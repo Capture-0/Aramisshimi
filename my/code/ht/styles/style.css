@@ -61,7 +61,7 @@ ol {
 }
 
 .container {
-  max-width: 1024px;
+  max-width: 1200px;
   margin-inline: auto;
   width: 90%;
 }
@@ -108,7 +108,7 @@ ol {
   }
 }
 
-@media (min-width: 600px) and (max-width: 960px) {
+@media (min-width: 600px) and (max-width: 1200px) {
   /* 600px < screen-width < 960 */
   :root {
     font-size: 14.5px;

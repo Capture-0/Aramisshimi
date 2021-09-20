@@ -2,7 +2,7 @@
 $layout_title = "salam";
 ?>
 <header id="intro" class="dark">
-    <div class="container">
+    <div class="container" style="max-width: 960px;">
         <div>
             <div><img data-src="logo.png" src="" alt=""></div>
             <div>
