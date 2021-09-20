@@ -1,0 +1,119 @@
+.btn {
+  -webkit-transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  border-radius: 0.1em;
+  opacity: 0.9;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.btn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  opacity: 1;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+main {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#services > .container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 75% 25%;
+      grid-template: auto / 75% 25%;
+}
+
+#carousel {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+#carousel .frame {
+  margin: auto;
+  overflow-x: hidden;
+}
+
+#carousel .slide {
+  height: 50vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: auto;
+}
+
+#carousel .slide img {
+  width: 100%;
+  height: 100%;
+}
+
+#carousel button {
+  width: 2em;
+  height: 4em;
+  border: none;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background-color: #eeeaea;
+}
+
+#services {
+  display: -ms-grid;
+  display: grid;
+}
+
+@media (max-width: 600px) {
+  /* 600px > screen-width */
+  #services > .container {
+    -ms-grid-rows: auto auto;
+    -ms-grid-columns: 1fr;
+        grid-template: auto auto / 1fr;
+  }
+  #carousel > div {
+    width: 100%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+  /* 600px < screen-width < 960 */
+  #services > .container {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 2fr 1fr;
+        grid-template: auto / 2fr 1fr;
+  }
+  #carousel > div {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* 960 < screen-width */
+  #services > .container {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 3fr 1fr;
+        grid-template: auto / 3fr 1fr;
+  }
+  #carousel > div {
+    width: 60%;
+  }
+}
+/*# sourceMappingURL=home.css.map */

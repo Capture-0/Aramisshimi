@@ -1,0 +1,107 @@
+@import "utility";
+* {
+    margin: 0;
+    padding: 0;
+    font-family: iransans;
+    direction: rtl;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+ul,
+ol {
+    list-style-type: none;
+}
+
+.container {
+    max-width: 1024px;
+    margin-inline: auto;
+    width: 90%;
+}
+
+.light {
+    background-color: $clr-light-2;
+    color: $clr-dark-3;
+}
+
+.lighter {
+    background-color: $clr-light-3;
+    color: $clr-dark-2;
+}
+
+.dark {
+    background-color: $clr-dark-2;
+    color: $clr-light-3;
+}
+
+.darker {
+    background-color: $clr-dark-3;
+    color: $clr-light-2;
+}
+
+[c] {
+    text-align: center;
+}
+
+[m] {
+    margin-inline: auto;
+}
+
+[data-height] {
+    transition: height 500ms ease-out, opacity 500ms ease-in;
+    height: 0;
+    opacity: 0;
+}
+
+.btn,
+button,
+input[type=button] {
+    @extend .btn;
+}
+
+@media (max-width:600px) {
+    /* 600px > screen-width */
+     :root {
+        font-size: 13px;
+    }
+}
+
+@media (min-width:600px) and (max-width:1200px) {
+    /* 600px < screen-width < 960 */
+     :root {
+        font-size: 14.5px;
+    }
+}
+
+@media (min-width:1200px) {
+    /* 960 < screen-width */
+     :root {
+        font-size: 16px;
+    }
+}
+
+@font-face {
+    font-family: iransans;
+    src: url(../../../media/font/iransans.ttf);
+}
+
+@font-face {
+    font-family: yekan;
+    src: url(../../../media/font/yekan.woff);
+}
