@@ -15,7 +15,8 @@
 </head>
 
 <body>
-    <div id="lightbox">
+    <!-- remove display none to show menu -->
+    <div id="lightbox" style="display: none;">
         <div data-toggleable="menu" onclick="toggleLightbox()" class="cancel"></div>
         <div class="content">
             <div id="menu">
@@ -77,7 +78,6 @@
     include(url("@/home.php"));
     include(url("@/outro.php"));
     ?>
-    <div style="width: 100%;height: 100vh;background-color: lime;"></div>
 </body>
 
 </html>

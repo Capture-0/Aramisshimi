@@ -1,4 +1,4 @@
-.btn {
+.btn, #services > #servicesContainer > div:last-child > div {
   -webkit-transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
   transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
   transition: transform 100ms ease-out, opacity 100ms ease-out;
@@ -12,27 +12,42 @@
           user-select: none;
 }
 
-.btn:hover {
+.btn:hover, #services > #servicesContainer > div:last-child > div:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
   opacity: 1;
 }
 
-.btn:active {
+.btn:active, #services > #servicesContainer > div:last-child > div:active {
   opacity: 0.8;
 }
 
 main {
+  font-size: 0.9rem;
   width: 100%;
   overflow-x: hidden;
 }
 
-#services > .container {
+#services > #servicesContainer {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: auto;
-  -ms-grid-columns: 75% 25%;
-      grid-template: auto / 75% 25%;
+}
+
+#services > #servicesContainer > div:first-child > img {
+  max-height: 60vh;
+}
+
+#services > #servicesContainer > div:last-child {
+  padding: 1em;
+}
+
+#services > #servicesContainer > div:last-child > div {
+  text-align: center;
+  background-color: #f3f2f2;
+  -webkit-box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
+          box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
+  margin: 1em 0;
+  padding: 0.4em;
 }
 
 #carousel {
@@ -73,7 +88,7 @@ main {
   top: 50%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  background-color: #eeeaea;
+  background-color: #f3f2f2;
 }
 
 #services {
@@ -83,7 +98,7 @@ main {
 
 @media (max-width: 600px) {
   /* 600px > screen-width */
-  #services > .container {
+  #services > #servicesContainer {
     -ms-grid-rows: auto auto;
     -ms-grid-columns: 1fr;
         grid-template: auto auto / 1fr;
@@ -95,7 +110,7 @@ main {
 
 @media (min-width: 600px) and (max-width: 1200px) {
   /* 600px < screen-width < 960 */
-  #services > .container {
+  #services > #servicesContainer {
     -ms-grid-rows: auto;
     -ms-grid-columns: 2fr 1fr;
         grid-template: auto / 2fr 1fr;
@@ -107,10 +122,11 @@ main {
 
 @media (min-width: 1200px) {
   /* 960 < screen-width */
-  #services > .container {
+  #services > #servicesContainer {
     -ms-grid-rows: auto;
     -ms-grid-columns: 3fr 1fr;
         grid-template: auto / 3fr 1fr;
+    padding: 2em 10em;
   }
   #carousel > div {
     width: 60%;

@@ -62,7 +62,7 @@ i {
   height: 100vh;
   width: 100vw;
   position: absolute;
-  background-color: #eeeaea;
+  background-color: #f3f2f2;
   opacity: 0.4;
   display: none;
 }
@@ -74,7 +74,7 @@ i {
   position: absolute;
   -webkit-transition: right 400ms ease-out;
   transition: right 400ms ease-out;
-  color: #eeeaea;
+  color: #f3f2f2;
   padding: 1em;
 }
 
@@ -90,7 +90,7 @@ i {
   cursor: pointer;
   padding: 0.2rem;
   margin: 0.2rem;
-  color: #eeeaea;
+  color: #f3f2f2;
   font-family: yekan;
 }
 
@@ -126,7 +126,7 @@ i {
 }
 
 #intro nav > ul li {
-  border-bottom: 0.1em solid #c1d5e9;
+  border-bottom: 0.1em solid #cdcecf;
   margin: 0.1em 0.3em;
   padding: 0.2em 0.6em;
   white-space: nowrap;

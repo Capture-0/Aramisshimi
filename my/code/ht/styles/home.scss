@@ -1,12 +1,28 @@
 @import "utility";
 main {
+    font-size: $fs-text;
     width: 100%;
     overflow-x: hidden;
 }
 
-#services>.container {
+#services>#servicesContainer {
     display: grid;
-    grid-template: auto / 75% 25%;
+    &>div:first-child{
+        &>img{
+            max-height: 60vh;
+        }
+    }
+    &>div:last-child{
+        padding: 1em;
+        &>div{
+            text-align: center;
+            background-color: $clr-light-3;
+            box-shadow: $shadow;
+            margin: 1em 0;
+            padding: 0.4em;
+            @extend .btn;
+        }
+    }
 }
 
 #carousel {
@@ -45,7 +61,7 @@ main {
 
 @media (max-width:600px) {
     /* 600px > screen-width */
-    #services>.container {
+    #services>#servicesContainer {
         grid-template: auto auto / 1fr;
     }
     #carousel>div {
@@ -55,7 +71,7 @@ main {
 
 @media (min-width:600px) and (max-width:1200px) {
     /* 600px < screen-width < 960 */
-    #services>.container {
+    #services>#servicesContainer {
         grid-template: auto / 2fr 1fr;
     }
     #carousel>div {
@@ -65,8 +81,9 @@ main {
 
 @media (min-width:1200px) {
     /* 960 < screen-width */
-    #services>.container {
+    #services>#servicesContainer {
         grid-template: auto / 3fr 1fr;
+        padding: 2em 10em;
     }
     #carousel>div {
         width: 60%;

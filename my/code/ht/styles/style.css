@@ -67,23 +67,23 @@ ol {
 }
 
 .light {
-  background-color: #d9e7f7;
+  background-color: #e6e6e6;
   color: #0f2c35;
 }
 
 .lighter {
-  background-color: #eeeaea;
+  background-color: #f3f2f2;
   color: #252D35;
 }
 
 .dark {
   background-color: #252D35;
-  color: #eeeaea;
+  color: #f3f2f2;
 }
 
 .darker {
   background-color: #0f2c35;
-  color: #d9e7f7;
+  color: #e6e6e6;
 }
 
 [c] {
