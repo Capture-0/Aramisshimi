@@ -122,6 +122,7 @@
     }
     
     #outro {
+        background-color: $clr-light-2;
         z-index: 1;
         &>.container {
             display: grid;

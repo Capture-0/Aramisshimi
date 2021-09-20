@@ -46,7 +46,8 @@
             </div>
         </div>
     </div>
-    <button onclick="menuToggle(true)" id="menuBtn">
+    <!-- remove display none to show menu button -->
+    <button style="display: none;" onclick="menuToggle(true)" id="menuBtn">
         <i class="fas fa-bars" style="font-size: 2em;"></i>
     </button>
     <script>

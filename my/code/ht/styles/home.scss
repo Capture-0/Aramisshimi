@@ -7,20 +7,70 @@ main {
 
 #services>#servicesContainer {
     display: grid;
-    &>div:first-child{
-        &>img{
+    align-items: center;
+    &>div:first-child {
+        position: relative;
+        &>img {
             max-height: 60vh;
+            opacity: 0.8;
+            background-image: url(my/media/img/liquid.jpg);
+        }
+        &>div {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 1em 3em;
+            &>h2 {
+                color: #fff;
+                font-weight: lighter;
+                text-align: center;
+            }
+            &>div {
+                font-family: yekan;
+                text-align: center;
+                color: #fff;
+                padding-bottom: 1em;
+            }
+            &>button {
+                border: 0.4em solid #fff;
+                border-radius: 4px;
+                background-color: transparent;
+                color: #fff;
+                display: block;
+                padding: 1em 3em;
+                margin-inline: auto;
+            }
         }
     }
-    &>div:last-child{
-        padding: 1em;
-        &>div{
+    &>div:last-child {
+        padding: 0 1em;
+        &>div {
             text-align: center;
             background-color: $clr-light-3;
             box-shadow: $shadow;
             margin: 1em 0;
             padding: 0.4em;
             @extend .btn;
+        }
+    }
+}
+
+#emblems {
+    &>.container {
+        display: grid;
+        grid-template: auto / repeat(auto-fill, minmax(30em, 1fr));
+        &>div {
+            &>h3 {
+                border-right: 0.4em solid $clr-secondary;
+                padding: 0.2em 1em;
+                margin: 1em;
+            }
+            &>p {
+                padding: 0.2em 1em;
+            }
         }
     }
 }
@@ -63,6 +113,9 @@ main {
     /* 600px > screen-width */
     #services>#servicesContainer {
         grid-template: auto auto / 1fr;
+    }
+    #emblems>.container{
+        grid-template: auto / repeat(auto-fill, 1fr);
     }
     #carousel>div {
         width: 100%;
