@@ -13,6 +13,9 @@ $cnf_db_pass = 'kUgclU3WpboWuR';
  */
 $cnf_db_connection = null;
 
+$cnf_page_default_description = "";
+$cnf_page_default_keywords = "";
+
 $cnf_path_templates = "my/code/ht/templates";
 $cnf_path_styles = "my/code/ht/styles";
 $cnf_path_images = "my/media/img";
@@ -45,7 +48,7 @@ function cnf_db_connect($dbname)
         // $cn->exec("SET NAMES utf8");
         // $cnf_db_connection = $cn;
         // return $cn; //return connection statment
-        $cnf_db_connection = new PDO("sqlite:admin.db");
+        $cnf_db_connection = new PDO("sqlite:my/admin.db");
         return $cnf_db_connection;
     }
     return null; //already connected
@@ -101,6 +104,32 @@ function cnf_db_select($qry, $vals = null)
     $sth->execute();
     //fetch all data
     return $sth->fetchAll();
+}
+
+//|----------------------------------------
+//|     PAGE
+//|----------------------------------------
+
+function cnf_page_create($_PAGE)
+{
+    if (count(cnf_db_select("select name from _page where name = '" . $_PAGE["name"] . "'")) == 0)
+        cnf_db_insert("INSERT into _page (name, title, description, keywords, styles) VALUES (?,?,?,?,?)", [$_PAGE["name"], $_PAGE["title"], $_PAGE["description"], $_PAGE["keywords"], $_PAGE["styles"]]);
+    else cnf_db_execute("update _page set title = ?, description = ?, keywords = ?, styles = ? where name = ?", [$_PAGE["title"], $_PAGE["description"], $_PAGE["keywords"], $_PAGE["styles"], $_PAGE["name"]]);
+}
+
+function cnf_page_data($page)
+{
+    global $cnf_page_default_description, $cnf_page_default_keywords;
+    $_PAGE = cnf_db_select("SELECT * FROM _page WHERE name = '$page' order by id desc");
+    $result = count($_PAGE) == 0 ? array(
+        "name" => $page,
+        "title" => $page, // 70 chars limit
+        "description" => $cnf_page_default_description, // default description
+        "keywords" => $cnf_page_default_keywords, // default keywords
+        "styles" => "form,$page"
+    ) : $_PAGE[0];
+    if (count($_PAGE) > 1) cnf_db_execute("delete from _page where name = '" . $_PAGE["name"] . "'");
+    return $result;
 }
 
 //|----------------------------------------

@@ -1,3 +1,13 @@
+<?php
+$_PAGE = array(
+    "name" => explode(".", basename(__FILE__))[0],
+    "title" => "khane", // 70 chars limit
+    "description" => "aramisshimi pishro dar sanate tolide shooyande", // 160 chars limit
+    "keywords" => "shooyande,aramis,shimi", // less than 10 phrases recommended
+    "styles" => "home"
+);
+cnf_page_create($_PAGE);
+?>
 <main>
     <section id="services">
         <div id="servicesContainer">

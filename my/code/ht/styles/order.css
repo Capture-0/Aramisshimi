@@ -1,0 +1,12 @@
+@media (max-width: 600px) {
+  /* 600px > screen-width */
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+  /* 600px < screen-width < 1200 */
+}
+
+@media (min-width: 1200px) {
+  /* 1200 < screen-width */
+}
+/*# sourceMappingURL=order.css.map */

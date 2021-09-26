@@ -115,7 +115,7 @@ main {
         grid-template: auto auto / 1fr;
     }
     #emblems>.container{
-        grid-template: auto / repeat(auto-fill, 1fr);
+        grid-template: auto / repeat(auto-fill, 100%);
     }
     #carousel>div {
         width: 100%;

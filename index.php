@@ -1,3 +1,10 @@
+<?php
+require("my/cnf.php");
+// CREATE TABLE _page (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(50) NOT NULL,title varchar(70) NOT NULL,description varchar(160) NOT NULL,keywords varchar(100) NOT NULL,styles varchar(100) NOT NULL);
+
+$page_name = "order"; // url in later versions
+$_PAGE = cnf_page_data($page_name);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,8 +12,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php global $layout_title;
-            echo $layout_title; ?></title>
+    <meta name="keywords" content="<?php echo $_PAGE["keywords"]; ?>">
+    <meta name="description" content="<?php echo $_PAGE["description"]; ?>">
+    <title><?php echo $_PAGE["title"]; ?></title>
+    <?php
+    foreach (explode(",", $_PAGE["styles"]) as $i) {
+        echo '<link rel="stylesheet" href="/my/code/ht/styles/' . $i . '.css">';
+    }
+    ?>
     <link rel="stylesheet" href="/my/code/ht/styles/style.css">
     <link rel="stylesheet" href="/my/code/ht/styles/home.css">
     <link rel="stylesheet" href="/my/code/ht/styles/header_footer.css">
@@ -74,9 +87,8 @@
         }
     </script>
     <?php
-    require("my/cnf.php");
     include(url("@/intro.php"));
-    include(url("@/home.php"));
+    include(url("@/" . $_PAGE["name"] . ".php"));
     include(url("@/outro.php"));
     ?>
 </body>
