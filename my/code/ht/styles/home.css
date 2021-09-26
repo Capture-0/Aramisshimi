@@ -166,8 +166,8 @@ main {
   }
   #emblems > .container {
     -ms-grid-rows: auto;
-    -ms-grid-columns: (100%)[auto-fill];
-        grid-template: auto/repeat(auto-fill, 100%);
+    -ms-grid-columns: (1fr)[auto-fill];
+        grid-template: auto/repeat(auto-fill, 1fr);
   }
   #carousel > div {
     width: 100%;
