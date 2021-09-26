@@ -31,9 +31,6 @@ main {
 #services > #servicesContainer {
   display: -ms-grid;
   display: grid;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 #services > #servicesContainer > div:first-child {

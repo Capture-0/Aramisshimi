@@ -9,9 +9,11 @@ $_PAGE = array(
 cnf_page_create($_PAGE);
 ?>
 <main>
-    <form method="POST">
-        <input />
-        <input />
-        <textarea></textarea>
-    </form>
+    <div class="container">
+        <form method="POST">
+            <input />
+            <input />
+            <textarea></textarea>
+        </form>
+    </div>
 </main>
