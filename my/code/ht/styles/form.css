@@ -1,28 +1,62 @@
+.btn {
+  -webkit-transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  border-radius: 0.1em;
+  opacity: 0.9;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.btn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  opacity: 1;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+form > * {
+  margin: 0.4em;
+}
+
+input[type=text],
+textarea {
+  border: 1px solid silver;
+  border-radius: 0.3em;
+  padding: 0.2em 0.3em;
+  outline: none;
+  font-size: 0.9rem;
+  display: inline;
+  width: 100%;
+  -webkit-transition: -webkit-box-shadow 100ms ease-out;
+  transition: -webkit-box-shadow 100ms ease-out;
+  transition: box-shadow 100ms ease-out;
+  transition: box-shadow 100ms ease-out, -webkit-box-shadow 100ms ease-out;
+}
+
+input[type=text]:focus,
+textarea:focus {
+  -webkit-box-shadow: 0 0 0.4em 1px #8de4af;
+          box-shadow: 0 0 0.4em 1px #8de4af;
+  border: 1px solid #8de4af;
+}
+
 @media (max-width: 600px) {
   /* 600px > screen-width */
-  input[type=text],
-  textarea {
-    width: 100%;
-  }
 }
 
 @media (min-width: 600px) and (max-width: 1200px) {
   /* 600px < screen-width < 1200 */
-  input[type=text] {
-    width: 50%;
-  }
-  textarea {
-    width: 100%;
-  }
 }
 
 @media (min-width: 1200px) {
   /* 1200 < screen-width */
-  input[type=text] {
-    width: 50%;
-  }
-  textarea {
-    width: 100%;
-  }
 }
 /*# sourceMappingURL=form.css.map */

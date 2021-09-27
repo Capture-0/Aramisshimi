@@ -1,6 +1,28 @@
+@import "utility";
+form {
+    display: grid;
+    grid-template: auto / repeat(auto-fit, minmax(50%, 1fr));
+    &>div {
+        &>span{
+            padding: 1em;
+        }
+        &>textarea {
+            height: 20vh;
+        }
+    }
+    &>button[type=submit] {
+        border: 1px solid silver;
+        padding: 1em;
+        margin: 1em;
+        background-color: $clr-secondary;
+    }
+}
 
 @media (max-width:600px) {
     /* 600px > screen-width */
+    form {
+        grid-template: auto / repeat(auto-fit, 100%);
+    }
 }
 
 @media (min-width:600px) and (max-width:1200px) {

@@ -15,6 +15,7 @@ $layout_title = "salam";
             <nav>
                 <ul>
                     <a href=""><li><i class="fas fa-home"></i> خانه</li></a>
+                    <a href=""><li><i class="fas fa-truck"></i> سفارش</li></a>
                     <a href=""><li><i class="fas fa-sign-in-alt"></i> ورود</li></a>
                     <a href=""><li class="active-page"><i class="fas fa-file-alt"></i> پست ها</li></a>
                     <a href=""><li><i class="far fa-question-circle"></i> پشتیبانی</li></a>

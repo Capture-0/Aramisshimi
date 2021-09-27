@@ -2,7 +2,7 @@
 require("my/cnf.php");
 // CREATE TABLE _page (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(50) NOT NULL,title varchar(70) NOT NULL,description varchar(160) NOT NULL,keywords varchar(100) NOT NULL,styles varchar(100) NOT NULL);
 
-$page_name = "home"; // url in later versions
+$page_name = "order"; // url in later versions
 $_PAGE = cnf_page_data($page_name);
 ?>
 <!DOCTYPE html>
