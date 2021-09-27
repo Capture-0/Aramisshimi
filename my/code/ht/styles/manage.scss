@@ -1,0 +1,93 @@
+@import "utility";
+#manage {
+    &>.container {
+        box-shadow: $shadow;
+        background-color: $clr-light-2;
+        border-radius: 1em;
+        padding: 1em;
+        &>h2 {
+            margin: 1em 3em;
+        }
+        &>.listBtn {
+            width: 100%;
+            margin: auto;
+            margin: 1em 0;
+            &>div:first-child {
+                z-index: 2;
+                cursor: pointer;
+                padding: 1em;
+                border-radius: 0.4em;
+                background-color: $clr-light-1;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &:hover {
+                    transform: scale(1.01);
+                }
+                &>div {
+                    border-radius: 50%;
+                    background-color: $clr-light-2;
+                    width: 3em;
+                    height: 3em;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    transition: transform 0.6s;
+                    transform: rotate(-90deg);
+                    &>i {
+                        color: $clr-dark-1;
+                    }
+                }
+            }
+            &>div:last-child {
+                z-index: 1;
+                display: flex;
+                flex-direction: column;
+                max-height: 0;
+                max-width: 100%;
+                overflow: auto;
+                background-color: $clr-light-3;
+                transition: max-height 0.6s;
+                &>.row {
+                    width: fit-content;
+                    display: grid;
+                    gap: 0.2em;
+                    &:nth-child(2n)>div {
+                        background-color: #d0d0d0;
+                    }
+                    &>div {
+                        padding: 0.4em;
+                        display: flex;
+                        align-items: center;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        background-color: $clr-light-2;
+                    }
+                }
+            }
+            // sepecifics
+            &:nth-child(2)>div:last-child>.row{
+                grid-template: auto / 10em 10em 20em 40em 3em 3em;
+            }
+            &:nth-child(3)>div:last-child>.row{
+                grid-template: auto / 15em 20em 30em 20em 8em 8em 5em 3em 3em;
+            }
+            &:nth-child(4)>div:last-child>.row{
+                grid-template: auto / 10em 15em 20em 30em 5em 4em 3em 3em;
+            }
+        }
+    }
+}
+
+@media (max-width:600px) {
+    /* 600px > screen-width */
+}
+
+@media (min-width:600px) and (max-width:1200px) {
+    /* 600px < screen-width < 1200 */
+}
+
+@media (min-width:1200px) {
+    /* 1200 < screen-width */
+}
