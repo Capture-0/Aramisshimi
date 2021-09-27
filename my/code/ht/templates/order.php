@@ -9,7 +9,7 @@ $_PAGE = array(
 cnf_page_create($_PAGE);
 ?>
 <main>
-    <div class="container" style="max-width: 780px;">
+    <section class="container" style="max-width: 780px;">
         <form method="POST">
             <div>
 
@@ -38,7 +38,7 @@ cnf_page_create($_PAGE);
             </div>
             <button style="grid-column: 1 / -1;" type="submit" name="submit">ثبت</button>
         </form>
-    </div>
+    </section>
     <script src="my/code/plugin/ckeditor/ckeditor.js"></script>
     <script src="my/code/plugin/ckeditor/ckfinder.js"></script>
     <script>
