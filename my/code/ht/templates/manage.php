@@ -65,7 +65,111 @@ cnf_page_create($_PAGE);
                     </div>
                 </div>
             </div>
+            <div class="extraData" data-action="server">
+                <h3>جدول ها</h3>
+                <div class="lists">
+                    <div class="users">
+                        <h4>کاربران</h4>
+                        <div class="list">
+                            <div class="row">
+                                <div>نام</div>
+                                <div>شماره</div>
+                                <div><i class="fas fa-trash"></i></div>
+                                <div><i class="fas fa-pen"></i></div>
+                            </div>
+                            <div class="row">
+                                <div>نام</div>
+                                <div>شماره</div>
+                                <div><i class="fas fa-trash"></i></div>
+                                <div><i class="fas fa-pen"></i></div>
+                            </div>
+                            <div class="row">
+                                <div>نام</div>
+                                <div>شماره</div>
+                                <div><i class="fas fa-trash"></i></div>
+                                <div><i class="fas fa-pen"></i></div>
+                            </div>
+                        </div>
+                        <div class="manage">
+                            <h5>ارسال پیام</h5>
+                            <div>
+                                <input type="text">
+                                <button>ok</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comments">
+                        <h4>کامنت ها</h4>
+                        <div class="list" data-sect="comments">
+                            <div class="row" data-identity="2">
+                                <div>کاربر</div>
+                                <div>نظر</div>
+                                <div>ارتباط</div>
+                                <div>تاریخ</div>
+                                <div data-op="delete"><i class="fas fa-trash"></i></div>
+                                <div data-op="edit"><i class="fas fa-pen"></i></div>
+                            </div>
+                            <div class="row">
+                                <div>کاربر</div>
+                                <div>نظر</div>
+                                <div>ارتباط</div>
+                                <div>تاریخ</div>
+                                <div><i class="fas fa-trash"></i></div>
+                                <div><i class="fas fa-pen"></i></div>
+                            </div>
+                            <div class="row">
+                                <div>کاربر</div>
+                                <div>نظر</div>
+                                <div>ارتباط</div>
+                                <div>تاریخ</div>
+                                <div><i class="fas fa-trash"></i></div>
+                                <div><i class="fas fa-pen"></i></div>
+                            </div>
+                        </div>
+                        <div class="manage">
+                            <h5>پاسخ</h5>
+                            <div>
+                                <input type="text">
+                                <button>ok</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="categories">
+                        <h4>برچسب ها</h4>
+                        <div class="list">
+                            <div class="row">
+                                <div>نام</div>
+                                <div>دفعات استفاده</div>
+                                <div><i class="fas fa-trash"></i></div>
+                                <div><i class="fas fa-pen"></i></div>
+                            </div>
+                            <div class="row">
+                                <div>نام</div>
+                                <div>دفعات استفاده</div>
+                                <div><i class="fas fa-trash"></i></div>
+                                <div><i class="fas fa-pen"></i></div>
+                            </div>
+                            <div class="row">
+                                <div>نام</div>
+                                <div>دفعات استفاده</div>
+                                <div><i class="fas fa-trash"></i></div>
+                                <div><i class="fas fa-pen"></i></div>
+                            </div>
+                        </div>
+                        <div class="manage">
+                            <h5>اضافه کردن</h5>
+                            <div>
+                                <input type="text">
+                                <button>ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+    <section id="posts">
+
     </section>
 </main>
 <script>
@@ -81,6 +185,18 @@ cnf_page_create($_PAGE);
                 btn.querySelector("div.btn>div").style.transform = "rotate(-90deg)";
                 btn.lastElementChild.style.maxHeight = 0;
             }
+        });
+    });
+    window.globalThis.pageLoad.push(function() {
+        document.querySelectorAll("[data-action=server] [data-op=delete]").forEach(el => {
+            el.addEventListener("click", async function(e) {
+                var t = e.target;
+                // if(!t.dataset.contains("op")){
+                //     t=t.parentNode;
+                // }
+                my = 
+                console.log(t);
+            });
         });
     });
 </script>

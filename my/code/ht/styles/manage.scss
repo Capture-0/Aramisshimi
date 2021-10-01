@@ -24,7 +24,7 @@
                 &:hover {
                     transform: scale(1.01);
                 }
-                h3>span{
+                h3>span {
                     background-color: red;
                     color: #ffffff;
                     border-radius: 50%;
@@ -78,14 +78,78 @@
                 }
             }
             // sepecifics
-            &:nth-child(2)>div:last-child>.row{
+            &:nth-child(2)>div:last-child>.row {
                 grid-template: auto / 10em 10em 20em 40em 3em 3em;
             }
-            &:nth-child(3)>div:last-child>.row{
+            &:nth-child(3)>div:last-child>.row {
                 grid-template: auto / 15em 20em 30em 20em 8em 8em 5em 3em 3em;
             }
-            &:nth-child(4)>div:last-child>.row{
+            &:nth-child(4)>div:last-child>.row {
                 grid-template: auto / 10em 15em 20em 30em 5em 4em 3em 3em;
+            }
+        }
+        &>.extraData {
+            &>h3 {
+                margin: 2em 3em 1em 0;
+            }
+            &>.lists {
+                border-radius: 0.4em;
+                background-color: $clr-light-1;
+                padding: 1em;
+                display: grid;
+                gap: 1em;
+                &>div {
+                    &>h4 {
+                        margin: 0 1em 0.6em 1em;
+                    }
+                    &>.list {
+                        max-height: 10em;
+                        overflow: auto;
+                        display: flex;
+                        flex-direction: column;
+                        background-color: $clr-light-3;
+                        border-radius: 0.4em;
+                        border: 1px solid silver;
+                        &>.row {
+                            display: grid;
+                            &>div {
+                                border-radius: 0.2em;
+                                padding: 0.2em 0.4em;
+                                margin: 0.2em;
+                            }
+                            &:nth-child(2n+1)>div {
+                                background-color: $clr-light-1;
+                            }
+                            &:nth-child(2n)>div {
+                                background-color: $clr-light-2;
+                            }
+                        }
+                    }
+                    &:nth-child(1)>.list>.row {
+                        grid-template: auto / 10em 10em 3em 3em;
+                    }
+                    &:nth-child(2)>.list>.row {
+                        grid-template: auto / 10em 20em 10em 10em 3em 3em;
+                    }
+                    &:nth-child(3)>.list>.row {
+                        grid-template: auto / 10em 10em 3em 3em;
+                    }
+                    &>.manage {
+                        &>h5 {
+                            margin: 1em;
+                        }
+                        &>div {
+                            display: flex;
+                            &>input {
+                                width: 80%;
+                            }
+                            &>button {
+                                border: 1px solid silver;
+                                width: 20%;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -93,12 +157,21 @@
 
 @media (max-width:600px) {
     /* 600px > screen-width */
+    .extraData>.lists {
+        grid-template: auto / repeat(auto-fill, minmax(14em, 1fr));
+    }
 }
 
 @media (min-width:600px) and (max-width:1200px) {
     /* 600px < screen-width < 1200 */
+    .extraData>.lists {
+        grid-template: auto / repeat(auto-fill, minmax(16em, 1fr));
+    }
 }
 
 @media (min-width:1200px) {
     /* 1200 < screen-width */
+    .extraData>.lists {
+        grid-template: auto / repeat(auto-fill, minmax(18em, 1fr));
+    }
 }

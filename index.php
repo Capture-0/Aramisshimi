@@ -64,6 +64,7 @@ $_PAGE = cnf_page_data($page_name);
         <i class="fas fa-bars" style="font-size: 2em;"></i>
     </button>
     <script>
+        window.globalThis.pageLoad = [];
         //menuToggle(true);
 
         function toggleLightbox() {

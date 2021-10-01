@@ -57,6 +57,11 @@
 
 <script>
     window.onload = async function() {
+        if (window.globalThis.pageLoad != undefined) {
+            window.globalThis.pageLoad.forEach(i => {
+                i();
+            });
+        }
         loadImages();
     };
     window.addEventListener("scroll", function() {

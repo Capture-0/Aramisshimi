@@ -162,15 +162,118 @@
       grid-template: auto / 10em 15em 20em 30em 5em 4em 3em 3em;
 }
 
+#manage > .container > .extraData > h3 {
+  margin: 2em 3em 1em 0;
+}
+
+#manage > .container > .extraData > .lists {
+  border-radius: 0.4em;
+  background-color: #cdcecf;
+  padding: 1em;
+  display: -ms-grid;
+  display: grid;
+  gap: 1em;
+}
+
+#manage > .container > .extraData > .lists > div > h4 {
+  margin: 0 1em 0.6em 1em;
+}
+
+#manage > .container > .extraData > .lists > div > .list {
+  max-height: 10em;
+  overflow: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #f3f2f2;
+  border-radius: 0.4em;
+  border: 1px solid silver;
+}
+
+#manage > .container > .extraData > .lists > div > .list > .row {
+  display: -ms-grid;
+  display: grid;
+}
+
+#manage > .container > .extraData > .lists > div > .list > .row > div {
+  border-radius: 0.2em;
+  padding: 0.2em 0.4em;
+  margin: 0.2em;
+}
+
+#manage > .container > .extraData > .lists > div > .list > .row:nth-child(2n+1) > div {
+  background-color: #cdcecf;
+}
+
+#manage > .container > .extraData > .lists > div > .list > .row:nth-child(2n) > div {
+  background-color: #e6e6e6;
+}
+
+#manage > .container > .extraData > .lists > div:nth-child(1) > .list > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 10em 3em 3em;
+      grid-template: auto / 10em 10em 3em 3em;
+}
+
+#manage > .container > .extraData > .lists > div:nth-child(2) > .list > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 20em 10em 10em 3em 3em;
+      grid-template: auto / 10em 20em 10em 10em 3em 3em;
+}
+
+#manage > .container > .extraData > .lists > div:nth-child(3) > .list > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 10em 3em 3em;
+      grid-template: auto / 10em 10em 3em 3em;
+}
+
+#manage > .container > .extraData > .lists > div > .manage > h5 {
+  margin: 1em;
+}
+
+#manage > .container > .extraData > .lists > div > .manage > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#manage > .container > .extraData > .lists > div > .manage > div > input {
+  width: 80%;
+}
+
+#manage > .container > .extraData > .lists > div > .manage > div > button {
+  border: 1px solid silver;
+  width: 20%;
+}
+
 @media (max-width: 600px) {
   /* 600px > screen-width */
+  .extraData > .lists {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(14em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(14em, 1fr));
+  }
 }
 
 @media (min-width: 600px) and (max-width: 1200px) {
   /* 600px < screen-width < 1200 */
+  .extraData > .lists {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(16em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(16em, 1fr));
+  }
 }
 
 @media (min-width: 1200px) {
   /* 1200 < screen-width */
+  .extraData > .lists {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(18em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(18em, 1fr));
+  }
 }
 /*# sourceMappingURL=manage.css.map */

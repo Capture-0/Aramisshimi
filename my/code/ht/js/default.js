@@ -60,3 +60,6 @@ function scrollReached(elements, callback) {
         }
     });
 }
+async function ajax(path) {
+    return await (await fetch(DEFAULT_CONFIG_PATH + "?" + path)).text();
+}

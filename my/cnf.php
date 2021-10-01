@@ -24,9 +24,11 @@ $cnf_path_images = "my/media/img";
 //|     AJAX
 //|----------------------------------------
 
-if (isset($_GET["url"])) {
-    echo url($_REQUEST["url"]);
-}
+// if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+    if (isset($_GET["url"])) {
+        echo url($_REQUEST["url"]);
+    }
+// }
 
 //|----------------------------------------
 //|     DATABASE
