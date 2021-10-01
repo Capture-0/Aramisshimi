@@ -191,11 +191,7 @@ cnf_page_create($_PAGE);
         document.querySelectorAll("[data-action=server] [data-op=delete]").forEach(el => {
             el.addEventListener("click", async function(e) {
                 var t = e.target;
-                // if(!t.dataset.contains("op")){
-                //     t=t.parentNode;
-                // }
-                my = 
-                console.log(t);
+                if (!t.hasAttribute("data-op")) t = t.parentNode;
             });
         });
     });
