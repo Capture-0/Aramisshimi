@@ -14,7 +14,11 @@ cnf_page_create($_PAGE);
             <h2>صفحه مدیریت</h2>
             <div class="listBtn">
                 <div class="btn">
+<<<<<<< HEAD
                     <h3><span>0</span> سفارشات</h3>
+=======
+                    <h3>سفارشات</h3>
+>>>>>>> 715a8ae8fc9daaf9b3a83e4447d0198994ca0892
                     <div><i class="fas fa-chevron-down"></i></div>
                 </div>
                 <div>
@@ -30,7 +34,11 @@ cnf_page_create($_PAGE);
             </div>
             <div class="listBtn">
                 <div class="btn">
+<<<<<<< HEAD
                     <h3><span>0</span> پست ها</h3>
+=======
+                    <h3>پست ها</h3>
+>>>>>>> 715a8ae8fc9daaf9b3a83e4447d0198994ca0892
                     <div><i class="fas fa-chevron-down"></i></div>
                 </div>
                 <div>
@@ -49,7 +57,11 @@ cnf_page_create($_PAGE);
             </div>
             <div class="listBtn">
                 <div class="btn">
+<<<<<<< HEAD
                     <h3><span>0</span> پیام ها</h3>
+=======
+                    <h3>پیام ها</h3>
+>>>>>>> 715a8ae8fc9daaf9b3a83e4447d0198994ca0892
                     <div><i class="fas fa-chevron-down"></i></div>
                 </div>
                 <div>
