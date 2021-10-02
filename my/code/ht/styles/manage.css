@@ -252,6 +252,52 @@
   width: 20%;
 }
 
+#manage > .container > .posts > h3 {
+  margin: 2em 3em 1em 0;
+}
+
+#manage > .container > .posts > .compose {
+  background-color: #f3f2f2;
+  border-radius: 0.4em;
+  padding: 0.4em;
+}
+
+#manage > .container > .posts > .compose > div > span {
+  padding: 1em;
+}
+
+#manage > .container > .posts > .compose > div > textarea {
+  height: 20vh;
+}
+
+#manage > .container > .posts > .compose > #tags > div > div {
+  display: inline-block;
+  padding: 0.1em 0.3em;
+  margin: 0.2em;
+  background-color: #a8ffca;
+  font-size: 1.1em;
+  border-radius: 0.2em;
+  border: 1px solid #8de4af;
+}
+
+#manage > .container > .posts > .compose > #tags > div > div > i {
+  color: red;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+#manage > .container > .posts > .compose > button[type=submit] {
+  border: 1px solid silver;
+  padding: 1em;
+  margin: 1em;
+  background-color: #8de4af;
+}
+
+#manage > .container > .posts > .compose > button[type=submit]:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+}
+
 @media (max-width: 600px) {
   /* 600px > screen-width */
   .extraData > .lists {
@@ -259,11 +305,25 @@
     -ms-grid-columns: (minmax(14em, 1fr))[auto-fill];
         grid-template: auto/repeat(auto-fill, minmax(14em, 1fr));
   }
+  .container > .posts > .compose {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 100%;
+        grid-template: auto / 100%;
+  }
 }
 
 @media (min-width: 600px) and (max-width: 1200px) {
   /* 600px < screen-width < 1200 */
   .extraData > .lists {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(16em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(16em, 1fr));
+  }
+  .container > .posts > .compose {
+    display: -ms-grid;
+    display: grid;
     -ms-grid-rows: auto;
     -ms-grid-columns: (minmax(16em, 1fr))[auto-fill];
         grid-template: auto/repeat(auto-fill, minmax(16em, 1fr));
@@ -276,6 +336,13 @@
     -ms-grid-rows: auto;
     -ms-grid-columns: (minmax(18em, 1fr))[auto-fill];
         grid-template: auto/repeat(auto-fill, minmax(18em, 1fr));
+  }
+  .container > .posts > .compose {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(20em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(20em, 1fr));
   }
 }
 /*# sourceMappingURL=manage.css.map */
