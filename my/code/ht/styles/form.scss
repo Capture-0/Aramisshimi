@@ -3,7 +3,7 @@ form>* {
     margin: 0.4em;
 }
 
-input[type=text],
+input[type=text],input[type=password],
 textarea, select {
     border: 1px solid silver;
     border-radius: 0.3em;
@@ -18,6 +18,11 @@ textarea, select {
         box-shadow: 0 0 0.4em 1px $clr;
         border: 1px solid $clr;
     }
+}
+h3{
+    margin: 1em 3em;
+    padding: 1em 3em;
+    border-bottom: 2px solid silver;
 }
 
 @media (max-width:600px) {

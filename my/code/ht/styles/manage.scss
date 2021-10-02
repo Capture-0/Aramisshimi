@@ -1,5 +1,10 @@
 @import "utility";
 #manage {
+    .row:active{
+        color: $clr-dark-1;
+        background-color: $clr-light-1;
+        transition: background-color 100ms ease;
+    }
     &>.container {
         box-shadow: $shadow;
         background-color: $clr-light-2;
@@ -100,7 +105,7 @@
                         margin: 0 1em 0.6em 1em;
                     }
                     &>.list {
-                        max-height: 16em;
+                        height: 14em;
                         overflow: auto;
                         display: flex;
                         flex-direction: column;
@@ -123,16 +128,13 @@
                         }
                     }
                     &:nth-child(1)>.list>.row {
-                        grid-template: auto / 10em 10em 3em 3em;
-                    }
-                    &:nth-child(2)>.list>.row {
                         grid-template: auto / 10em 20em 10em 10em 3em 3em;
                     }
-                    &:nth-child(3)>.list>.row {
-                        grid-template: auto / 10em 10em 3em 3em;
-                    }
-                    &:nth-child(4)>.list>.row {
+                    &:nth-child(2)>.list>.row {
                         grid-template: auto / 10em 8em 3em 3em;
+                    }
+                    &:nth-child(3)>.list>.row {
+                        grid-template: auto / 10em 8em;
                     }
                     &>.manage {
                         &>h5 {

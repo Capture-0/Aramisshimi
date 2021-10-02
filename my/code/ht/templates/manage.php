@@ -24,7 +24,7 @@ cnf_page_create($_PAGE);
                         <div>ادرس</div>
                         <div>توضیحات</div>
                         <div data-op="delete"></div>
-                        <div data-op="edit"></div>
+                        <div data-op="inspect"></div>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@ cnf_page_create($_PAGE);
                         <div>تاریخ</div>
                         <div>پیوست</div>
                         <div data-op="delete"></div>
-                        <div data-op="edit"></div>
+                        <div data-op="inspect"></div>
                     </div>
                 </div>
             </div>
@@ -69,40 +69,10 @@ cnf_page_create($_PAGE);
                 <h3>جدول ها</h3>
                 <div class="lists">
                     <div>
-                        <h4>کاربران</h4>
-                        <div class="list" data-sect="users">
-                            <div class="row">
-                                <div>نام</div>
-                                <div>شماره</div>
-                                <div data-op="delete"></div>
-                                <div data-op="edit"></div>
-                            </div>
-                            <div class="row">
-                                <div>نام</div>
-                                <div>شماره</div>
-                                <div data-op="delete"></div>
-                                <div data-op="edit"></div>
-                            </div>
-                            <div class="row">
-                                <div>نام</div>
-                                <div>شماره</div>
-                                <div data-op="delete"></div>
-                                <div data-op="edit"></div>
-                            </div>
-                        </div>
-                        <div class="manage">
-                            <h5>ارسال پیام</h5>
-                            <div>
-                                <input type="text">
-                                <button>ok</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
                         <h4>کامنت ها</h4>
                         <div class="list" data-sect="comments">
                             <div class="row" data-identity="2">
-                                <div>کاربر</div>
+                                <div>نام</div>
                                 <div>نظر</div>
                                 <div>ارتباط</div>
                                 <div>تاریخ</div>
@@ -110,7 +80,7 @@ cnf_page_create($_PAGE);
                                 <div data-op="edit"></div>
                             </div>
                             <div class="row">
-                                <div>کاربر</div>
+                                <div>نام</div>
                                 <div>نظر</div>
                                 <div>ارتباط</div>
                                 <div>تاریخ</div>
@@ -118,7 +88,7 @@ cnf_page_create($_PAGE);
                                 <div data-op="edit"></div>
                             </div>
                             <div class="row">
-                                <div>کاربر</div>
+                                <div>نام</div>
                                 <div>نظر</div>
                                 <div>ارتباط</div>
                                 <div>تاریخ</div>
@@ -128,36 +98,6 @@ cnf_page_create($_PAGE);
                         </div>
                         <div class="manage">
                             <h5>پاسخ</h5>
-                            <div>
-                                <input type="text">
-                                <button>ok</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4>برچسب ها</h4>
-                        <div class="list" data-sect="tags">
-                            <div class="row">
-                                <div>نام</div>
-                                <div>دفعات استفاده</div>
-                                <div data-op="delete"></div>
-                                <div data-op="edit"></div>
-                            </div>
-                            <div class="row">
-                                <div>نام</div>
-                                <div>دفعات استفاده</div>
-                                <div data-op="delete"></div>
-                                <div data-op="edit"></div>
-                            </div>
-                            <div class="row">
-                                <div>نام</div>
-                                <div>دفعات استفاده</div>
-                                <div data-op="delete"></div>
-                                <div data-op="edit"></div>
-                            </div>
-                        </div>
-                        <div class="manage">
-                            <h5>اضافه کردن</h5>
                             <div>
                                 <input type="text">
                                 <button>ok</button>
@@ -185,6 +125,23 @@ cnf_page_create($_PAGE);
                             <div>
                                 <input type="text">
                                 <button>ok</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>برچسب ها</h4>
+                        <div class="list" data-sect="tags">
+                            <div class="row">
+                                <div>نام</div>
+                                <div>دفعات استفاده</div>
+                            </div>
+                            <div class="row">
+                                <div>نام</div>
+                                <div>دفعات استفاده</div>
+                            </div>
+                            <div class="row">
+                                <div>نام</div>
+                                <div>دفعات استفاده</div>
                             </div>
                         </div>
                     </div>
@@ -268,6 +225,7 @@ cnf_page_create($_PAGE);
             if (!t.hasAttribute("data-op")) t = t.parentNode;
             if (t.dataset.op == "delete") t.innerHTML = '<i class="fas fa-trash"></i>';
             else if (t.dataset.op == "edit") t.innerHTML = '<i class="fas fa-pen"></i>';
+            else if (t.dataset.op == "inspect") t.innerHTML = '<i class="fas fa-eye"></i>';
             el.addEventListener("click", function(e) {
                 var t = e.target;
                 if (!t.hasAttribute("data-op")) t = t.parentNode;

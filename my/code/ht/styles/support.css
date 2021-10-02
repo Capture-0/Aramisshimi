@@ -22,40 +22,36 @@
   opacity: 0.8;
 }
 
-form > * {
-  margin: 0.4em;
+form {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: (minmax(50%, 1fr))[auto-fit];
+      grid-template: auto/repeat(auto-fit, minmax(50%, 1fr));
 }
 
-input[type=text], input[type=password],
-textarea, select {
+form > div > span {
+  padding: 1em;
+}
+
+form > div > textarea {
+  height: 20vh;
+}
+
+form > button[type=submit] {
   border: 1px solid silver;
-  border-radius: 0.3em;
-  padding: 0.2em 0.3em;
-  outline: none;
-  font-size: 0.9rem;
-  display: inline;
-  width: 100%;
-  -webkit-transition: -webkit-box-shadow 100ms ease-out;
-  transition: -webkit-box-shadow 100ms ease-out;
-  transition: box-shadow 100ms ease-out;
-  transition: box-shadow 100ms ease-out, -webkit-box-shadow 100ms ease-out;
-}
-
-input[type=text]:focus, input[type=password]:focus,
-textarea:focus, select:focus {
-  -webkit-box-shadow: 0 0 0.4em 1px #8de4af;
-          box-shadow: 0 0 0.4em 1px #8de4af;
-  border: 1px solid #8de4af;
-}
-
-h3 {
-  margin: 1em 3em;
-  padding: 1em 3em;
-  border-bottom: 2px solid silver;
+  padding: 1em;
+  margin: 1em;
+  background-color: #8de4af;
 }
 
 @media (max-width: 600px) {
   /* 600px > screen-width */
+  form {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (100%)[auto-fit];
+        grid-template: auto/repeat(auto-fit, 100%);
+  }
 }
 
 @media (min-width: 600px) and (max-width: 1200px) {
@@ -65,4 +61,4 @@ h3 {
 @media (min-width: 1200px) {
   /* 1200 < screen-width */
 }
-/*# sourceMappingURL=form.css.map */
+/*# sourceMappingURL=support.css.map */

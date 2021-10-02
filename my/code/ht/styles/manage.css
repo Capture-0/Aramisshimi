@@ -22,6 +22,13 @@
   opacity: 0.8;
 }
 
+#manage .row:active {
+  color: #2a4a69;
+  background-color: #cdcecf;
+  -webkit-transition: background-color 100ms ease;
+  transition: background-color 100ms ease;
+}
+
 #manage > .container {
   -webkit-box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
           box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
@@ -176,7 +183,7 @@
 }
 
 #manage > .container > .extraData > .lists > div > .list {
-  max-height: 16em;
+  height: 14em;
   overflow: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -211,26 +218,20 @@
 
 #manage > .container > .extraData > .lists > div:nth-child(1) > .list > .row {
   -ms-grid-rows: auto;
-  -ms-grid-columns: 10em 10em 3em 3em;
-      grid-template: auto / 10em 10em 3em 3em;
-}
-
-#manage > .container > .extraData > .lists > div:nth-child(2) > .list > .row {
-  -ms-grid-rows: auto;
   -ms-grid-columns: 10em 20em 10em 10em 3em 3em;
       grid-template: auto / 10em 20em 10em 10em 3em 3em;
 }
 
-#manage > .container > .extraData > .lists > div:nth-child(3) > .list > .row {
-  -ms-grid-rows: auto;
-  -ms-grid-columns: 10em 10em 3em 3em;
-      grid-template: auto / 10em 10em 3em 3em;
-}
-
-#manage > .container > .extraData > .lists > div:nth-child(4) > .list > .row {
+#manage > .container > .extraData > .lists > div:nth-child(2) > .list > .row {
   -ms-grid-rows: auto;
   -ms-grid-columns: 10em 8em 3em 3em;
       grid-template: auto / 10em 8em 3em 3em;
+}
+
+#manage > .container > .extraData > .lists > div:nth-child(3) > .list > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 8em;
+      grid-template: auto / 10em 8em;
 }
 
 #manage > .container > .extraData > .lists > div > .manage > h5 {
