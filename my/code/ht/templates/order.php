@@ -12,7 +12,6 @@ cnf_page_create($_PAGE);
     <section class="container" style="max-width: 780px;">
         <form method="POST">
             <div>
-
                 <span><span style="color: red;">*</span> نام</span>
                 <input type="text" />
             </div>
@@ -40,7 +39,6 @@ cnf_page_create($_PAGE);
         </form>
     </section>
     <script src="my/code/plugin/ckeditor/ckeditor.js"></script>
-    <script src="my/code/plugin/ckeditor/ckfinder.js"></script>
     <script>
         CKEDITOR.replace("orderDesc", {
             filebrowserBrowseUrl: "/my/code/plugin/my/ckeditor_browser.php",
@@ -48,8 +46,7 @@ cnf_page_create($_PAGE);
             filebrowserUploadMethod: "form"
         });
         CKEDITOR.config.toolbarGroups = [{
-            name: 'paragraph',
-            groups: ['basicstyles', 'list', 'insert', 'links', 'undo','styles']
+            groups: ['basicstyles', 'list', 'insert', 'links', 'undo', 'styles']
         }];
         CKEDITOR.config.removeButtons = 'Italic,Strike,Subscript,Superscript,NumberedList,Image,Anchor,Unlink,Redo';
     </script>

@@ -152,6 +152,47 @@
                 }
             }
         }
+        &>.posts {
+            &>h3 {
+                margin: 2em 3em 1em 0;
+            }
+            &>.compose {
+                background-color: $clr-light-3;
+                border-radius: 0.4em;
+                padding: 0.4em;
+                &>div {
+                    &>span {
+                        padding: 1em;
+                    }
+                    &>textarea {
+                        height: 20vh;
+                    }
+                }
+                &>#tags>div>div {
+                    display: inline-block;
+                    padding: 0.1em 0.3em;
+                    margin: 0.2em;
+                    background-color: #a8ffca;
+                    font-size: 1.1em;
+                    border-radius: 0.2em;
+                    border: 1px solid $clr-secondary;
+                    &>i{
+                        color: red;
+                        font-size: 1.1em;
+                        cursor: pointer;
+                    }
+                }
+                &>button[type=submit] {
+                    border: 1px solid silver;
+                    padding: 1em;
+                    margin: 1em;
+                    background-color: $clr-secondary;
+                    &:hover {
+                        transform: scale(1.01);
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -160,11 +201,19 @@
     .extraData>.lists {
         grid-template: auto / repeat(auto-fill, minmax(14em, 1fr));
     }
+    .container>.posts>.compose {
+        display: grid;
+        grid-template: auto / 100%;
+    }
 }
 
 @media (min-width:600px) and (max-width:1200px) {
     /* 600px < screen-width < 1200 */
     .extraData>.lists {
+        grid-template: auto / repeat(auto-fill, minmax(16em, 1fr));
+    }
+    .container>.posts>.compose {
+        display: grid;
         grid-template: auto / repeat(auto-fill, minmax(16em, 1fr));
     }
 }
@@ -173,5 +222,9 @@
     /* 1200 < screen-width */
     .extraData>.lists {
         grid-template: auto / repeat(auto-fill, minmax(18em, 1fr));
+    }
+    .container>.posts>.compose {
+        display: grid;
+        grid-template: auto / repeat(auto-fill, minmax(20em, 1fr));
     }
 }

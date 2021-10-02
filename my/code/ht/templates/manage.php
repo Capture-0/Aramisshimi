@@ -68,7 +68,7 @@ cnf_page_create($_PAGE);
             <div class="extraData" data-action="server">
                 <h3>جدول ها</h3>
                 <div class="lists">
-                    <div class="users">
+                    <div>
                         <h4>کاربران</h4>
                         <div class="list" data-sect="users">
                             <div class="row">
@@ -98,7 +98,7 @@ cnf_page_create($_PAGE);
                             </div>
                         </div>
                     </div>
-                    <div class="comments">
+                    <div>
                         <h4>کامنت ها</h4>
                         <div class="list" data-sect="comments">
                             <div class="row" data-identity="2">
@@ -134,7 +134,7 @@ cnf_page_create($_PAGE);
                             </div>
                         </div>
                     </div>
-                    <div class="tags">
+                    <div>
                         <h4>برچسب ها</h4>
                         <div class="list" data-sect="tags">
                             <div class="row">
@@ -164,7 +164,7 @@ cnf_page_create($_PAGE);
                             </div>
                         </div>
                     </div>
-                    <div class="archives">
+                    <div>
                         <h4>دسته بندی ها</h4>
                         <div class="list" data-sect="archives">
                             <div class="row">
@@ -190,13 +190,64 @@ cnf_page_create($_PAGE);
                     </div>
                 </div>
             </div>
+            <div class="posts">
+                <h3>نوشتن پست جدید</h3>
+                <form method="POST" class="compose">
+                    <div>
+                        <span><span style="color: red;">*</span> موضوع</span>
+                        <input type="text" />
+                    </div>
+                    <div>
+                        <span><span style="color: red;">*</span> دسته بندی</span>
+                        <select name="archive" id="">
+                            <option value="powder">powder</option>
+                            <option value="fluid">fluid</option>
+                            <option value="machine">machine</option>
+                        </select>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <span><span style="color: red;">*</span> متن پست</span>
+                        <textarea name="postDesc" contenteditable="true"></textarea>
+                    </div>
+                    <div id="tags">
+                        <span><span style="color: red;">*</span> برچسب ها</span>
+                        <input onfocus="tagInputFocused = true;" onblur="tagInputFocused = false;" type="text">
+                        <div></div>
+                    </div>
+                    <div>
+                        <span><span style="color: red;">*</span> عکس</span>
+                        <input type="file" />
+                    </div>
+                    <button style="grid-column: 1 / -1;" type="submit" name="submit">ثبت</button>
+                </form>
+            </div>
         </div>
     </section>
-    <section id="posts">
-
-    </section>
 </main>
+<script src="my/code/plugin/ckeditor/ckeditor.js"></script>
+<script src="my/code/plugin/ckfinder/ckfinder.js"></script>
 <script>
+    var tagInputFocused = false;
+    var tags = [];
+
+    CKEDITOR.replace("postDesc", {
+        filebrowserBrowseUrl: "/my/code/plugin/my/ckeditor_browser.php",
+        filebrowserUploadUrl: "/my/code/plugin/my/ckeditor_upload.php",
+        filebrowserUploadMethod: "form"
+    });
+    CKEDITOR.config.toolbarGroups = [{
+            groups: ['basicstyles', 'indent', 'clipboard', 'undo']
+        }, '/',
+        {
+            groups: ['insert', 'links', 'list', 'bidi']
+        }, '/',
+        {
+            groups: ['tools', 'document', 'mode', 'styles']
+        }
+    ];
+
+    CKEDITOR.config.removeButtons = 'Italic,Strike,Subscript,Cut,Paste,Redo,NumberedList,Anchor,Unlink';
+
     window.globalThis.pageLoad.push(function() {
         document.querySelectorAll(".listBtn>.btn").forEach(el => {
             el.addEventListener("click", (e) => {
@@ -251,5 +302,31 @@ cnf_page_create($_PAGE);
                 if (confirm("ایا از حذف این " + msg + " اطمینان دارید؟")) alert("a=db&o=" + t.dataset.op + "&i=" + t.parentNode.dataset.identity + "&s=" + sect);
             });
         });
+
+        var form = document.querySelector("#manage .posts form").addEventListener("submit", function(event) {
+            if (tagInputFocused) {
+                event.preventDefault();
+                var tagInput = document.querySelector("#manage .posts .compose #tags input");
+                if (tagInput.value == "" || tags.includes(tagInput.value)) return false;
+                var div = document.createElement("div");
+                var i = document.createElement("i");
+                i.classList.add("fas");
+                i.classList.add("fa-times");
+                i.addEventListener("click", function(e) {
+                    var input = e.target.parentNode.innerText;
+                    if (tags.indexOf(input.substring(0, input.length - 1)) > -1) tags.splice(tags.indexOf(input.substring(0, input.length - 1)), 1);
+                    e.target.parentNode.style.display = "none";
+                });
+                tags.push(tagInput.value);
+                div.append(tagInput.value + " ");
+                div.appendChild(i);
+                tagInput.value = "";
+                document.querySelector("#manage .posts .compose #tags > div").appendChild(div);
+            } else if (!confirm("ایا از انتشار این مقاله اطمینان دارید؟")) event.preventDefault();
+        });
     });
+
+    function cw(val) {
+        console.log(val);
+    }
 </script>

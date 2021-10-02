@@ -27,7 +27,7 @@ form > * {
 }
 
 input[type=text],
-textarea {
+textarea, select {
   border: 1px solid silver;
   border-radius: 0.3em;
   padding: 0.2em 0.3em;
@@ -42,7 +42,7 @@ textarea {
 }
 
 input[type=text]:focus,
-textarea:focus {
+textarea:focus, select:focus {
   -webkit-box-shadow: 0 0 0.4em 1px #8de4af;
           box-shadow: 0 0 0.4em 1px #8de4af;
   border: 1px solid #8de4af;
