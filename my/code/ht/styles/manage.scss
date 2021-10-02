@@ -45,9 +45,6 @@
                     align-items: center;
                     transition: transform 0.6s;
                     transform: rotate(-90deg);
-                    &>i {
-                        color: $clr-dark-1;
-                    }
                 }
             }
             &>div:last-child {
@@ -103,7 +100,7 @@
                         margin: 0 1em 0.6em 1em;
                     }
                     &>.list {
-                        max-height: 10em;
+                        max-height: 16em;
                         overflow: auto;
                         display: flex;
                         flex-direction: column;
@@ -133,6 +130,9 @@
                     }
                     &:nth-child(3)>.list>.row {
                         grid-template: auto / 10em 10em 3em 3em;
+                    }
+                    &:nth-child(4)>.list>.row {
+                        grid-template: auto / 10em 8em 3em 3em;
                     }
                     &>.manage {
                         &>h5 {

@@ -96,10 +96,6 @@
           transform: rotate(-90deg);
 }
 
-#manage > .container > .listBtn > div:first-child > div > i {
-  color: #2a4a69;
-}
-
 #manage > .container > .listBtn > div:last-child {
   z-index: 1;
   display: -webkit-box;
@@ -180,7 +176,7 @@
 }
 
 #manage > .container > .extraData > .lists > div > .list {
-  max-height: 10em;
+  max-height: 16em;
   overflow: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -229,6 +225,12 @@
   -ms-grid-rows: auto;
   -ms-grid-columns: 10em 10em 3em 3em;
       grid-template: auto / 10em 10em 3em 3em;
+}
+
+#manage > .container > .extraData > .lists > div:nth-child(4) > .list > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 8em 3em 3em;
+      grid-template: auto / 10em 8em 3em 3em;
 }
 
 #manage > .container > .extraData > .lists > div > .manage > h5 {
