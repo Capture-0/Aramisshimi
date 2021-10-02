@@ -12,7 +12,8 @@ cnf_page_create($_PAGE);
     <section id="manage">
         <div class="container" data-action="server">
             <h2>صفحه مدیریت</h2>
-            <div class="listBtn">
+            <!-- delete display none to show -->
+            <div class="listBtn" style="display: none;">
                 <div class="btn">
                     <h3><span>0</span> سفارشات</h3>
                     <div><i class="fas fa-chevron-down"></i></div>
@@ -28,7 +29,8 @@ cnf_page_create($_PAGE);
                     </div>
                 </div>
             </div>
-            <div class="listBtn">
+            <!-- delete display none to show -->
+            <div class="listBtn" style="display: none;">
                 <div class="btn">
                     <h3><span>0</span> پست ها</h3>
                     <div><i class="fas fa-chevron-down"></i></div>
@@ -47,7 +49,8 @@ cnf_page_create($_PAGE);
                     </div>
                 </div>
             </div>
-            <div class="listBtn">
+            <!-- delete display none to show -->
+            <div class="listBtn" style="display: none;">
                 <div class="btn">
                     <h3><span>0</span> پیام ها</h3>
                     <div><i class="fas fa-chevron-down"></i></div>
@@ -65,7 +68,8 @@ cnf_page_create($_PAGE);
                     </div>
                 </div>
             </div>
-            <div class="extraData" data-action="server">
+            <!-- delete display none to show -->
+            <div class="extraData" data-action="server" style="display: none;">
                 <h3>جدول ها</h3>
                 <div class="lists">
                     <div>
