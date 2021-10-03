@@ -151,28 +151,32 @@ cnf_page_create($_PAGE);
                 <h3>نوشتن پست جدید</h3>
                 <form method="POST" class="compose">
                     <div>
-                        <span><span style="color: red;">*</span> موضوع</span>
+                        <span>عنوان</span>
                         <input type="text" />
                     </div>
                     <div>
-                        <span><span style="color: red;">*</span> دسته بندی</span>
+                        <span>موضوع</span>
+                        <input type="text" />
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <span>متن پست</span>
+                        <textarea name="postDesc" contenteditable="true"></textarea>
+                    </div>
+                    <div>
+                        <span>دسته بندی</span>
                         <select name="archive" id="">
                             <option value="powder">powder</option>
                             <option value="fluid">fluid</option>
                             <option value="machine">machine</option>
                         </select>
                     </div>
-                    <div style="grid-column: 1 / -1;">
-                        <span><span style="color: red;">*</span> متن پست</span>
-                        <textarea name="postDesc" contenteditable="true"></textarea>
-                    </div>
                     <div id="tags">
-                        <span><span style="color: red;">*</span> برچسب ها</span>
+                        <span>برچسب ها</span>
                         <input onfocus="tagInputFocused = true;" onblur="tagInputFocused = false;" type="text">
                         <div></div>
                     </div>
                     <div>
-                        <span><span style="color: red;">*</span> عکس</span>
+                        <span>عکس</span>
                         <input type="file" />
                     </div>
                     <button style="grid-column: 1 / -1;" type="submit" name="submit">ثبت</button>

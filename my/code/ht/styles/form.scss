@@ -3,8 +3,10 @@ form>* {
     margin: 0.4em;
 }
 
-input[type=text],input[type=password],
-textarea, select {
+input[type=text],
+input[type=password],
+textarea,
+select {
     border: 1px solid silver;
     border-radius: 0.3em;
     padding: 0.2em 0.3em;
@@ -19,10 +21,16 @@ textarea, select {
         border: 1px solid $clr;
     }
 }
-h3{
-    margin: 1em 3em;
-    padding: 1em 3em;
-    border-bottom: 2px solid silver;
+
+form {
+    h3 {
+        margin: 1em 3em;
+        padding: 1em 3em;
+        border-bottom: 2px solid silver;
+    }
+    span{
+        font-family: yekan;
+    }
 }
 
 @media (max-width:600px) {

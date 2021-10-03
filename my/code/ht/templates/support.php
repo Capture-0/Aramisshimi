@@ -13,19 +13,15 @@ cnf_page_create($_PAGE);
     <h3>پشتیبانی</h3>
         <form method="POST">
             <div>
-                <span><span style="color: red;">*</span> نام</span>
-                <input type="text" />
-            </div>
-            <div>
-                <span><span style="color: red;">*</span> نام خانوادگی</span>
+                <span><span style="color: red;">*</span> نام و نام خانوادگی</span>
                 <input type="text" />
             </div>
             <div>
                 <span><span style="color: red;">*</span> شماره موبایل</span>
                 <input type="text" />
             </div>
-            <div>
-                <span>ایمیل</span>
+            <div style="grid-column: 1 / -1;">
+                <span>موضوع</span>
                 <input type="text" />
             </div>
             <div style="grid-column: 1 / -1;">

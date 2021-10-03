@@ -1,0 +1,173 @@
+@import "utility";
+main {
+    display: grid;
+    background-color: #ffffff;
+    border-radius: 0.3em;
+    box-shadow: $shadow;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    .hr {
+        margin: 1em 0.4em;
+        border-top: 1px solid $clr-light-1;
+        display: block;
+    }
+    &>h2 {
+        padding: 1em;
+    }
+    &>section {
+        padding: 0.8em;
+        &>article {
+            cursor: pointer;
+            display: grid;
+            align-items: center;
+            &>div:last-child {
+                padding: 1em;
+                &>h3 {
+                    font-weight: lighter;
+                    font-size: $fs-big;
+                    font-family: yekan, cursive;
+                    padding-inline: 1em;
+                }
+                &>.info {
+                    padding: 1em;
+                    &>span {
+                        font-size: 1em;
+                        padding: 0 0.4em;
+                        color: #55AC77;
+                        i {
+                            font-size: 1em;
+                            color: $clr-secondary-d;
+                        }
+                    }
+                }
+                &>.text {
+                    letter-spacing: 1px;
+                    line-height: 2em;
+                    font-size: $fs-text;
+                    font-weight: 100;
+                }
+                &>button {
+                    padding: 0.3em 0.9em;
+                    font-size: 0.9em;
+                    border: none;
+                    border-radius: 0.2em;
+                    margin: 1em;
+                    i {
+                        font-size: 0.9em;
+                    }
+                }
+            }
+        }
+    }
+    &>aside {
+        padding: 1em;
+        .search {
+            width: 100%;
+            display: flex;
+            background-color: $clr-light-3;
+            border-radius: 0.2em;
+            border: 1px solid $clr-light-1;
+            input {
+                padding: 0 0.6em;
+                background-color: transparent;
+                width: 100%;
+                outline: none;
+                border: none;
+                font-size: 1.2em;
+                font-family: yekan, cursive;
+                font-weight: lighter;
+                letter-spacing: 1px;
+            }
+            button {
+                background-color: transparent;
+                padding: 0.4em 1em;
+                margin: 0.4em;
+                outline: none;
+                border: none;
+                display: flex;
+                align-items: center;
+                border-right: 1px solid $clr-light-1;
+                i {
+                    color: $clr-dark-2;
+                }
+            }
+        }
+        .articleContainer {
+            display: grid;
+        }
+        article {
+            cursor: pointer;
+            padding: 1em;
+            div {
+                height: 10em;
+            }
+            p {
+                font-family: yekan, cursive;
+            }
+        }
+    }
+}
+
+@media (max-width:600px) {
+    /* 600px > screen-width */
+    main {
+        grid-template: auto / 100%;
+        &>section>article {
+            grid-template: auto / 100%;
+            &>div:first-child {
+                height: 20em;
+            }
+        }
+        &>aside .articleContainer {
+            grid-template: auto / repeat(auto-fill,minmax(10em,1fr));
+        }
+    }
+}
+
+@media (min-width:600px) and (max-width:1200px) {
+    /* 600px < screen-width < 960 */
+    main {
+        grid-template: auto / 67% 33%;
+        &>section {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            &>article {
+                grid-template: auto / 40% 60%;
+                // &>div:first-child {
+                //     height: 14em;
+                // }
+            }
+        }
+        &>aside {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            .articleContainer {
+                grid-template: auto / 100%;
+            }
+        }
+    }
+}
+
+@media (min-width:1200px) {
+    /* 960 < screen-width */
+    main {
+        grid-template: auto / 75% 25%;
+        &>section {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            &>article {
+                grid-template: auto / 30% 70%;
+                &>div:first-child {
+                    height: 12em;
+                }
+            }
+        }
+        &>aside {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            .articleContainer {
+                grid-template: auto / 100%;
+            }
+        }
+    }
+}

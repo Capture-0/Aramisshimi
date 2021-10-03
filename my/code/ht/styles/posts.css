@@ -1,0 +1,261 @@
+.btn {
+  -webkit-transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  border-radius: 0.1em;
+  opacity: 0.9;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.btn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  opacity: 1;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+main {
+  display: -ms-grid;
+  display: grid;
+  background-color: #ffffff;
+  border-radius: 0.3em;
+  -webkit-box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
+          box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+main .hr {
+  margin: 1em 0.4em;
+  border-top: 1px solid #cdcecf;
+  display: block;
+}
+
+main > h2 {
+  padding: 1em;
+}
+
+main > section {
+  padding: 0.8em;
+}
+
+main > section > article {
+  cursor: pointer;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main > section > article > div:last-child {
+  padding: 1em;
+}
+
+main > section > article > div:last-child > h3 {
+  font-weight: lighter;
+  font-size: 1.3em;
+  font-family: yekan, cursive;
+  padding-inline: 1em;
+}
+
+main > section > article > div:last-child > .info {
+  padding: 1em;
+}
+
+main > section > article > div:last-child > .info > span {
+  font-size: 1em;
+  padding: 0 0.4em;
+  color: #55AC77;
+}
+
+main > section > article > div:last-child > .info > span i {
+  font-size: 1em;
+  color: #6FC691;
+}
+
+main > section > article > div:last-child > .text {
+  letter-spacing: 1px;
+  line-height: 2em;
+  font-size: 0.9rem;
+  font-weight: 100;
+}
+
+main > section > article > div:last-child > button {
+  padding: 0.3em 0.9em;
+  font-size: 0.9em;
+  border: none;
+  border-radius: 0.2em;
+  margin: 1em;
+}
+
+main > section > article > div:last-child > button i {
+  font-size: 0.9em;
+}
+
+main > aside {
+  padding: 1em;
+}
+
+main > aside .search {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #f3f2f2;
+  border-radius: 0.2em;
+  border: 1px solid #cdcecf;
+}
+
+main > aside .search input {
+  padding: 0 0.6em;
+  background-color: transparent;
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1.2em;
+  font-family: yekan, cursive;
+  font-weight: lighter;
+  letter-spacing: 1px;
+}
+
+main > aside .search button {
+  background-color: transparent;
+  padding: 0.4em 1em;
+  margin: 0.4em;
+  outline: none;
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-right: 1px solid #cdcecf;
+}
+
+main > aside .search button i {
+  color: #252D35;
+}
+
+main > aside .articleContainer {
+  display: -ms-grid;
+  display: grid;
+}
+
+main > aside article {
+  cursor: pointer;
+  padding: 1em;
+}
+
+main > aside article div {
+  height: 10em;
+}
+
+main > aside article p {
+  font-family: yekan, cursive;
+}
+
+@media (max-width: 600px) {
+  /* 600px > screen-width */
+  main {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 100%;
+        grid-template: auto / 100%;
+  }
+  main > section > article {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 100%;
+        grid-template: auto / 100%;
+  }
+  main > section > article > div:first-child {
+    height: 20em;
+  }
+  main > aside .articleContainer {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(10em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(10em, 1fr));
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+  /* 600px < screen-width < 960 */
+  main {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 67% 33%;
+        grid-template: auto / 67% 33%;
+  }
+  main > section {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1 / 2;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    grid-row: 2 / 3;
+  }
+  main > section > article {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 40% 60%;
+        grid-template: auto / 40% 60%;
+  }
+  main > aside {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2 / 3;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    grid-row: 2 / 3;
+  }
+  main > aside .articleContainer {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 100%;
+        grid-template: auto / 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* 960 < screen-width */
+  main {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 75% 25%;
+        grid-template: auto / 75% 25%;
+  }
+  main > section {
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1 / 2;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    grid-row: 2 / 3;
+  }
+  main > section > article {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 30% 70%;
+        grid-template: auto / 30% 70%;
+  }
+  main > section > article > div:first-child {
+    height: 12em;
+  }
+  main > aside {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2 / 3;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    grid-row: 2 / 3;
+  }
+  main > aside .articleContainer {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 100%;
+        grid-template: auto / 100%;
+  }
+}
+/*# sourceMappingURL=posts.css.map */

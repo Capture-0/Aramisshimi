@@ -76,6 +76,7 @@
                         white-space: nowrap;
                         overflow: hidden;
                         background-color: $clr-light-2;
+                        font-family: yekan, cursive;
                     }
                 }
             }
@@ -118,6 +119,7 @@
                                 border-radius: 0.2em;
                                 padding: 0.2em 0.4em;
                                 margin: 0.2em;
+                                font-family: yekan, cursive;
                             }
                             &:nth-child(2n+1)>div {
                                 background-color: $clr-light-1;
