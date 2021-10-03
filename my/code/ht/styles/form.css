@@ -26,8 +26,10 @@ form > * {
   margin: 0.4em;
 }
 
-input[type=text], input[type=password],
-textarea, select {
+input[type=text],
+input[type=password],
+textarea,
+select {
   border: 1px solid silver;
   border-radius: 0.3em;
   padding: 0.2em 0.3em;
@@ -41,17 +43,23 @@ textarea, select {
   transition: box-shadow 100ms ease-out, -webkit-box-shadow 100ms ease-out;
 }
 
-input[type=text]:focus, input[type=password]:focus,
-textarea:focus, select:focus {
+input[type=text]:focus,
+input[type=password]:focus,
+textarea:focus,
+select:focus {
   -webkit-box-shadow: 0 0 0.4em 1px #8de4af;
           box-shadow: 0 0 0.4em 1px #8de4af;
   border: 1px solid #8de4af;
 }
 
-h3 {
+form h3 {
   margin: 1em 3em;
   padding: 1em 3em;
   border-bottom: 2px solid silver;
+}
+
+form span {
+  font-family: yekan;
 }
 
 @media (max-width: 600px) {

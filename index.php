@@ -4,13 +4,13 @@
 // manage #
 // login #
 // support #
-// posts
+// posts #
 // one post
 
 require("my/cnf.php");
 // CREATE TABLE _page (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(50) NOT NULL,title varchar(70) NOT NULL,description varchar(160) NOT NULL,keywords varchar(100) NOT NULL,styles varchar(100) NOT NULL);
 
-$page_name = "login"; // url in later versions
+$page_name = "posts"; // url in later versions
 $_PAGE = cnf_page_data($page_name);
 ?>
 <!DOCTYPE html>
@@ -22,6 +22,8 @@ $_PAGE = cnf_page_data($page_name);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="<?php echo $_PAGE["keywords"]; ?>">
     <meta name="description" content="<?php echo $_PAGE["description"]; ?>">
+    <meta name="robots" content="index, follow">
+    <link href="https://aramisshimi.rf.gd/" rel="canonical">
     <title><?php echo $_PAGE["title"]; ?></title>
     <?php
     foreach (explode(",", $_PAGE["styles"]) as $i) {

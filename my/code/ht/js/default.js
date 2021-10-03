@@ -45,9 +45,6 @@ async function url(path) {
 
 async function loadImages() { document.querySelectorAll("img[data-src]").forEach(async(img) => { img.src = await url("i/" + img.dataset.src); }); }
 
-function test() {
-    return "test successful";
-}
 /**
  * @param {Function} callback
  */
@@ -62,4 +59,19 @@ function scrollReached(elements, callback) {
 }
 async function ajax(path) {
     return await (await fetch(DEFAULT_CONFIG_PATH + "?" + path)).text();
+}
+
+function pagingIndexes(rows, divideBy, currentPage) {
+    var ar = [],
+        etcs = [],
+        pages = Math.floor(rows / divideBy) + 1;
+    currentPage = currentPage < 1 ? 1 : currentPage > pages ? pages : currentPage;
+    for (i = 1; i <= pages; i++) ar.push(i);
+    if (ar.length > 5) {
+        ar.splice(1, ar.indexOf(currentPage) - 2);
+        ar.splice(ar.indexOf(currentPage) + 2, ar.length - ar.indexOf(currentPage) - 3);
+        if (ar[0] != (ar[1] - 1)) ar.splice(1, 0, "...");
+        if (ar[ar.length - 2] != (ar[ar.length - 1] - 1)) ar.splice(ar.length - 1, 0, "...");
+    }
+    return ar;
 }

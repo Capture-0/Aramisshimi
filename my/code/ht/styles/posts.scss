@@ -1,0 +1,226 @@
+@import "utility";
+main {
+    display: grid;
+    background-color: #ffffff;
+    border-radius: 0.3em;
+    box-shadow: $shadow;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    .hr {
+        margin: 1em 0.4em;
+        border-top: 1px solid $clr-light-1;
+        display: block;
+    }
+    &>h2 {
+        padding: 1em;
+    }
+    &>section {
+        padding: 0.8em;
+        &>article {
+            padding: 1em;
+            cursor: pointer;
+            display: grid;
+            align-items: center;
+            border-radius: 0.4em;
+            transition: background-color 400ms ease-out;
+            &:hover {
+                background-color: $clr-light-2;
+            }
+            &>div:last-child {
+                &>h3 {
+                    font-weight: lighter;
+                    font-size: $fs-big;
+                    font-family: yekan, cursive;
+                    padding-inline: 1em;
+                }
+                &>.info {
+                    padding: 1em;
+                    &>span {
+                        font-size: 1em;
+                        padding: 0 0.4em;
+                        color: #55AC77;
+                        i {
+                            font-size: 1em;
+                            color: $clr-secondary-d;
+                        }
+                    }
+                }
+                &>.text {
+                    padding: 0.4em;
+                    letter-spacing: 1px;
+                    line-height: 2em;
+                    font-size: $fs-text;
+                    font-weight: 100;
+                }
+                &>button {
+                    padding: 0.3em 0.9em;
+                    font-size: 0.9em;
+                    border: none;
+                    border-radius: 0.2em;
+                    margin: 1em;
+                    i {
+                        font-size: 0.9em;
+                    }
+                }
+            }
+        }
+        &>#pageIndex {
+            display: flex;
+            justify-content: center;
+            &>div {
+                padding: 0.2em 0.6em;
+                margin: 0.2em;
+                &[data-page] {
+                    @extend .btn;
+                    border: 0.4em solid #ddd;
+                    background-color: $clr-secondary-d;
+                    color: $clr-white;
+                    font-weight: lighter;
+                }
+            }
+        }
+    }
+    &>aside {
+        padding: 1em;
+        .search {
+            width: 100%;
+            display: flex;
+            background-color: $clr-light-3;
+            border-radius: 0.2em;
+            border: 1px solid $clr-light-1;
+            input {
+                padding: 0 0.6em;
+                background-color: transparent;
+                width: 100%;
+                outline: none;
+                border: none;
+                font-size: 1.2em;
+                font-family: yekan, cursive;
+                font-weight: lighter;
+                letter-spacing: 1px;
+            }
+            button {
+                background-color: transparent;
+                padding: 0.4em 1em;
+                margin: 0.4em;
+                outline: none;
+                border: none;
+                display: flex;
+                align-items: center;
+                border-right: 1px solid $clr-light-1;
+                i {
+                    color: $clr-dark-2;
+                }
+            }
+        }
+        .articleContainer {
+            display: grid;
+        }
+        article {
+            cursor: pointer;
+            padding: 1em;
+            border-radius: 0.4em;
+            transition: background-color 400ms ease-out;
+            &:hover {
+                background-color: $clr-light-2;
+            }
+            div {
+                height: 10em;
+            }
+            p {
+                color: gray;
+                font-family: yekan, cursive;
+                &>span {
+                    color: $clr-dark-1;
+                    font-size: 0.9em;
+                    &>i {
+                        font-size: 0.9em;
+                        color: $clr-secondary-d;
+                        padding-inline: 0.4em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:600px) {
+    /* 600px > screen-width */
+    main {
+        grid-template: auto / 100%;
+        &>section>article {
+            grid-template: auto / 100%;
+            &>div:first-child {
+                height: 20em;
+            }
+        }
+        &>aside .articleContainer {
+            grid-template: auto / repeat(auto-fill, minmax(10em, 1fr));
+        }
+    }
+}
+
+@media (min-width:600px) and (max-width:1200px) {
+    /* 600px < screen-width < 960 */
+    main {
+        grid-template: auto / 67% 33%;
+        &>section {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            &>article {
+                grid-template: auto / 40% 60%;
+            }
+        }
+        &>aside {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            .articleContainer {
+                grid-template: auto / 100%;
+                article {
+                    display: grid;
+                    grid-template: auto / 50% 50%;
+                    div {
+                        height: 6em;
+                    }
+                    p {
+                        padding: 0.4em;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width:1200px) {
+    /* 960 < screen-width */
+    main {
+        grid-template: auto / 75% 25%;
+        &>section {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+            &>article {
+                grid-template: auto / 30% 70%;
+                &>div:first-child {
+                    height: 12em;
+                }
+            }
+        }
+        &>aside {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+            .articleContainer {
+                grid-template: auto / 100%;
+                article {
+                    display: grid;
+                    grid-template: auto / 50% 50%;
+                    div {
+                        height: 6em;
+                    }
+                    p {
+                        padding: 0.4em;
+                    }
+                }
+            }
+        }
+    }
+}
