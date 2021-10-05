@@ -1,0 +1,107 @@
+@import "utility";
+main>article {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    &>* {
+        padding: 0.4em 0;
+        margin: 1em 0;
+    }
+    &>.category {
+        padding: 0.2em 1em;
+        font-size: 0.9em;
+        color: gray;
+        font-family: yekan, cursive;
+        background-color: $clr-light-2;
+        border-radius: 0.6em;
+        i {
+            font-size: 1em;
+            padding: 0 0.4em;
+            color: $clr-dark-1;
+        }
+    }
+    &>.info {
+        font-size: 1rem;
+        &>* {
+            padding: 0.4em 1em;
+        }
+        &>img {
+            width: 100%;
+            height: initial;
+            max-height: 50vh;
+        }
+        &>h3 {
+            color: $clr-dark-3;
+            font-weight: lighter;
+            letter-spacing: 0.8px;
+            font-family: yekan, cursive;
+        }
+        &>p {
+            font-size: 0.9em;
+            span {
+                padding: 0 1em 0 0.2em;
+                i {
+                    font-size: 1em;
+                    color: $clr-secondary-d;
+                }
+            }
+        }
+    }
+    &>.tags {
+        background-color: $clr-light-2;
+        border-radius: 0.4em;
+        padding: 1em;
+        &>div {
+            display: inline-block;
+            user-select: none;
+            padding: 0.2em 0.6em;
+            margin: 0.4em;
+            background-color: #a8ffca;
+            font-size: 0.9em;
+            border-radius: 0.3em;
+            border: 2px dashed $clr-secondary-d;
+        }
+    }
+}
+
+@media (max-width:600px) {
+    /* 600px > screen-width */
+    main>article {
+        &>.info {
+            &>img {
+                width: 100%;
+                height: initial;
+            }
+        }
+    }
+}
+
+@media (min-width:600px) and (max-width:1200px) {
+    /* 600px < screen-width < 960 */
+    main>article {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        &>.info {
+            &>img {
+                width: 50%;
+                height: initial;
+                float: right;
+            }
+        }
+    }
+}
+
+@media (min-width:1200px) {
+    /* 960 < screen-width */
+    main>article {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        &>.info {
+            &>img {
+                width: 25%;
+                height: initial;
+                float: right;
+            }
+        }
+    }
+}

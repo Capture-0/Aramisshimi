@@ -25,7 +25,6 @@
 main {
   display: -ms-grid;
   display: grid;
-  background-color: #ffffff;
   border-radius: 0.3em;
   -webkit-box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
           box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;

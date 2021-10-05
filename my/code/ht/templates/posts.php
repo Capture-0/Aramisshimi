@@ -6,10 +6,116 @@ $_PAGE = array(
     "name" => explode(".", basename(__FILE__))[0],
     "styles" => "posts"
 );
-cnf_page_create($_PAGE);
+if (count($_REQUEST) == 0) cnf_page_create($_PAGE);
 ?>
 <main class="container">
-    <h2>پست ها</h2>
+    <h2>
+        <?php
+        if (count($_REQUEST) > 0) echo "poste shomare 2";
+        else echo "پست ها";
+        ?>
+    </h2>
+    <?php
+    // if(count($_REQUEST)>0){
+    //     echo '<article>';
+    // }
+
+    // # aks
+    // # onvan 4 - 10 words
+    // # mozooe 30 - 50 words
+    // # mohtava > 400 words
+    // # dastebandi
+    // barchasb < 12
+    // comments
+    // # bazdid
+    // # tarikh
+
+    ?>
+    <article>
+        <p class="category">مقالات<i class="fas fa-chevron-left"></i>دسته بندی<i class="fas fa-chevron-left"></i>خط تولید صابون</p>
+        <div class="info">
+            <img data-src="documentary/image61.jpg" src="" alt="">
+            <h3>
+                شما هم به اسانی میتوانید تولید کننده شوینده ها باشید فقط کافی است تجربه و تجهیزات تولید ما را داشته باشید.
+                تخصص ما طراحی ساخت ارایه فرمولاسیون و راه اندازی انواع خط تولید مواد شوینده مایع صابون و پودر رخت شویی سبک می باشد.
+
+                خود اشتغالی
+            </h3>
+            <p><span><i class="fas fa-eye"></i></span>364<span><i class="fas fa-comment"></i></span>59<span><i class="far fa-calendar-alt"></i></span>sat 10:06 00/4/25</p>
+        </div>
+        <div class="content">
+            شما هم به اسانی میتوانید تولید کننده شوینده ها باشید فقط کافی است تجربه و تجهیزات تولید ما را داشته باشید.
+            تخصص ما طراحی ساخت ارایه فرمولاسیون و راه اندازی انواع خط تولید مواد شوینده مایع صابون و پودر رخت شویی سبک می باشد.
+
+            خود اشتغالی
+            صفر تا صد شروع و توسعه انواع خط تولید شوینده در کنار شماییم.
+            در جهت ایجاد اشتغال پایدار در ایران عزیز اقدام به راه اندازی و تاسیس کارخانه تولید مواد شوینده در هر حجمی برای شما می نماییم.
+
+            بهترین محصول و خدمات
+            محصولات با بهترین کیفیت و سازگار با انواع پوست و مو.
+            پشتیبانی بلند مدت از فرمولاسون و تجهیزال تولید.
+
+            تسهیلات هنگام کار
+            با ابزار وسایل و متخصصات حرفه ای کسب و کار بسیاری در اختیارتان قرار می دهیم.
+            خدمات رسانی در تمام نقاط خراسان رضوی و پشتیبانی تلفنی در ساعات کاری
+            شما هم به اسانی میتوانید تولید کننده شوینده ها باشید فقط کافی است تجربه و تجهیزات تولید ما را داشته باشید.
+            تخصص ما طراحی ساخت ارایه فرمولاسیون و راه اندازی انواع خط تولید مواد شوینده مایع صابون و پودر رخت شویی سبک می باشد.
+
+            خود اشتغالی
+            صفر تا صد شروع و توسعه انواع خط تولید شوینده در کنار شماییم.
+            در جهت ایجاد اشتغال پایدار در ایران عزیز اقدام به راه اندازی و تاسیس کارخانه تولید مواد شوینده در هر حجمی برای شما می نماییم.
+
+            بهترین محصول و خدمات
+            محصولات با بهترین کیفیت و سازگار با انواع پوست و مو.
+            پشتیبانی بلند مدت از فرمولاسون و تجهیزال تولید.
+
+            تسهیلات هنگام کار
+            با ابزار وسایل و متخصصات حرفه ای کسب و کار بسیاری در اختیارتان قرار می دهیم.
+            خدمات رسانی در تمام نقاط خراسان رضوی و پشتیبانی تلفنی در ساعات کاری
+        </div>
+        <div class="tags">
+            <div>salam</div>
+            <div>khoobi</div>
+            <div>chetori</div>
+            <div>hi</div>
+            <div>nice</div>
+        </div>
+        <div class="comments">
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            </p>
+        </div>
+    </article>
     <section>
         <article>
             <div><img data-src="documentary/image55.jpg" src="" alt=""></div>
@@ -170,4 +276,9 @@ cnf_page_create($_PAGE);
     for (let i = 0; i < pages.length; i++) {
         document.querySelector("main > section > #pageIndex").innerHTML += "<div " + (pages[i] == "..." ? '' : 'data-page="' + pages[i] + '"') + " >" + pages[i] + "<div>";
     }
+    <?php
+    if (count($_REQUEST) > 0) {
+        echo 'document.querySelector("main > section").remove()';
+    }
+    ?>
 </script>
