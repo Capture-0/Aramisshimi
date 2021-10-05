@@ -150,6 +150,16 @@ function url($path)
     return $p . "/" . substr($path, 2);
 }
 
+function dirs()
+{
+    $items = array();
+    if ($handle = opendir('.')) {
+        while (false !== ($entry = readdir($handle))) if ($entry != "." && $entry != "..") $items[] = $entry;
+        closedir($handle);
+    }
+    return $items;
+}
+
 //|----------------------------------------
 //|     MISC
 //|----------------------------------------

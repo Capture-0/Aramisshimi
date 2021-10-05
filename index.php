@@ -37,6 +37,21 @@ else if (m('\/(order)?', $currentPage)) $currentPage = "order";
 else if (m('\/(posts)?', $currentPage)) $currentPage = "posts";
 else if (m('\/(support)?', $currentPage)) $currentPage = "support";
 $page_name = $currentPage;
+
+$params = preg_split("/\//", $currentPage, -1, PREG_SPLIT_NO_EMPTY);
+
+if (count($params) > 1) { // multi parameter url
+    if (strtolower($params[0]) == "posts" && m("\d+", $params[1])) { // viewing a single post
+        cnf_page_create(array(
+            "title" => $params[0], // 70 chars limit
+            "description" => $params[0], // 160 chars limit
+            "keywords" => "post,aramis,shimi", // less than 10 phrases recommended
+            "name" => $page_name,
+            "styles" => "posts,post"
+        ));
+    }
+}
+
 $_PAGE = cnf_page_data($page_name);
 ?>
 <!DOCTYPE html>
@@ -124,7 +139,6 @@ $_PAGE = cnf_page_data($page_name);
         }
     </script>
     <?php
-    $params = preg_split("/\//", $_PAGE["name"], -1, PREG_SPLIT_NO_EMPTY);
     if (file_exists(url("@/" . $params[0] . ".php"))) {
         for ($i = 1; $i < count($params); $i++) $_REQUEST["p$i"] = $params[$i];
         include(url("@/intro.php"));

@@ -40,7 +40,7 @@ function setQueryString(key, value) {
 }
 
 async function url(path) {
-    return await (await fetch(DEFAULT_CONFIG_PATH + "?url=" + path)).text();
+    return "/" + (await (await fetch(DEFAULT_CONFIG_PATH + "?url=" + path)).text());
 }
 
 async function loadImages() { document.querySelectorAll("img[data-src]").forEach(async(img) => { img.src = await url("i/" + img.dataset.src); }); }

@@ -71,7 +71,7 @@
         });
     });
     document.querySelectorAll("nav ul a").forEach(e => {
-        if (e.attributes.href.value.toLowerCase() == document.querySelector("nav ul").dataset.highlight.toLowerCase()) {
+        if (e.attributes.href.value.toLowerCase() == "/" + document.querySelector("nav ul").dataset.highlight.toLowerCase()) {
             e.addEventListener("click", event => {
                 event.preventDefault();
             });
