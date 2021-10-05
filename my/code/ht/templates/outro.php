@@ -70,4 +70,13 @@
             element.style.opacity = 1;
         });
     });
+    document.querySelectorAll("nav ul a").forEach(e => {
+        if (e.attributes.href.value.toLowerCase() == document.querySelector("nav ul").dataset.highlight.toLowerCase()) {
+            e.addEventListener("click", event => {
+                event.preventDefault();
+            });
+            e.querySelector("li").classList.add("active-page");
+            return;
+        }
+    });
 </script>

@@ -1,4 +1,5 @@
 <?php
+// --- pages ---
 // home #
 // order #
 // manage #
@@ -7,10 +8,35 @@
 // posts #
 // one post
 
+// --- database tables ---
+// orders
+// posts
+// messages
+// comments
+// archives
+// tags
+// _page #
+// _setting
+
+// --- other ---
+// 
+// 
+// 
+// 
+// 
+
+
 require("my/cnf.php");
 // CREATE TABLE _page (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(50) NOT NULL,title varchar(70) NOT NULL,description varchar(160) NOT NULL,keywords varchar(100) NOT NULL,styles varchar(100) NOT NULL);
 
-$page_name = "posts"; // url in later versions
+
+$currentPage = $_SERVER["REQUEST_URI"];
+if (m('\/(home)?', $currentPage)) $currentPage = "home";
+else if (m('\/(login)?', $currentPage)) $currentPage = "login";
+else if (m('\/(order)?', $currentPage)) $currentPage = "order";
+else if (m('\/(posts)?', $currentPage)) $currentPage = "posts";
+else if (m('\/(support)?', $currentPage)) $currentPage = "support";
+$page_name = $currentPage;
 $_PAGE = cnf_page_data($page_name);
 ?>
 <!DOCTYPE html>

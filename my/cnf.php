@@ -25,9 +25,9 @@ $cnf_path_images = "my/media/img";
 //|----------------------------------------
 
 // if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-    if (isset($_GET["url"])) {
-        echo url($_REQUEST["url"]);
-    }
+if (isset($_GET["url"])) {
+    echo url($_REQUEST["url"]);
+}
 // }
 
 //|----------------------------------------
@@ -170,6 +170,11 @@ function cnf_misc_jalali_date($date = null, $format = "yyyy/MM/dd")
 function cnf_misc_alert($msg)
 {
     echo "<script>alert('" . $msg . "');</script>";
+}
+
+function m($pattern, $input, $caseSensetive = true)
+{
+    return preg_match('/^' . $pattern . '$/' . ($caseSensetive ? 'i' : ''), $input);
 }
 
 function cnf_misc_test()

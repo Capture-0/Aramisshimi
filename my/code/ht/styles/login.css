@@ -36,6 +36,10 @@ main > .container * {
   margin: 0.4vw 0;
 }
 
+main > .container > h3 {
+  padding: 0 1em;
+}
+
 main > .container form div {
   padding: 1em;
 }

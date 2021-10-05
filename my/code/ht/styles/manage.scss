@@ -1,6 +1,6 @@
 @import "utility";
 #manage {
-    .row:active{
+    .row:active {
         color: $clr-dark-1;
         background-color: $clr-light-1;
         transition: background-color 100ms ease;
@@ -173,6 +173,7 @@
                     }
                 }
                 &>#tags>div>div {
+                    user-select: none;
                     display: inline-block;
                     padding: 0.1em 0.3em;
                     margin: 0.2em;
@@ -180,7 +181,7 @@
                     font-size: 1.1em;
                     border-radius: 0.2em;
                     border: 1px solid $clr-secondary;
-                    &>i{
+                    &>i {
                         color: red;
                         font-size: 1.1em;
                         cursor: pointer;

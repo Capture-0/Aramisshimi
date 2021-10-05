@@ -67,7 +67,7 @@ main {
   padding-bottom: 1em;
 }
 
-#services > #servicesContainer > div:first-child > div > button {
+#services > #servicesContainer > div:first-child > div > a > button {
   border: 0.4em solid #fff;
   border-radius: 4px;
   background-color: transparent;
