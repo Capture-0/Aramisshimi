@@ -124,9 +124,17 @@ $_PAGE = cnf_page_data($page_name);
         }
     </script>
     <?php
-    include(url("@/intro.php"));
-    include(url("@/" . $_PAGE["name"] . ".php"));
-    include(url("@/outro.php"));
+    $params = preg_split("/\//", $_PAGE["name"], -1, PREG_SPLIT_NO_EMPTY);
+    if (file_exists(url("@/" . $params[0] . ".php"))) {
+        for ($i = 1; $i < count($params); $i++) $_REQUEST["p$i"] = $params[$i];
+        include(url("@/intro.php"));
+        include(url("@/" . $params[0] . ".php"));
+        include(url("@/outro.php"));
+    } else {
+        include(url("@/intro.php"));
+        include(url("@/home.php"));
+        include(url("@/outro.php"));
+    }
     ?>
 </body>
 
