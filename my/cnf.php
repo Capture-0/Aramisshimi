@@ -182,6 +182,11 @@ function cnf_misc_alert($msg)
     echo "<script>alert('" . $msg . "');</script>";
 }
 
+function cnf_misc_avatar($id = "", $type = 1)
+{
+    return "https://avatars.dicebear.com/api/" . ($type == 1 ? "jdenticon" : ($type == 2 ? "initials" : "identicon")) . "/" . md5($id) . ".svg";
+}
+
 function m($pattern, $input, $caseSensetive = true)
 {
     return preg_match('/^' . $pattern . '$/' . ($caseSensetive ? 'i' : ''), $input);

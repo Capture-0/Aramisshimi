@@ -87,13 +87,17 @@ main > article > .info > p span i {
   color: #6FC691;
 }
 
-main > article > .tags {
-  background-color: #e6e6e6;
+main > article > .extra {
   border-radius: 0.4em;
+  background-color: #e6e6e6;
   padding: 1em;
 }
 
-main > article > .tags > div {
+main > article > .extra > .tags {
+  padding: 0.2em;
+}
+
+main > article > .extra > .tags > div {
   display: inline-block;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -105,6 +109,71 @@ main > article > .tags > div {
   font-size: 0.9em;
   border-radius: 0.3em;
   border: 2px dashed #6FC691;
+  font-weight: bolder;
+}
+
+main > article > .extra > .comments > h3 {
+  padding-inline: 1em;
+}
+
+main > article > .extra > .comments > form {
+  display: -ms-grid;
+  display: grid;
+}
+
+main > article > .extra > .comments > form textarea {
+  min-height: 20vh;
+}
+
+main > article > .extra > .comments > form button[type=submit] {
+  border: 1px solid silver;
+  padding: 0.6em;
+  margin: 1em;
+  background-color: #8de4af;
+}
+
+main > article > .extra > .comments > form button[type=submit]:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+}
+
+main > article > .extra > .comments .comment {
+  border-radius: 0.4em;
+  background-color: #f3f2f2;
+  margin: 1em 0.4em;
+  border: 1px solid silver;
+}
+
+main > article > .extra > .comments .comment > .head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main > article > .extra > .comments .comment > .head > img {
+  margin: 1em;
+  margin-bottom: 0;
+  max-width: 4em;
+  max-height: 6em;
+}
+
+main > article > .extra > .comments .comment > .head > div {
+  margin: 1em 0.4em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main > article > .extra > .comments .comment > .head > div > span {
+  color: gray;
+}
+
+main > article > .extra > .comments .comment > p {
+  padding: 0 1em 1em 1em;
 }
 
 @media (max-width: 600px) {
@@ -112,6 +181,11 @@ main > article > .tags > div {
   main > article > .info > img {
     width: 100%;
     height: initial;
+  }
+  main > article > .extra > .comments > form {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 1fr;
+        grid-template: auto / 1fr;
   }
 }
 
@@ -130,6 +204,11 @@ main > article > .tags > div {
     height: initial;
     float: right;
   }
+  main > article > .extra > .comments > form {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template: auto / 1fr 1fr;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -146,6 +225,11 @@ main > article > .tags > div {
     width: 25%;
     height: initial;
     float: right;
+  }
+  main > article > .extra > .comments > form {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template: auto / 1fr 1fr;
   }
 }
 /*# sourceMappingURL=post.css.map */

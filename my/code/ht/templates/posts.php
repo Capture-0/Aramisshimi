@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 $_PAGE = array(
     "title" => "post ha", // 70 chars limit
     "description" => "modiriyate website", // 160 chars limit
@@ -16,9 +19,51 @@ if (count($_REQUEST) == 0) cnf_page_create($_PAGE);
         ?>
     </h2>
     <?php
-    // if(count($_REQUEST)>0){
-    //     echo '<article>';
-    // }
+    if (count($_REQUEST) > 0) {
+        echo '<article>
+        <p class="category">مقالات<i class="fas fa-chevron-left"></i>دسته بندی<i class="fas fa-chevron-left"></i>خط تولید صابون</p>
+        <div class="info">
+            <img data-src="documentary/image61.jpg" src="" alt="">
+            <h3></h3>
+            <p><span><i class="fas fa-eye"></i></span>364<span><i class="fas fa-comment"></i></span>59<span><i class="far fa-calendar-alt"></i></span>sat 10:06 00/4/25</p>
+        </div>
+        <div class="content"></div>
+        <div class="extra">
+            <div class="tags">
+                <div>salam</div>
+            </div>
+            <div class="comments">
+                <h3>ثبت نظر</h3>
+                <form method="post">
+                    <div>
+                        <span>نام</span>
+                        <input type="text" />
+                    </div>
+                    <div>
+                        <span>ایمیل یا شماره موبایل</span>
+                        <input type="text" />
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <span>نظر</span>
+                        <textarea name="orderDesc" contenteditable="true"></textarea>
+                    </div>
+                    <button style="grid-column: 1 / -1;" type="submit" name="submit">ثبت</button>
+                </form>
+                <div class="comment">
+                    <div class="head">
+                        <img data-src="documentary/image69.jpg" alt="">
+                        <div>
+                            <h4></h4>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="hr"></div>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </article>';
+    }
 
     // # aks
     // # onvan 4 - 10 words
@@ -26,96 +71,11 @@ if (count($_REQUEST) == 0) cnf_page_create($_PAGE);
     // # mohtava > 400 words
     // # dastebandi
     // barchasb < 12
-    // comments
+    // # comments
     // # bazdid
     // # tarikh
-
     ?>
-    <article>
-        <p class="category">مقالات<i class="fas fa-chevron-left"></i>دسته بندی<i class="fas fa-chevron-left"></i>خط تولید صابون</p>
-        <div class="info">
-            <img data-src="documentary/image61.jpg" src="" alt="">
-            <h3>
-                شما هم به اسانی میتوانید تولید کننده شوینده ها باشید فقط کافی است تجربه و تجهیزات تولید ما را داشته باشید.
-                تخصص ما طراحی ساخت ارایه فرمولاسیون و راه اندازی انواع خط تولید مواد شوینده مایع صابون و پودر رخت شویی سبک می باشد.
 
-                خود اشتغالی
-            </h3>
-            <p><span><i class="fas fa-eye"></i></span>364<span><i class="fas fa-comment"></i></span>59<span><i class="far fa-calendar-alt"></i></span>sat 10:06 00/4/25</p>
-        </div>
-        <div class="content">
-            شما هم به اسانی میتوانید تولید کننده شوینده ها باشید فقط کافی است تجربه و تجهیزات تولید ما را داشته باشید.
-            تخصص ما طراحی ساخت ارایه فرمولاسیون و راه اندازی انواع خط تولید مواد شوینده مایع صابون و پودر رخت شویی سبک می باشد.
-
-            خود اشتغالی
-            صفر تا صد شروع و توسعه انواع خط تولید شوینده در کنار شماییم.
-            در جهت ایجاد اشتغال پایدار در ایران عزیز اقدام به راه اندازی و تاسیس کارخانه تولید مواد شوینده در هر حجمی برای شما می نماییم.
-
-            بهترین محصول و خدمات
-            محصولات با بهترین کیفیت و سازگار با انواع پوست و مو.
-            پشتیبانی بلند مدت از فرمولاسون و تجهیزال تولید.
-
-            تسهیلات هنگام کار
-            با ابزار وسایل و متخصصات حرفه ای کسب و کار بسیاری در اختیارتان قرار می دهیم.
-            خدمات رسانی در تمام نقاط خراسان رضوی و پشتیبانی تلفنی در ساعات کاری
-            شما هم به اسانی میتوانید تولید کننده شوینده ها باشید فقط کافی است تجربه و تجهیزات تولید ما را داشته باشید.
-            تخصص ما طراحی ساخت ارایه فرمولاسیون و راه اندازی انواع خط تولید مواد شوینده مایع صابون و پودر رخت شویی سبک می باشد.
-
-            خود اشتغالی
-            صفر تا صد شروع و توسعه انواع خط تولید شوینده در کنار شماییم.
-            در جهت ایجاد اشتغال پایدار در ایران عزیز اقدام به راه اندازی و تاسیس کارخانه تولید مواد شوینده در هر حجمی برای شما می نماییم.
-
-            بهترین محصول و خدمات
-            محصولات با بهترین کیفیت و سازگار با انواع پوست و مو.
-            پشتیبانی بلند مدت از فرمولاسون و تجهیزال تولید.
-
-            تسهیلات هنگام کار
-            با ابزار وسایل و متخصصات حرفه ای کسب و کار بسیاری در اختیارتان قرار می دهیم.
-            خدمات رسانی در تمام نقاط خراسان رضوی و پشتیبانی تلفنی در ساعات کاری
-        </div>
-        <div class="tags">
-            <div>salam</div>
-            <div>khoobi</div>
-            <div>chetori</div>
-            <div>hi</div>
-            <div>nice</div>
-        </div>
-        <div class="comments">
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            </p>
-        </div>
-    </article>
     <section>
         <article>
             <div><img data-src="documentary/image55.jpg" src="" alt=""></div>

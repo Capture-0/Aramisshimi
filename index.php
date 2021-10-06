@@ -47,7 +47,7 @@ if (count($params) > 1) { // multi parameter url
             "description" => $params[0], // 160 chars limit
             "keywords" => "post,aramis,shimi", // less than 10 phrases recommended
             "name" => $page_name,
-            "styles" => "posts,post"
+            "styles" => "posts,post,form"
         ));
     }
 }

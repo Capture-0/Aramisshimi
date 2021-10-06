@@ -47,19 +47,69 @@ main>article {
             }
         }
     }
-    &>.tags {
-        background-color: $clr-light-2;
+    &>.extra {
         border-radius: 0.4em;
+        background-color: $clr-light-2;
         padding: 1em;
-        &>div {
-            display: inline-block;
-            user-select: none;
-            padding: 0.2em 0.6em;
-            margin: 0.4em;
-            background-color: #a8ffca;
-            font-size: 0.9em;
-            border-radius: 0.3em;
-            border: 2px dashed $clr-secondary-d;
+        &>.tags {
+            padding: 0.2em;
+            &>div {
+                display: inline-block;
+                user-select: none;
+                padding: 0.2em 0.6em;
+                margin: 0.4em;
+                background-color: #a8ffca;
+                font-size: 0.9em;
+                border-radius: 0.3em;
+                border: 2px dashed $clr-secondary-d;
+                font-weight: bolder;
+            }
+        }
+        &>.comments {
+            &>h3 {
+                padding-inline: 1em;
+            }
+            &>form {
+                display: grid;
+                textarea {
+                    min-height: 20vh;
+                }
+                button[type=submit] {
+                    border: 1px solid silver;
+                    padding: 0.6em;
+                    margin: 1em;
+                    background-color: $clr-secondary;
+                    &:hover {
+                        transform: scale(1.01);
+                    }
+                }
+            }
+            .comment {
+                border-radius: 0.4em;
+                background-color: $clr-light-3;
+                margin: 1em 0.4em;
+                border: 1px solid silver;
+                &>.head {
+                    display: flex;
+                    &>img {
+                        margin: 1em;
+                        margin-bottom: 0;
+                        max-width: 4em;
+                        max-height: 6em;
+                    }
+                    &>div {
+                        margin: 1em 0.4em;
+                        display: flex;
+                        flex-direction: column;
+                        &>span {
+                            color: gray;
+                        }
+                    }
+                }
+                &>p{
+                    padding: 0 1em 1em 1em;
+                }
+            }
         }
     }
 }
@@ -72,6 +122,9 @@ main>article {
                 width: 100%;
                 height: initial;
             }
+        }
+        &>.extra>.comments>form {
+            grid-template: auto / 1fr;
         }
     }
 }
@@ -88,6 +141,9 @@ main>article {
                 float: right;
             }
         }
+        &>.extra>.comments>form {
+            grid-template: auto / 1fr 1fr;
+        }
     }
 }
 
@@ -102,6 +158,9 @@ main>article {
                 height: initial;
                 float: right;
             }
+        }
+        &>.extra>.comments>form {
+            grid-template: auto / 1fr 1fr;
         }
     }
 }
