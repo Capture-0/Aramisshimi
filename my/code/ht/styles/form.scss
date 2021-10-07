@@ -23,12 +23,41 @@ select {
 }
 
 form {
+    &>.flash {
+        grid-column: 1 / -1;
+        padding: 0.4em 1em;
+        border-radius: 0.4em;
+        $borderSize:1px;
+        &[data-type=success] {
+            color: $clr-success-d;
+            background-color: $clr-success;
+            border: $borderSize solid $clr-success-b;
+        }
+        &[data-type=info] {
+            color: $clr-info-d;
+            background-color: $clr-info;
+            border: $borderSize solid $clr-info-b;
+        }
+        &[data-type=warning] {
+            color: $clr-warning-d;
+            background-color: $clr-warning;
+            border: $borderSize solid $clr-warning-b;
+        }
+        &[data-type=error] {
+            color: $clr-error-d;
+            background-color: $clr-error;
+            border: $borderSize solid $clr-error-b;
+        }
+        &[data-type=none] {
+            display: none;
+        }
+    }
     h3 {
         margin: 1em 3em;
         padding: 1em 3em;
         border-bottom: 2px solid silver;
     }
-    span{
+    span {
         font-family: yekan;
     }
 }

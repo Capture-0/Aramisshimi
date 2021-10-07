@@ -9,7 +9,18 @@ $_PAGE = array(
 cnf_page_create($_PAGE);
 ?>
 <main>
-    <section id="services">
+    <section id="flashMessage" class="container">
+        <div class="flash" data-type="<?php if ($_SESSION["form_message"] != null) echo $_SESSION["form_message"] == "" ? "none" : $_SESSION["form_result"];
+                                        else echo "none"; ?>">
+            <?php
+            if ($_SESSION["form_message"] != null) {
+                echo $_SESSION["form_message"];
+                $_SESSION["form_message"] = "";
+            }
+            ?>
+        </div>
+    </section>
+    <section id="services" style="padding: 0;">
         <div id="servicesContainer">
             <div>
                 <img data-src="liquid.jpg" src="" alt="">
@@ -68,7 +79,7 @@ cnf_page_create($_PAGE);
             </div>
         </div>
     </section>
-    <section id="carousel">
+    <section id="carousel" style="padding: 0;">
         <div class="frame">
             <div class="slide">
                 <img data-src="carousel/img 1.jpeg" src="" alt="">

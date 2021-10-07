@@ -6,37 +6,37 @@
 // login #
 // support #
 // posts #
-// one post
+// one post #
 
 // --- database tables ---
-// orders
-// posts
-// messages
-// comments
-// archives
-// tags
-// _page #
-// _setting
+// orders / id first_name last_name email(null) mobile address(null) content datetime(current) isread(0) / CREATE TABLE orders (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,first_name varchar(50) NOT NULL,last_name varchar(50) NOT NULL,email varchar(50),mobile varchar(50) NOT NULL,address varchar(100),content varchar(1000) NOT NULL,datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,isread BOOLEAN NOT NULL DEFAULT 0);
+// posts / id title(unique) subject image content archive datetime(current) / CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,title varchar(100) NOT NULL UNIQUE,subject varchar(500) NOT NULL,image varchar(100) NOT NULL,content varchar(5000) NOT NULL,archive INTEGER NOT NULL,datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
+// messages / id fullname mobile subject content isread(0) attachment(null) datetime(current) / CREATE TABLE messages (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fullname varchar(100) NOT NULL,mobile varchar(50) NOT NULL,subject varchar(500) NOT NULL,content varchar(1000) NOT NULL,isread BOOLEAN NOT NULL DEFAULT 0,attachment varchar(100),datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
+// comments / id fullname email content post comment(0) datetime(current) / CREATE TABLE comments (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fullname varchar(100) NOT NULL,email varchar(50) NOT NULL,content varchar(1000) NOT NULL,post INTEGER NOT NULL,comment INTEGER DEFAULT 0,datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
+// archives / id name(unique) priority(2) show(1) / CREATE TABLE archives (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE,priority INTEGER DEFAULT 2,show BOOLEAN DEFAULT 1);
+// pivot / data object object_id / CREATE TABLE pivot (data varchar(100) NOT NULL,object varchar(100) NOT NULL,object_id INTEGER NOT NULL);
+// tags / id name(unique) / CREATE TABLE tags (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE);
+// _page / id 
+// _setting / id 
 
 // --- other ---
-// 
+// put intro and outro in etc
 // 
 // 
 // 
 // 
 
-
+session_start();
 require("my/cnf.php");
 // CREATE TABLE _page (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(50) NOT NULL,title varchar(70) NOT NULL,description varchar(160) NOT NULL,keywords varchar(100) NOT NULL,styles varchar(100) NOT NULL);
 
 
 $currentPage = $_SERVER["REQUEST_URI"];
 if (m('\/(home)?', $currentPage)) $currentPage = "home";
-else if (m('\/(login)?', $currentPage)) $currentPage = "login";
-else if (m('\/(order)?', $currentPage)) $currentPage = "order";
-else if (m('\/(posts)?', $currentPage)) $currentPage = "posts";
-else if (m('\/(support)?', $currentPage)) $currentPage = "support";
-$page_name = $currentPage;
+else if (m('\/login', $currentPage)) $currentPage = "login";
+else if (m('\/order', $currentPage)) $currentPage = "order";
+else if (m('\/posts', $currentPage)) $currentPage = "posts";
+else if (m('\/support', $currentPage)) $currentPage = "support";
 
 $params = preg_split("/\//", $currentPage, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -46,13 +46,13 @@ if (count($params) > 1) { // multi parameter url
             "title" => $params[0], // 70 chars limit
             "description" => $params[0], // 160 chars limit
             "keywords" => "post,aramis,shimi", // less than 10 phrases recommended
-            "name" => $page_name,
+            "name" => $currentPage,
             "styles" => "posts,post,form"
         ));
     }
 }
 
-$_PAGE = cnf_page_data($page_name);
+$_PAGE = cnf_page_data($currentPage);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,16 +139,16 @@ $_PAGE = cnf_page_data($page_name);
         }
     </script>
     <?php
+    ob_start();
+    include(url("@/intro.php"));
     if (file_exists(url("@/" . $params[0] . ".php"))) {
         for ($i = 1; $i < count($params); $i++) $_REQUEST["p$i"] = $params[$i];
-        include(url("@/intro.php"));
         include(url("@/" . $params[0] . ".php"));
-        include(url("@/outro.php"));
     } else {
-        include(url("@/intro.php"));
-        include(url("@/home.php"));
-        include(url("@/outro.php"));
+        header("location:/");
     }
+    include(url("@/outro.php"));
+    ob_end_flush();
     ?>
 </body>
 

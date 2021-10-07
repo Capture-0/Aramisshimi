@@ -52,6 +52,40 @@ select:focus {
   border: 1px solid #8de4af;
 }
 
+form > .flash {
+  grid-column: 1 / -1;
+  padding: 0.4em 1em;
+  border-radius: 0.4em;
+}
+
+form > .flash[data-type=success] {
+  color: #4a7f46;
+  background-color: #dff0d8;
+  border: 1px solid #bfd0b8;
+}
+
+form > .flash[data-type=info] {
+  color: #3f799a;
+  background-color: #d9edf7;
+  border: 1px solid #b9cdd7;
+}
+
+form > .flash[data-type=warning] {
+  color: #948d80;
+  background-color: #fcf8e3;
+  border: 1px solid #dcd8c3;
+}
+
+form > .flash[data-type=error] {
+  color: #ac4b4b;
+  background-color: #f2dede;
+  border: 1px solid #d2bebe;
+}
+
+form > .flash[data-type=none] {
+  display: none;
+}
+
 form h3 {
   margin: 1em 3em;
   padding: 1em 3em;

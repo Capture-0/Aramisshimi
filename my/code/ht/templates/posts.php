@@ -1,7 +1,4 @@
 <?php
-
-use function PHPSTORM_META\type;
-
 $_PAGE = array(
     "title" => "post ha", // 70 chars limit
     "description" => "modiriyate website", // 160 chars limit

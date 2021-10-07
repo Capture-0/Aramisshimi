@@ -1,0 +1,36 @@
+@import "../utility";
+main>section {
+    &>h2{
+        padding: 1em 2em;
+    }
+    &>div {
+        display: grid;
+        img {
+            object-fit: contain;
+            max-height: 40vh;
+            padding: 1em;
+            margin: 1em;
+        }
+    }
+}
+
+@media (max-width:600px) {
+    /* 600px > screen-width */
+    main>section>div {
+        grid-template: auto / 1fr;
+    }
+}
+
+@media (min-width:600px) and (max-width:1200px) {
+    /* 600px < screen-width < 1200 */
+    main>section>div {
+        grid-template: auto / 1fr 1fr;
+    }
+}
+
+@media (min-width:1200px) {
+    /* 1200 < screen-width */
+    main>section>div {
+        grid-template: auto / 1fr 1fr 1fr;
+    }
+}
