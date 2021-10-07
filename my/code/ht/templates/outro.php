@@ -18,8 +18,8 @@
             <li><a href="">کارگاه و کارخانه</a></li>
             <li><a href="">تجهیزات متخصصان</a></li>
             <li><a href="">تجهیزات محل کار</a></li>
-            <li><a href="">گواهینامه ها</a></li>
-            <li><a href="">ارتباط با ما</a></li>
+            <li><a href="/Page/Certificates">گواهینامه ها</a></li>
+            <li><a href="/Support">ارتباط با ما</a></li>
         </ul>
         <ul>
             <li>

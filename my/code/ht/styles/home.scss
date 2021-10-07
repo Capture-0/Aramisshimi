@@ -3,6 +3,39 @@ main {
     font-size: $fs-text;
     width: 100%;
     overflow-x: hidden;
+    &>section#flashMessage {
+        padding: 0;
+        &>.flash {
+            margin: 1em;
+            grid-column: 1 / -1;
+            padding: 0.4em 1em;
+            border-radius: 0.4em;
+            $borderSize: 1px;
+            &[data-type=success] {
+                color: $clr-success-d;
+                background-color: $clr-success;
+                border: $borderSize solid $clr-success-b;
+            }
+            &[data-type=info] {
+                color: $clr-info-d;
+                background-color: $clr-info;
+                border: $borderSize solid $clr-info-b;
+            }
+            &[data-type=warning] {
+                color: $clr-warning-d;
+                background-color: $clr-warning;
+                border: $borderSize solid $clr-warning-b;
+            }
+            &[data-type=error] {
+                color: $clr-error-d;
+                background-color: $clr-error;
+                border: $borderSize solid $clr-error-b;
+            }
+            &[data-type=none] {
+                display: none;
+            }
+        }
+    }
 }
 
 #services>#servicesContainer {
@@ -113,7 +146,7 @@ main {
     #services>#servicesContainer {
         grid-template: auto auto / 1fr;
     }
-    #emblems>.container{
+    #emblems>.container {
         grid-template: auto / repeat(auto-fill, 100%);
     }
     #carousel>div {

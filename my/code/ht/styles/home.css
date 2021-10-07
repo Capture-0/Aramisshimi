@@ -28,6 +28,45 @@ main {
   overflow-x: hidden;
 }
 
+main > section#flashMessage {
+  padding: 0;
+}
+
+main > section#flashMessage > .flash {
+  margin: 1em;
+  grid-column: 1 / -1;
+  padding: 0.4em 1em;
+  border-radius: 0.4em;
+}
+
+main > section#flashMessage > .flash[data-type=success] {
+  color: #4a7f46;
+  background-color: #dff0d8;
+  border: 1px solid #bfd0b8;
+}
+
+main > section#flashMessage > .flash[data-type=info] {
+  color: #3f799a;
+  background-color: #d9edf7;
+  border: 1px solid #b9cdd7;
+}
+
+main > section#flashMessage > .flash[data-type=warning] {
+  color: #948d80;
+  background-color: #fcf8e3;
+  border: 1px solid #dcd8c3;
+}
+
+main > section#flashMessage > .flash[data-type=error] {
+  color: #ac4b4b;
+  background-color: #f2dede;
+  border: 1px solid #d2bebe;
+}
+
+main > section#flashMessage > .flash[data-type=none] {
+  display: none;
+}
+
 #services > #servicesContainer {
   display: -ms-grid;
   display: grid;

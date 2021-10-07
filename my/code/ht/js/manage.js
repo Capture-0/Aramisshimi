@@ -79,7 +79,7 @@ window.globalThis.pageLoad.push(function() {
         if (tagInputFocused) {
             event.preventDefault();
             var tagInput = document.querySelector("#manage .posts .compose #tags input");
-            if (tagInput.value == "" || tags.includes(tagInput.value)) return false;
+            if (tagInput.value == "" || tags.includes(tagInput.value) || tagInput.value.indexOf(",") != -1) return false;
             var div = document.createElement("div");
             var i = document.createElement("i");
             i.classList.add("fas");
@@ -88,8 +88,10 @@ window.globalThis.pageLoad.push(function() {
                 var input = e.target.parentNode.innerText;
                 if (tags.indexOf(input.substring(0, input.length - 1)) > -1) tags.splice(tags.indexOf(input.substring(0, input.length - 1)), 1);
                 e.target.parentNode.style.display = "none";
+                document.querySelector("#manage .posts .compose #tags #tagsArray").value = tags.length > 0 ? tags.join(",") : "";
             });
             tags.push(tagInput.value);
+            document.querySelector("#manage .posts .compose #tags #tagsArray").value = tags.length > 0 ? tags.join(",") : "";
             div.append(tagInput.value + " ");
             div.appendChild(i);
             tagInput.value = "";
