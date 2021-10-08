@@ -9,8 +9,8 @@ function bwn($input, $start, $end)
 }
 $_FORM["result"] = "none";
 $_FORM["message"] = "";
-$_PF = array("s" => isset($_POST["post_submit"]), "r" => true);
-if ($s_p) {
+$_PF = array("s" => isset($_POST["post_submit"]), "r" => isset($_POST["post_submit"]));
+if ($_PF["s"]) {
     $t = array("c" => $_POST["title"], "s" => 3, "e" => 10, "n" => wc($_POST["title"]));
     $s = array("c" => $_POST["subject"], "s" => 20, "e" => 50, "n" => wc($_POST["subject"]));
     $c = array("c" => $_POST["postDesc"], "s" => 300, "e" => 99999, "n" => wc(strip_tags($_POST["postDesc"])));
@@ -19,9 +19,8 @@ if ($s_p) {
     $i = $_FILES["image"]; // name type tmp_name error size
     $_FORM = array();
     $erar = array();
-    if (bwn($t["n"], $t["s"], $t["e"]) && bwn($s["n"], $s["s"], $s["e"]) && bwn($c["n"], $c["s"], $c["e"]) && bwn($tg["n"], $tg["s"], $tg["e"]) && $i["error"] == 0 || 1 == 1) {
+    if (bwn($t["n"], $t["s"], $t["e"]) && bwn($s["n"], $s["s"], $s["e"]) && bwn($c["n"], $c["s"], $c["e"]) && bwn($tg["n"], $tg["s"], $tg["e"]) && $i["error"] == 0) {
         $_FORM["result"] = "success";
-        $_FORM["message"] = "پست با موفقیت منتشر شد.";
         if (!bwn($t["n"], 4, 10)) $erar[] = "عنوان بین 4 تا 10 کلمه (" . $t["n"] . ")";
         if (!bwn($s["n"], 30, 50)) $erar[] = "موضوع بین 30 تا 50 کلمه (" . $s["n"] . ")";
         if (!bwn($c["n"], 400, 99999)) $erar[] = "محتوای بیش از 400 کلمه (" . $c["n"] . ")";
@@ -29,27 +28,53 @@ if ($s_p) {
         if (count($erar) > 0) {
             $_FORM["result"] = "info";
             array_splice($erar, 0, 0, "موارد زیر برای seo وبسایت اهمیت دارد.");
-            array_splice($erar, 0, 0, "<br>");
         }
-        // try {
-
-        //     cnf_db_insert("INSERT INTO posts () VALUES (?,?,?,?,?,?)", [$f, $l, $e, $m, $a, $o]);
-        //     $_PF["r"] = false;
-        // } catch (Exception $e) {
-        //     $_FORM["result"] = "error";
-        //     $_FORM["message"] = "سفارش شما ثبت نشد.";
-        // }
+        try {
+            // file settings
+            $_F = array(
+                "str" => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+                "rand" => "", "len" => 32, "ext" => strtolower(pathinfo(basename($i["name"]), PATHINFO_EXTENSION)), "i" => $_FILES["image"], "lim" => 20
+            );
+            // create random name for the image
+            for ($i = 0; $i < $_F["len"]; $i++) $_F["rand"] .= $_F["str"][rand(0, strlen($_F["str"]) - 1)];
+            $_F["rand"] = url("i/posts/" . $_F["rand"] . "." . $_F["ext"]);
+            while (file_exists($_F["rand"])) {
+                $_F["rand"] = "";
+                for ($i = 0; $i < $_F["len"]; $i++) $_F["rand"] .= $_F["str"][rand(0, strlen($_F["str"]) - 1)];
+                $_F["rand"] = url("i/posts/" . $_F["rand"] . "." . $_F["ext"]);
+            }
+            // check whether file has certain conditions
+            if (
+                in_array($_F["ext"], explode(",", "jpg,jpeg,png,gif,apng,avif,jfif,pjpeg,pjp,svg,webp")) == 1 &&
+                getimagesize($_F["i"]["tmp_name"]) && $_F["i"]["size"] < $_F["lim"] * 1024 * 1024
+            ) {
+                // check whether file has been uploaded and inputs inserted to database
+                if (
+                    move_uploaded_file($_F["i"]["tmp_name"], $_F["rand"]) &&
+                    cnf_db_insert("INSERT INTO posts (title, [subject], [image], content, archive) VALUES (?,?,?,?,?)", [$t["c"], $s["c"], basename($_F["rand"]), $c["c"], $a])
+                ) {
+                    $_PF["r"] = false;
+                    $_FORM["message"] = "پست با موفقیت منتشر شد.";
+                } else throw new Exception();
+            } else throw new Exception();
+        } catch (Exception $e) {
+            $_FORM["result"] = "error";
+            $_FORM["message"] = "پست منتشر نشد.";
+            $erar[] = "لطفا موارد زیر را رعایت کنید.";
+            $erar[] = "نوع فایل عکس باشد (jpg,jpeg,png,gif,svg,webp,...)";
+            $erar[] = "حجم فایل زیر 20 مگابایت باشد";
+        }
     } else {
         $_FORM["result"] = "warning";
         $_FORM["message"] = "لطفا موارد زیر را به درستی وارد نمایید.";
-        $erar[] = "<br />";
         if (!bwn($t["n"], $t["s"], $t["e"])) $erar[] = "عنوان بین " . $t["s"] . " تا " . $t["e"] . " کلمه" . " (" . $t["n"] . ")";
         if (!bwn($s["n"], $s["s"], $s["e"])) $erar[] = "موضوع بین " . $s["s"] . " تا " . $s["e"] . " کلمه" . " (" . $s["n"] . ")";
         if (!bwn($c["n"], $c["s"], $c["e"])) $erar[] = "محتوای بیش از " . $c["s"] . " کلمه" . " (" . $c["n"] . ")";
         if (!bwn($tg["n"], $tg["s"], $tg["e"])) $erar[] = "برچسب بین " . $tg["s"] . " تا " . $tg["e"] . " عدد" . " (" . $tg["n"] . ")";
-        if ($i["error"] != 0) $erar[] = "اپلود عکس";
+        if (empty($_FILES["image"]["name"])) $erar[] = "اپلود عکس";
     }
     if (count($erar) > 1) {
+        array_splice($erar, 0, 0, "<br>");
         $_FORM["message"] .= implode("<br />", $erar);
     }
 }
@@ -81,7 +106,7 @@ cnf_page_create($_PAGE);
                         <div data-op="inspect"></div>
                     </div>
                     <?php
-                    foreach (cnf_db_select("select * from orders") as $i) {
+                    foreach (cnf_db_select("select * from orders order by id desc") as $i) {
                         echo '<div class="row" data-identity="' . $i["id"] . '">
                         <div>' . $i["first_name"] . ' ' . $i["last_name"] . '</div>
                         <div>' . $i["mobile"] . '</div>
@@ -112,7 +137,7 @@ cnf_page_create($_PAGE);
                         <div data-op="edit"></div>
                     </div>
                     <?php
-                    foreach (cnf_db_select("select * from posts") as $i) {
+                    foreach (cnf_db_select("select * from posts order by id desc") as $i) {
                         echo '<div class="row" data-identity="' . $i["id"] . '">
                         <div>' . $i["image"] . '</div>
                         <div>' . $i["subject"] . '</div>
@@ -145,7 +170,7 @@ cnf_page_create($_PAGE);
                         <div data-op="inspect"></div>
                     </div>
                     <?php
-                    foreach (cnf_db_select("select * from messages") as $i) {
+                    foreach (cnf_db_select("select * from messages order by id desc") as $i) {
                         echo '<div class="row" data-identity="' . $i["id"] . '">
                         <div>' . $i["fullname"] . '</div>
                         <div>' . $i["mobile"] . '</div>
@@ -175,7 +200,7 @@ cnf_page_create($_PAGE);
                                 <div data-op="edit"></div>
                             </div>
                             <?php
-                            foreach (cnf_db_select("select * from comments") as $i) {
+                            foreach (cnf_db_select("select * from comments order by id desc") as $i) {
                                 echo '<div class="row" data-identity="' . $i["id"] . '">
                                     <div>' . $i["fullname"] . '</div>
                                     <div>' . $i["content"] . '</div>
@@ -205,7 +230,7 @@ cnf_page_create($_PAGE);
                                 <div data-op="edit"></div>
                             </div>
                             <?php
-                            foreach (cnf_db_select("select * from archives") as $i) {
+                            foreach (cnf_db_select("select * from archives order by id desc") as $i) {
                                 echo '<div class="row" data-identity="' . $i["id"] . '">
                                     <div>' . $i["name"] . '</div>
                                     <div>38</div>
@@ -231,7 +256,7 @@ cnf_page_create($_PAGE);
                                 <div>دفعات استفاده</div>
                             </div>
                             <?php
-                            foreach (cnf_db_select("select * from tags") as $i) {
+                            foreach (cnf_db_select("select * from tags order by id desc") as $i) {
                                 echo '<div class="row" data-identity="' . $i["id"] . '">
                                     <div>' . $i["name"] . '</div>
                                     <div>51</div>
