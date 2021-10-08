@@ -20,6 +20,8 @@ $cnf_path_templates = "my/code/ht/templates";
 $cnf_path_styles = "my/code/ht/styles";
 $cnf_path_images = "my/media/img";
 
+date_default_timezone_set("Asia/Tehran");
+
 //|----------------------------------------
 //|     AJAX
 //|----------------------------------------
@@ -175,6 +177,12 @@ function cnf_misc_jalali_date($date = null, $format = "yyyy/MM/dd")
 
     $num = range(0, 9);
     return str_replace($arabic, $num, str_replace($persian, $num, $string));
+}
+
+function cnf_misc_create_date($input, $toformat, $fromformat = "Y-m-d H:i:s")
+{ // intl formats -> https://pub.dev/documentation/intl/latest/intl/DateFormat-class.html
+    $formatter = new IntlDateFormatter("fa_IR@calendar=persian", IntlDateFormatter::FULL, IntlDateFormatter::FULL, 'Asia/Tehran', IntlDateFormatter::TRADITIONAL, $toformat);
+    return $formatter->format(DateTime::createFromFormat($fromformat, $input));
 }
 
 function cnf_misc_alert($msg)

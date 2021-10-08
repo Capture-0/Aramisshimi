@@ -46,7 +46,7 @@ main > section {
   padding: 0.8em;
 }
 
-main > section > article {
+main > section > a > article {
   padding: 1em;
   cursor: pointer;
   display: -ms-grid;
@@ -59,41 +59,42 @@ main > section > article {
   transition: background-color 400ms ease-out;
 }
 
-main > section > article:hover {
+main > section > a > article:hover {
   background-color: #e6e6e6;
 }
 
-main > section > article > div:last-child > h3 {
+main > section > a > article > div:last-child > h3 {
   font-weight: lighter;
   font-size: 1.3em;
   font-family: yekan, cursive;
   padding-inline: 1em;
 }
 
-main > section > article > div:last-child > .info {
+main > section > a > article > div:last-child > .info {
   padding: 1em;
+  color: gray;
+  font-weight: lighter;
 }
 
-main > section > article > div:last-child > .info > span {
+main > section > a > article > div:last-child > .info > span {
   font-size: 1em;
   padding: 0 0.4em;
-  color: #55AC77;
 }
 
-main > section > article > div:last-child > .info > span i {
-  font-size: 1em;
+main > section > a > article > div:last-child > .info > span i {
+  font-size: 1rem;
   color: #6FC691;
 }
 
-main > section > article > div:last-child > .text {
+main > section > a > article > div:last-child > .text {
   padding: 0.4em;
   letter-spacing: 1px;
   line-height: 2em;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 100;
 }
 
-main > section > article > div:last-child > button {
+main > section > a > article > div:last-child > button {
   padding: 0.3em 0.9em;
   font-size: 0.9em;
   border: none;
@@ -101,7 +102,7 @@ main > section > article > div:last-child > button {
   margin: 1em;
 }
 
-main > section > article > div:last-child > button i {
+main > section > a > article > div:last-child > button i {
   font-size: 0.9em;
 }
 
@@ -215,12 +216,12 @@ main > aside article p > span > i {
     -ms-grid-columns: 100%;
         grid-template: auto / 100%;
   }
-  main > section > article {
+  main > section > a > article {
     -ms-grid-rows: auto;
     -ms-grid-columns: 100%;
         grid-template: auto / 100%;
   }
-  main > section > article > div:first-child {
+  main > section > a > article > div:first-child {
     height: 20em;
   }
   main > aside .articleContainer {
@@ -245,7 +246,7 @@ main > aside article p > span > i {
     -ms-grid-row-span: 1;
     grid-row: 2 / 3;
   }
-  main > section > article {
+  main > section > a > article {
     -ms-grid-rows: auto;
     -ms-grid-columns: 40% 60%;
         grid-template: auto / 40% 60%;
@@ -293,12 +294,12 @@ main > aside article p > span > i {
     -ms-grid-row-span: 1;
     grid-row: 2 / 3;
   }
-  main > section > article {
+  main > section > a > article {
     -ms-grid-rows: auto;
     -ms-grid-columns: 30% 70%;
         grid-template: auto / 30% 70%;
   }
-  main > section > article > div:first-child {
+  main > section > a > article > div:first-child {
     height: 12em;
   }
   main > aside {

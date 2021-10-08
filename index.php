@@ -14,7 +14,7 @@
 // messages / id fullname mobile subject content isread(0) attachment(null) datetime(current) / CREATE TABLE messages (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fullname varchar(100) NOT NULL,mobile varchar(50) NOT NULL,subject varchar(500) NOT NULL,content varchar(1000) NOT NULL,isread BOOLEAN NOT NULL DEFAULT 0,attachment varchar(100),datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
 // comments / id fullname email content post comment(0) datetime(current) / CREATE TABLE comments (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,fullname varchar(100) NOT NULL,email varchar(50) NOT NULL,content varchar(1000) NOT NULL,post INTEGER NOT NULL,comment INTEGER DEFAULT 0,datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
 // archives / id name(unique) priority(2) show(1) / CREATE TABLE archives (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE,priority INTEGER DEFAULT 2,show BOOLEAN DEFAULT 1);
-// pivot / data object object_id / CREATE TABLE pivot (data varchar(100) NOT NULL,object varchar(100) NOT NULL,object_id INTEGER NOT NULL);
+// pivot / relation object1 object2 / CREATE TABLE pivot (relation varchar(100) NOT NULL,object1 INTEGER NOT NULL,object2 INTEGER NOT NULL);
 // tags / id name(unique) / CREATE TABLE tags (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE);
 // _page / id 
 // _setting / id 
@@ -22,8 +22,8 @@
 // --- other ---
 // put intro and outro in etc
 // fix home page flash section
-// 
-// 
+// add view column to tags table in manage page
+// set default pic in settings
 // 
 
 session_start();

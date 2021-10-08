@@ -49,10 +49,21 @@ if ($_PF["s"]) {
                 getimagesize($_F["i"]["tmp_name"]) && $_F["i"]["size"] < $_F["lim"] * 1024 * 1024
             ) {
                 // check whether file has been uploaded and inputs inserted to database
-                if (
-                    move_uploaded_file($_F["i"]["tmp_name"], $_F["rand"]) &&
-                    cnf_db_insert("INSERT INTO posts (title, [subject], [image], content, archive) VALUES (?,?,?,?,?)", [$t["c"], $s["c"], basename($_F["rand"]), $c["c"], $a])
-                ) {
+                if (move_uploaded_file($_F["i"]["tmp_name"], $_F["rand"])) {
+                    $insertedPostId = cnf_db_insert("INSERT INTO posts (title, [subject], [image], content, archive) VALUES (?,?,?,?,?)", [$t["c"], $s["c"], basename($_F["rand"]), $c["c"], $a]);
+                    $tagsArray = array();
+                    foreach (explode(",", $tg["c"]) as $item) {
+                        $inTable = cnf_db_select("select * from tags where name= ?", [$item]);
+                        if (count($inTable) == 0) {
+                            $insertedId = cnf_db_insert("INSERT INTO tags ([name]) VALUES (?)", [$item]);
+                            $tagsArray[] = $insertedId;
+                        } else {
+                            $tagsArray[] = $inTable[0]["id"];
+                        }
+                    }
+                    foreach ($tagsArray as $item) {
+                        cnf_db_insert("INSERT INTO pivot (relation, object1, object2) VALUES (?,?,?)", ["post_tag", $insertedPostId, $item]);
+                    }
                     $_PF["r"] = false;
                     $_FORM["message"] = "پست با موفقیت منتشر شد.";
                 } else throw new Exception();
@@ -138,13 +149,22 @@ cnf_page_create($_PAGE);
                     </div>
                     <?php
                     foreach (cnf_db_select("select * from posts order by id desc") as $i) {
+                        $tmptg = array();
+                        foreach (cnf_db_select("select * from pivot where relation = 'post_tag' and object1 = " . $i["id"]) as $j) {
+                            $tmptg[] = $j["object2"];
+                        }
+                        $tmpres = array();
+                        foreach (cnf_db_select("SELECT * FROM tags WHERE id IN (" . implode(",", $tmptg) . ")") as $j) {
+                            $tmpres[] = $j["name"];
+                        }
+
                         echo '<div class="row" data-identity="' . $i["id"] . '">
                         <div>' . $i["image"] . '</div>
                         <div>' . $i["subject"] . '</div>
                         <div>' . $i["content"] . '</div>
-                        <div>tags, ad, dawd, awd</div>
+                        <div>' . implode(", ", $tmpres) . '</div>
                         <div>234,43</div>
-                        <div>fluid</div>
+                        <div>' . cnf_db_select("SELECT * FROM archives WHERE id = " . $i["archive"])[0]["name"] . '</div>
                         <div>' . $i["datetime"] . '</div>
                         <div data-op="delete"></div>
                         <div data-op="edit"></div>
@@ -233,7 +253,7 @@ cnf_page_create($_PAGE);
                             foreach (cnf_db_select("select * from archives order by id desc") as $i) {
                                 echo '<div class="row" data-identity="' . $i["id"] . '">
                                     <div>' . $i["name"] . '</div>
-                                    <div>38</div>
+                                    <div>' . cnf_db_select("select count(id) as res from posts where archive = " . $i["id"])[0]["res"] . '</div>
                                     <div data-op="delete"></div>
                                     <div data-op="edit"></div>
                                     </div>';
@@ -259,7 +279,7 @@ cnf_page_create($_PAGE);
                             foreach (cnf_db_select("select * from tags order by id desc") as $i) {
                                 echo '<div class="row" data-identity="' . $i["id"] . '">
                                     <div>' . $i["name"] . '</div>
-                                    <div>51</div>
+                                    <div>' . cnf_db_select("select count(*) as res from pivot where relation = 'post_tag' and object2 = " . $i["id"])[0]["res"] . '</div>
                                     </div>';
                             }
                             ?>
@@ -282,9 +302,11 @@ cnf_page_create($_PAGE);
                     <div>
                         <span>دسته بندی</span>
                         <select name="archive">
-                            <option value="1">powder</option>
-                            <option value="3">fluid</option>
-                            <option value="2">machine</option>
+                            <?php
+                            foreach (cnf_db_select("select * from archives order by id desc") as $item) {
+                                echo '<option value="' . $item["id"] . '">' . $item["name"] . '</option>';
+                            }
+                            ?>
                         </select>
                     </div>
                     <div style="grid-column: 1 / -1;">
