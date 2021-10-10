@@ -78,7 +78,7 @@ main > section > a > article > div:last-child > .info {
 
 main > section > a > article > div:last-child > .info > span {
   font-size: 1em;
-  padding: 0 0.4em;
+  padding: 0 1em 0 0.2em;
 }
 
 main > section > a > article > div:last-child > .info > span i {

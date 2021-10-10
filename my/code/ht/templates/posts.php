@@ -12,8 +12,6 @@ if ($post["isPost"]) {
     if (count($r) == 0) header("location: /Posts");
     else $post["c"] = $r[0];
 }
-$_FORM["result"] = "none";
-$_FORM["message"] = "";
 if (isset($_POST["submit"])) {
     $p = array("n" => $_POST["name"], "e" => $_POST["email"], "c" => $_POST["content"]);
     if (!empty($p["n"]) && m("[\w\-\.]+@[\w\-\.]+\.[\w\-\.]+", $p["e"]) && !empty($p["c"])) {
@@ -38,6 +36,12 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
     </h2>
     <?php
     if ($post["isPost"]) {
+        // implement seen mechanism
+        if (count(cnf_db_select("SELECT * FROM pivot WHERE relation = 'post_view' AND object1 = '" . $post["c"]["id"] . "' AND object2 = '" . $_SERVER["REMOTE_ADDR"] . "'")) == 0) {
+            cnf_db_insert("INSERT INTO pivot (relation, object1, object2) VALUES (?,?,?)", ["post_view", $post["c"]["id"], $_SERVER["REMOTE_ADDR"]]);
+        }
+
+        // get tags
         $tmptg = array();
         foreach (cnf_db_select("select * from pivot where relation = 'post_tag' and object1 = " . $post["c"]["id"]) as $j) {
             $tmptg[] = $j["object2"];
@@ -53,11 +57,11 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         }
 
         echo '<article>
-        <p class="category">مقالات<i class="fas fa-chevron-left"></i>' . cnf_db_select("select name from archives where id = " . $post["c"]["archive"])[0]["name"] . '<i class="fas fa-chevron-left"></i>خط تولید صابون</p>
+        <p class="category">مقالات<i class="fas fa-chevron-left"></i>' . cnf_db_select("select name from archives where id = " . $post["c"]["archive"])[0]["name"] . '<i class="fas fa-chevron-left"></i>' . $post["c"]["title"] . '</p>
         <div class="info">
             <img data-src="posts/' . $post["c"]["image"] . '" src="" alt="">
             <h3>' . $post["c"]["subject"] . '</h3>
-            <p><span><i class="fas fa-eye"></i></span>364<span><i class="fas fa-comment"></i></span>59<span><i class="far fa-calendar-alt"></i></span>' . cnf_misc_create_date($post["c"]["datetime"], "EEEE d MMMM y")  . '</p>
+            <p><span><i class="fas fa-eye"></i></span>' . cnf_db_select("SELECT COUNT(*) AS res FROM pivot WHERE relation = 'post_view' AND object1 = '" . $post["c"]["id"] . "'")[0]["res"] . '<span><i class="fas fa-comment"></i></span>' . cnf_db_select("select count(id) as res from comments where post = " . $post["c"]["id"])[0]["res"] . '<span><i class="far fa-calendar-alt"></i></span>' . cnf_misc_create_date($post["c"]["datetime"], "EEEE d MMMM y")  . '</p>
         </div>
         <div class="content">' . $post["c"]["content"] . '</div>
         <div class="extra">
@@ -114,12 +118,15 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
     <section>
         <?php
         foreach (cnf_db_select("select * from posts") as $i) {
+            // if(count(cnf_db_select("select id from "))){
+
+            // }
             echo '<a href="/Posts/' . $i["id"] . '">
                 <article>
                     <div><img data-src="posts/' . $i["image"] . '" src="" alt=""></div>
                     <div>
                         <h3>' . $i["title"] . '</h3>
-                        <p class="info"><span><i class="fas fa-eye"></i></span>364<span><i class="fas fa-comment"></i></span>59<span><i class="far fa-calendar-alt"></i></span>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y")  . '</p>
+                        <p class="info"><span><i class="fas fa-eye"></i></span>' . cnf_db_select("SELECT COUNT(*) AS res FROM pivot WHERE relation = 'post_view' AND object1 = '" . $i["id"] . "'")[0]["res"] . '<span><i class="fas fa-comment"></i></span>' . cnf_db_select("select count(id) as res from comments where post = " . $i["id"])[0]["res"] . '<span><i class="far fa-calendar-alt"></i></span>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y")  . '</p>
                         <p class="text">' . $i["subject"] . '</p>
                         <button class="dark">ادامه <i class="fas fa-arrow-left"></i></button>
                     </div>

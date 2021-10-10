@@ -1,17 +1,44 @@
 <?php
-$_FORM["result"] = "none";
-$_FORM["message"] = "";
 if (isset($_POST["submit"])) {
     $n = $_POST["name"];
     $m = $_POST["mobile"];
     $s = $_POST["subject"];
     $c = $_POST["messageDesc"];
+    $f = array(
+        "lim" => 4,
+        "str" => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        "len" => 32,
+        "rand" => ""
+    );
     $_FORM = array();
     if (m("..+", $n) && m("(\+)?[\d\s]+", $m) && (m("..+", $s) || empty($s)) && m("....+", $c)) {
-        $_FORM["result"] = "success";
-        $_FORM["message"] = "پیام شما با موفقیت ارسال شد.";
+        if ($_FILES["attachment"]["size"] > 0 || !empty($_FILES["attachment"]["name"])) {
+            $f["c"] = $_FILES["attachment"];
+            $f["ext"] = strtolower(pathinfo(basename($_FILES["attachment"]["name"]), PATHINFO_EXTENSION));
+        }
         try {
-            cnf_db_insert("INSERT INTO messages (fullname, mobile, [subject], content) VALUES (?,?,?,?)", [$n, $m, $s, $c]);
+            if (!empty($f["c"])) {
+                // create random name for the image
+                for ($i = 0; $i < $f["len"]; $i++) $f["rand"] .= $f["str"][rand(0, strlen($f["str"]) - 1)];
+                $f["rand"] = "my/media/uploaded/messages/" . $f["rand"] . "." . $f["ext"];
+                while (file_exists($f["rand"])) {
+                    $f["rand"] = "";
+                    for ($i = 0; $i < $f["len"]; $i++) $f["rand"] .= $f["str"][rand(0, strlen($f["str"]) - 1)];
+                    $f["rand"] = url("my/media/uploaded/messages/" . $f["rand"] . "." . $f["ext"]);
+                }
+                // check whether file has certain conditions
+                if (
+                    in_array($f["ext"], explode(",", "jpg,jpeg,png,gif,apng,avif,jfif,pjpeg,pjp,svg,webp")) &&
+                    getimagesize($f["c"]["tmp_name"]) && $f["c"]["size"] < $f["lim"] * 1024 * 1024
+                ) {
+                    // check whether file has been uploaded and inputs inserted to database
+                    if (move_uploaded_file($f["c"]["tmp_name"], $f["rand"])) {
+                    } else throw new Exception();
+                } else throw new Exception();
+            }
+            cnf_db_insert("INSERT INTO messages (fullname, mobile, [subject], content, attachment) VALUES (?,?,?,?,?)", [$n, $m, $s, $c, basename($f["rand"])]);
+            $_FORM["result"] = "success";
+            $_FORM["message"] = "پیام شما ارسال شد.";
         } catch (Exception $e) {
             $_FORM["result"] = "error";
             $_FORM["message"] = "پیام شما ارسال نشد.";
@@ -39,7 +66,7 @@ cnf_page_create($_PAGE);
 <main>
     <section class="container" style="max-width: 780px;">
         <h3>پشتیبانی</h3>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             <div class="flash" data-type="<?php echo $_FORM["message"] == "" ? "none" : $_FORM["result"];  ?>">
                 <?php
                 echo $_FORM["message"];
@@ -66,15 +93,11 @@ cnf_page_create($_PAGE);
                 <span><span style="color: red;">*</span> پیام شما</span>
                 <textarea name="messageDesc" contenteditable="true"></textarea>
             </div>
+            <div>
+                <span>پیوست</span>
+                <input name="attachment" type="file" />
+            </div>
             <button style="grid-column: 1 / -1;" type="submit" name="submit">ارسال</button>
         </form>
     </section>
-    <script src="my/code/plugin/ckeditor/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace("messageDesc");
-        CKEDITOR.config.toolbarGroups = [{
-            groups: ['basicstyles', 'list', 'insert', 'links', 'undo', 'styles']
-        }];
-        CKEDITOR.config.removeButtons = 'Italic,Strike,Subscript,Superscript,NumberedList,Image,Anchor,Unlink,Redo';
-    </script>
 </main>

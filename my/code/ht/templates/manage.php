@@ -1,4 +1,5 @@
 <?php
+if ($_SESSION["role"] != "admin") header("location:/");
 function wc($input, $seprator = "\s+")
 {
     return count(preg_split("/$seprator/", $input, -1, PREG_SPLIT_NO_EMPTY));
@@ -7,8 +8,6 @@ function bwn($input, $start, $end)
 {
     return $input >= $start && $input <= $end;
 }
-$_FORM["result"] = "none";
-$_FORM["message"] = "";
 $_PF = array("s" => isset($_POST["post_submit"]), "r" => isset($_POST["post_submit"]));
 if ($_PF["s"]) {
     $t = array("c" => $_POST["title"], "s" => 3, "e" => 10, "n" => wc($_POST["title"]));
@@ -19,7 +18,7 @@ if ($_PF["s"]) {
     $i = $_FILES["image"]; // name type tmp_name error size
     $_FORM = array();
     $erar = array();
-    if (bwn($t["n"], $t["s"], $t["e"]) && bwn($s["n"], $s["s"], $s["e"]) && bwn($c["n"], $c["s"], $c["e"]) && bwn($tg["n"], $tg["s"], $tg["e"]) && $i["error"] == 0) {
+    if (bwn($t["n"], $t["s"], $t["e"]) && bwn($s["n"], $s["s"], $s["e"]) && bwn($c["n"], $c["s"], $c["e"]) && bwn($tg["n"], $tg["s"], $tg["e"]) && $i["size"] != 0) {
         $_FORM["result"] = "success";
         if (!bwn($t["n"], 4, 10)) $erar[] = "عنوان بین 4 تا 10 کلمه (" . $t["n"] . ")";
         if (!bwn($s["n"], 30, 50)) $erar[] = "موضوع بین 30 تا 50 کلمه (" . $s["n"] . ")";
@@ -141,7 +140,7 @@ cnf_page_create($_PAGE);
                         <div>موضوع</div>
                         <div>محتوا</div>
                         <div>برچسب ها</div>
-                        <div>بازدید/نظر ها</div>
+                        <div>نظر ها/بازدید</div>
                         <div>دسته بندی</div>
                         <div>تاریخ</div>
                         <div data-op="delete"></div>
@@ -159,13 +158,13 @@ cnf_page_create($_PAGE);
                         }
 
                         echo '<div class="row" data-identity="' . $i["id"] . '">
-                        <div>' . $i["image"] . '</div>
+                        <div><img data-src="posts/' . $i["image"] . '" src="">' . $i["title"] . '</div>
                         <div>' . $i["subject"] . '</div>
-                        <div>' . $i["content"] . '</div>
+                        <div>' . strip_tags($i["content"]) . '</div>
                         <div>' . implode(", ", $tmpres) . '</div>
-                        <div>234,43</div>
+                        <div>' . cnf_db_select("SELECT COUNT(*) AS res FROM pivot WHERE relation = 'post_view' AND object1 = '" . $i["id"] . "'")[0]["res"] . '/' . cnf_db_select("select count(id) as res from comments where post = " . $i["id"])[0]["res"] . '</div>
                         <div>' . cnf_db_select("SELECT * FROM archives WHERE id = " . $i["archive"])[0]["name"] . '</div>
-                        <div>' . $i["datetime"] . '</div>
+                        <div>' . cnf_misc_create_date($i["datetime"], "d MMMM y | H:m") . '</div>
                         <div data-op="delete"></div>
                         <div data-op="edit"></div>
                     </div>';

@@ -121,9 +121,6 @@
 }
 
 #manage > .container > .listBtn > div:last-child > .row {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   display: -ms-grid;
   display: grid;
   gap: 0.2em;
@@ -135,17 +132,17 @@
 
 #manage > .container > .listBtn > div:last-child > .row > div {
   padding: 0.4em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   background-color: #e6e6e6;
-  font-family: yekan, cursive;
+  font-family: yekan;
+}
+
+#manage > .container > .listBtn > div:last-child > .row > div > img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  max-height: 6em;
 }
 
 #manage > .container > .listBtn:nth-child(2) > div:last-child > .row {
@@ -156,8 +153,8 @@
 
 #manage > .container > .listBtn:nth-child(3) > div:last-child > .row {
   -ms-grid-rows: auto;
-  -ms-grid-columns: 15em 20em 30em 20em 8em 8em 5em 3em 3em;
-      grid-template: auto / 15em 20em 30em 20em 8em 8em 5em 3em 3em;
+  -ms-grid-columns: 15em 20em 30em 20em 8em 8em 10em 3em 3em;
+      grid-template: auto / 15em 20em 30em 20em 8em 8em 10em 3em 3em;
 }
 
 #manage > .container > .listBtn:nth-child(4) > div:last-child > .row {
@@ -207,7 +204,10 @@
   border-radius: 0.2em;
   padding: 0.2em 0.4em;
   margin: 0.2em;
-  font-family: yekan, cursive;
+  font-family: yekan;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 #manage > .container > .extraData > .lists > div > .list > .row:nth-child(2n+1) > div {

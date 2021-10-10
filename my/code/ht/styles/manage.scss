@@ -62,7 +62,6 @@
                 background-color: $clr-light-3;
                 transition: max-height 0.6s;
                 &>.row {
-                    width: fit-content;
                     display: grid;
                     gap: 0.2em;
                     &:nth-child(2n)>div {
@@ -70,13 +69,15 @@
                     }
                     &>div {
                         padding: 0.4em;
-                        display: flex;
-                        align-items: center;
                         text-overflow: ellipsis;
                         white-space: nowrap;
                         overflow: hidden;
                         background-color: $clr-light-2;
-                        font-family: yekan, cursive;
+                        font-family: yekan;
+                        &>img{
+                            object-fit: contain;
+                            max-height: 6em;
+                        }
                     }
                 }
             }
@@ -85,7 +86,7 @@
                 grid-template: auto / 10em 10em 20em 40em 3em 3em;
             }
             &:nth-child(3)>div:last-child>.row {
-                grid-template: auto / 15em 20em 30em 20em 8em 8em 5em 3em 3em;
+                grid-template: auto / 15em 20em 30em 20em 8em 8em 10em 3em 3em;
             }
             &:nth-child(4)>div:last-child>.row {
                 grid-template: auto / 10em 15em 20em 30em 5em 4em 3em 3em;
@@ -119,7 +120,10 @@
                                 border-radius: 0.2em;
                                 padding: 0.2em 0.4em;
                                 margin: 0.2em;
-                                font-family: yekan, cursive;
+                                font-family: yekan;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
                             }
                             &:nth-child(2n+1)>div {
                                 background-color: $clr-light-1;

@@ -10,10 +10,10 @@ cnf_page_create($_PAGE);
 ?>
 <main>
     <section id="flashMessage" class="container">
-        <div class="flash" data-type="<?php if ($_SESSION["form_message"] != null) echo $_SESSION["form_message"] == "" ? "none" : $_SESSION["form_result"];
+        <div class="flash" data-type="<?php if (!empty($_SESSION["form_message"])) echo $_SESSION["form_message"] == "" ? "none" : $_SESSION["form_result"];
                                         else echo "none"; ?>">
             <?php
-            if ($_SESSION["form_message"] != null) {
+            if (!empty($_SESSION["form_message"])) {
                 echo $_SESSION["form_message"];
                 $_SESSION["form_message"] = "";
             }
