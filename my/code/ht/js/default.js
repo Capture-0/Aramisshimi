@@ -57,8 +57,8 @@ function scrollReached(elements, callback) {
         }
     });
 }
-async function ajax(path) {
-    return await (await fetch(DEFAULT_CONFIG_PATH + "?" + path)).text();
+async function ajax(qry) {
+    return await (await fetch(DEFAULT_CONFIG_PATH + "?req=sql&p=" + encodeURIComponent(qry))).text();
 }
 
 function pagingIndexes(rows, divideBy, currentPage) {

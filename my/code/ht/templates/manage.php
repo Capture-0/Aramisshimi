@@ -18,7 +18,7 @@ if ($_PF["s"]) {
     $i = $_FILES["image"]; // name type tmp_name error size
     $_FORM = array();
     $erar = array();
-    if (bwn($t["n"], $t["s"], $t["e"]) && bwn($s["n"], $s["s"], $s["e"]) && bwn($c["n"], $c["s"], $c["e"]) && bwn($tg["n"], $tg["s"], $tg["e"]) && $i["size"] != 0) {
+    if (bwn($t["n"], $t["s"], $t["e"]) && bwn($s["n"], $s["s"], $s["e"]) && bwn($c["n"], $c["s"], $c["e"]) && bwn($tg["n"], $tg["s"], $tg["e"]) && !empty($_FILES["image"]["name"])) {
         $_FORM["result"] = "success";
         if (!bwn($t["n"], 4, 10)) $erar[] = "عنوان بین 4 تا 10 کلمه (" . $t["n"] . ")";
         if (!bwn($s["n"], 30, 50)) $erar[] = "موضوع بین 30 تا 50 کلمه (" . $s["n"] . ")";
@@ -36,11 +36,11 @@ if ($_PF["s"]) {
             );
             // create random name for the image
             for ($i = 0; $i < $_F["len"]; $i++) $_F["rand"] .= $_F["str"][rand(0, strlen($_F["str"]) - 1)];
-            $_F["rand"] = url("i/posts/" . $_F["rand"] . "." . $_F["ext"]);
+            $_F["rand"] = url("i/posts/files/thumbnails/" . $_F["rand"] . "." . $_F["ext"]);
             while (file_exists($_F["rand"])) {
                 $_F["rand"] = "";
                 for ($i = 0; $i < $_F["len"]; $i++) $_F["rand"] .= $_F["str"][rand(0, strlen($_F["str"]) - 1)];
-                $_F["rand"] = url("i/posts/" . $_F["rand"] . "." . $_F["ext"]);
+                $_F["rand"] = url("i/posts/files/thumbnails/" . $_F["rand"] . "." . $_F["ext"]);
             }
             // check whether file has certain conditions
             if (
@@ -112,6 +112,7 @@ cnf_page_create($_PAGE);
                         <div>شماره</div>
                         <div>ادرس</div>
                         <div>توضیحات</div>
+                        <div>تاریخ</div>
                         <div data-op="delete"></div>
                         <div data-op="inspect"></div>
                     </div>
@@ -122,6 +123,7 @@ cnf_page_create($_PAGE);
                         <div>' . $i["mobile"] . '</div>
                         <div>' . $i["address"] . '</div>
                         <div>' . $i["content"] . '</div>
+                        <div>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y | H:m") . '</div>
                         <div data-op="delete"></div>
                         <div data-op="inspect"></div>
                     </div>';
@@ -158,13 +160,13 @@ cnf_page_create($_PAGE);
                         }
 
                         echo '<div class="row" data-identity="' . $i["id"] . '">
-                        <div><img data-src="posts/' . $i["image"] . '" src="">' . $i["title"] . '</div>
+                        <div><img data-src="posts/files/thumbnails/' . $i["image"] . '" src="">' . $i["title"] . '</div>
                         <div>' . $i["subject"] . '</div>
                         <div>' . strip_tags($i["content"]) . '</div>
                         <div>' . implode(", ", $tmpres) . '</div>
                         <div>' . cnf_db_select("SELECT COUNT(*) AS res FROM pivot WHERE relation = 'post_view' AND object1 = '" . $i["id"] . "'")[0]["res"] . '/' . cnf_db_select("select count(id) as res from comments where post = " . $i["id"])[0]["res"] . '</div>
                         <div>' . cnf_db_select("SELECT * FROM archives WHERE id = " . $i["archive"])[0]["name"] . '</div>
-                        <div>' . cnf_misc_create_date($i["datetime"], "d MMMM y | H:m") . '</div>
+                        <div>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y | H:m") . '</div>
                         <div data-op="delete"></div>
                         <div data-op="edit"></div>
                     </div>';
@@ -195,8 +197,8 @@ cnf_page_create($_PAGE);
                         <div>' . $i["mobile"] . '</div>
                         <div>' . $i["subject"] . '</div>
                         <div>' . $i["content"] . '</div>
-                        <div>' . $i["datetime"] . '</div>
-                        <div>' . ($i["attachment"] == 0 ? "ندارد" : "دارد") . '</div>
+                        <div>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y | H:m") . '</div>
+                        <div>' . (strlen($i["attachment"]) < 10 ? "ندارد" : "دارد") . '</div>
                         <div data-op="delete"></div>
                         <div data-op="inspect"></div>
                     </div>';
@@ -224,7 +226,7 @@ cnf_page_create($_PAGE);
                                     <div>' . $i["fullname"] . '</div>
                                     <div>' . $i["content"] . '</div>
                                     <div>' . $i["email"] . '</div>
-                                    <div>' . $i["datetime"] . '</div>
+                                    <div>' . cnf_misc_create_date($i["datetime"], "d MMMM y | H:m") . '</div>
                                     <div data-op="delete"></div>
                                     <div data-op="edit"></div>
                                     </div>';

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 //|----------------------------------------
 //|     CONSTANTS
@@ -26,11 +27,28 @@ date_default_timezone_set("Asia/Tehran");
 //|     AJAX
 //|----------------------------------------
 
-// if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 if (isset($_GET["url"])) {
     echo url($_REQUEST["url"]);
 }
-// }
+
+if (isset($_GET["req"]) && $_SESSION["role"]) {
+    if ($_GET["req"] == "sql" && isset($_GET["p"])) {
+        $qry = $_GET["p"];
+        $sql = array("operation" => substr($qry, 0, 1), "table" => substr($qry, 1, 3), "id" => substr($qry, 4));
+        $res = "";
+        if ("d" == $sql["operation"] && $_SESSION["role"] == "admin") $res .= "delete from ";
+        else if ("s" == $sql["operation"]) $res .= "select * from ";
+        if ("arc" == $sql["table"]) $res .= "archives ";
+        else if ("com" == $sql["table"]) $res .= "comments ";
+        else if ("msg" == $sql["table"]) $res .= "messages ";
+        else if ("ord" == $sql["table"]) $res .= "orders ";
+        else if ("pst" == $sql["table"]) $res .= "posts ";
+        $res .= m("\d+", $sql["id"]) ? "where id = " . $sql["id"] : "";
+        $cnf_db_connection = new PDO("sqlite:admin.db");
+        if (str_starts_with($res, "delete")) cnf_db_execute($res);
+        else echo json_encode(cnf_db_select($res)[0]);
+    }
+}
 
 //|----------------------------------------
 //|     DATABASE
@@ -193,6 +211,13 @@ function cnf_misc_alert($msg)
 function cnf_misc_avatar($id = "", $type = 1)
 {
     return "https://avatars.dicebear.com/api/" . ($type == 1 ? "jdenticon" : ($type == 2 ? "initials" : "identicon")) . "/" . md5($id) . ".svg";
+}
+
+function cnf_misc_random_string($length = 32, $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
+{
+    $res = "";
+    for ($i = 0; $i < $length; $i++) $res .= $chars[rand(0, strlen($chars) - 1)];
+    return $res;
 }
 
 function m($pattern, $input, $caseSensetive = true)

@@ -6,7 +6,10 @@ $_PAGE = array(
     "name" => explode(".", basename(__FILE__))[0],
     "styles" => "posts"
 );
-$post = array("isPost" => count($_REQUEST) > 0 ? m("\d+", $_REQUEST["p1"]) : false);
+$post = array("isPost" => count($_REQUEST) > 0 ? m("\d+", $_REQUEST["p1"]) : false, "isIndex" => !m("\d+", isset($_REQUEST["p1"]) ? $_REQUEST["p1"] : ""));
+if (isset($_REQUEST["p1"]) && isset($_REQUEST["p2"])) {
+    $post["isCategory"] = strtolower($_REQUEST["p1"]) == "c" && m("\d+", $_REQUEST["p2"]) ? true : false;
+} else $post["isCategory"] = false;
 if ($post["isPost"]) {
     $r = cnf_db_select("select * from posts where id = " . $_REQUEST["p1"]);
     if (count($r) == 0) header("location: /Posts");
@@ -59,7 +62,7 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         echo '<article>
         <p class="category">مقالات<i class="fas fa-chevron-left"></i>' . cnf_db_select("select name from archives where id = " . $post["c"]["archive"])[0]["name"] . '<i class="fas fa-chevron-left"></i>' . $post["c"]["title"] . '</p>
         <div class="info">
-            <img data-src="posts/' . $post["c"]["image"] . '" src="" alt="">
+            <img data-src="posts/files/thumbnails/' . $post["c"]["image"] . '" src="" alt="">
             <h3>' . $post["c"]["subject"] . '</h3>
             <p><span><i class="fas fa-eye"></i></span>' . cnf_db_select("SELECT COUNT(*) AS res FROM pivot WHERE relation = 'post_view' AND object1 = '" . $post["c"]["id"] . "'")[0]["res"] . '<span><i class="fas fa-comment"></i></span>' . cnf_db_select("select count(id) as res from comments where post = " . $post["c"]["id"])[0]["res"] . '<span><i class="far fa-calendar-alt"></i></span>' . cnf_misc_create_date($post["c"]["datetime"], "EEEE d MMMM y")  . '</p>
         </div>
@@ -117,13 +120,22 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
 
     <section>
         <?php
-        foreach (cnf_db_select("select * from posts") as $i) {
-            // if(count(cnf_db_select("select id from "))){
-
-            // }
-            echo '<a href="/Posts/' . $i["id"] . '">
+        $qry = "select * from posts order by id desc";
+        if ($post["isCategory"]) {
+            cnf_page_create(array(
+                "title" => "daste bandi", // 70 chars limit
+                "description" => "daste badni", // 160 chars limit
+                "keywords" => "daste bandi,aramis,shimi", // less than 10 phrases recommended
+                "name" => $currentPage,
+                "styles" => "posts"
+            ));
+            $qry = "select * from posts where archive = " . $_REQUEST["p2"] . " order by id desc";
+        }
+        if ($post["isIndex"]) {
+            foreach (cnf_db_select($qry) as $i) {
+                echo '<a href="/Posts/' . $i["id"] . '">
                 <article>
-                    <div><img data-src="posts/' . $i["image"] . '" src="" alt=""></div>
+                    <div><img data-src="posts/files/thumbnails/' . $i["image"] . '" src="" alt=""></div>
                     <div>
                         <h3>' . $i["title"] . '</h3>
                         <p class="info"><span><i class="fas fa-eye"></i></span>' . cnf_db_select("SELECT COUNT(*) AS res FROM pivot WHERE relation = 'post_view' AND object1 = '" . $i["id"] . "'")[0]["res"] . '<span><i class="fas fa-comment"></i></span>' . cnf_db_select("select count(id) as res from comments where post = " . $i["id"])[0]["res"] . '<span><i class="far fa-calendar-alt"></i></span>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y")  . '</p>
@@ -133,6 +145,7 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
                 </article>
             </a>
             <div class="hr"></div>';
+            }
         }
         ?>
         <div id="pageIndex"></div>
@@ -145,81 +158,47 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         <div class="hr"></div>
         <h3>پر بازدید ها</h3>
         <div class="articleContainer">
-            <article>
-                <div><img data-src="documentary/image11.jpg" src="" alt=""></div>
-                <p>
-                    بهترین محصول و خدمات
-                    <br>
-                    <span><i class="fas fa-eye"></i>289</span>
-                </p>
-            </article>
-            <article>
-                <div><img data-src="documentary/image11.jpg" src="" alt=""></div>
-                <p>
-                    بهترین محصول و خدمات
-                    <br>
-                    <span><i class="fas fa-eye"></i>289</span>
-                </p>
-            </article>
-            <article>
-                <div><img data-src="documentary/image11.jpg" src="" alt=""></div>
-                <p>
-                    بهترین محصول و خدمات
-                    <br>
-                    <span><i class="fas fa-eye"></i>289</span>
-                </p>
-            </article>
-            <article>
-                <div><img data-src="documentary/image11.jpg" src="" alt=""></div>
-                <p>
-                    بهترین محصول و خدمات
-                    <br>
-                    <span><i class="fas fa-eye"></i>289</span>
-                </p>
-            </article>
+            <?php
+            foreach (cnf_db_select("SELECT * FROM posts WHERE id IN (SELECT object1 AS id FROM pivot GROUP BY  object1 ORDER BY COUNT(object2) DESC LIMIT 4) LIMIT 4") as $i) {
+                echo '<a href="/Posts/' . $i["id"] . '">
+                    <article>
+                        <div><img data-src="posts/files/thumbnails/' . $i["image"] . '" src="" alt=""></div>
+                        <p>
+                            ' . $i["title"] . '
+                            <br>
+                            <span><i class="fas fa-eye"></i>' . cnf_db_select("SELECT COUNT(*) AS res FROM pivot WHERE relation = 'post_view' AND object1 = '" . $i["id"] . "'")[0]["res"] . '</span>
+                        </p>
+                    </article>
+                </a>';
+            }
+            ?>
         </div>
         <div class="hr"></div>
         <div>
             <h3>دسته بندی ها</h3>
-            <div>مایع</div>
-            <div>دستگاه ها</div>
-            <div>پودر</div>
+            <?php
+            foreach (cnf_db_select("SELECT * FROM archives WHERE show = 1 ORDER BY [priority] DESC LIMIT 3") as $i) {
+                echo '<a href="/Posts/c/' . $i["id"] . '"><div>' . $i["name"] . "</div></a>";
+            }
+            ?>
         </div>
         <div class="hr"></div>
         <h3>جدید ترین مطالب</h3>
         <div class="articleContainer">
-            <article>
-                <div><img data-src="documentary/image11.jpg" src="" alt=""></div>
-                <p>
-                    بهترین محصول و خدمات
-                    <br>
-                    <span><i class="far fa-calendar-alt"></i>sat 10:06 00/4/25</span>
-                </p>
-            </article>
-            <article>
-                <div><img data-src="documentary/image11.jpg" src="" alt=""></div>
-                <p>
-                    بهترین محصول و خدمات
-                    <br>
-                    <span><i class="far fa-calendar-alt"></i>sat 10:06 00/4/25</span>
-                </p>
-            </article>
-            <article>
-                <div><img data-src="documentary/image11.jpg" src="" alt=""></div>
-                <p>
-                    بهترین محصول و خدمات
-                    <br>
-                    <span><i class="far fa-calendar-alt"></i>sat 10:06 00/4/25</span>
-                </p>
-            </article>
-            <article>
-                <div><img data-src="documentary/image11.jpg" src="" alt=""></div>
-                <p>
-                    بهترین محصول و خدمات
-                    <br>
-                    <span><i class="far fa-calendar-alt"></i>sat 10:06 00/4/25</span>
-                </p>
-            </article>
+            <?php
+            foreach (cnf_db_select("SELECT * FROM posts ORDER BY id DESC LIMIT 4") as $i) {
+                echo '<a href="/Posts/' . $i["id"] . '">
+                    <article>
+                        <div><img data-src="posts/files/thumbnails/' . $i["image"] . '" src="" alt=""></div>
+                        <p>
+                            ' . $i["title"] . '
+                            <br>
+                            <span><i class="far fa-calendar-alt"></i>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y")  . '</span>
+                        </p>
+                    </article>
+                </a>';
+            }
+            ?>
         </div>
     </aside>
 </main>

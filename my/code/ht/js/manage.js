@@ -1,9 +1,9 @@
 var tagInputFocused = false;
 var tags = [];
 
-CKEDITOR.replace("postDesc", {
-    filebrowserBrowseUrl: "/my/code/plugin/my/ckeditor_browser.php",
-    filebrowserUploadUrl: "/my/code/plugin/my/ckeditor_upload.php",
+var editor = CKEDITOR.replace("postDesc", {
+    filebrowserBrowseUrl: "my/code/plugin/ckfinder/ckfinder.html",
+    filebrowserUploadUrl: "my/code/plugin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files",
     filebrowserUploadMethod: "form"
 });
 CKEDITOR.config.toolbarGroups = [{
@@ -19,7 +19,9 @@ CKEDITOR.config.toolbarGroups = [{
 
 CKEDITOR.config.removeButtons = 'Italic,Strike,Subscript,Cut,Paste,Redo,NumberedList,Anchor,Unlink';
 
-window.globalThis.pageLoad.push(function() {
+CKFinder.setupCKEditor(editor);
+
+window.globalThis.pageLoad.push(async function() {
     document.querySelectorAll(".listBtn>.btn").forEach(el => {
         el.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -34,44 +36,54 @@ window.globalThis.pageLoad.push(function() {
             }
         });
     });
-    document.querySelectorAll("[data-action=server] [data-op]").forEach(el => {
+    document.querySelectorAll("[data-action=server] [data-op]").forEach(async el => {
         var t = el;
         if (!t.hasAttribute("data-op")) t = t.parentNode;
         if (t.dataset.op == "delete") t.innerHTML = '<i class="fas fa-trash"></i>';
         else if (t.dataset.op == "edit") t.innerHTML = '<i class="fas fa-pen"></i>';
         else if (t.dataset.op == "inspect") t.innerHTML = '<i class="fas fa-eye"></i>';
-        el.addEventListener("click", function(e) {
+        el.addEventListener("click", async function(e) {
             var t = e.target;
             if (!t.hasAttribute("data-op")) t = t.parentNode;
             var sect = t.parentNode.parentNode.dataset.sect;
             var msg = "";
+            var tbl = "";
             switch (sect) {
                 case "orders":
                     msg = "سفارش";
+                    tbl = "ord";
                     break;
                 case "posts":
                     msg = "پست";
+                    tbl = "pst";
                     break;
                 case "messages":
                     msg = "پیام";
-                    break;
-                case "users":
-                    msg = "کاربر";
+                    tbl = "msg";
                     break;
                 case "comments":
                     msg = "کامنت";
-                    break;
-                case "tags":
-                    msg = "برچسب";
+                    tbl = "com";
                     break;
                 case "archives":
                     msg = "دسته بندی";
+                    tbl = "arc";
+                    break;
+                case "tags":
+                    msg = "برچسب";
                     break;
                 default:
                     msg = "مورد";
                     break;
             }
-            if (confirm("ایا از حذف این " + msg + " اطمینان دارید؟")) alert("a=db&o=" + t.dataset.op + "&i=" + t.parentNode.dataset.identity + "&s=" + sect);
+            switch (t.dataset.op) {
+                case "delete":
+                    if (confirm("ایا از حذف این " + msg + " اطمینان دارید؟")) await ajax("d" + tbl + t.parentNode.dataset.identity);
+                    break;
+            }
+            // if (confirm("ایا از حذف این " + msg + " اطمینان دارید؟")) alert("a=db&o=" + t.dataset.op + "&i=" + t.parentNode.dataset.identity + "&s=" + sect);
+            // res = await ajax("");
+            // alert(res);
         });
     });
 
