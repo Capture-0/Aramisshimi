@@ -12,7 +12,6 @@
 
 // --- other ---
 // put intro and outro in etc
-// fix home page flash section
 // add view column to tags table in manage page
 // set default pic in settings
 // add validate class to config
@@ -20,7 +19,9 @@
 // create function that gets $_POST and return flash data and functions to change result and message, posted data and related in it
 // change config to an object oriented file
 // create a form validation class in config
-// 
+// create a url class that return url params
+// create a handler for uploaded files
+// 1 melyoono sado panj hezar toman
 
 session_start();
 if (empty($_SESSION["role"])) $_SESSION["role"] = "user";

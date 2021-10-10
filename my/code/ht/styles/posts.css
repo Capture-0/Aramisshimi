@@ -177,7 +177,7 @@ main > aside .articleContainer {
   display: grid;
 }
 
-main > aside article {
+main > aside a > article {
   cursor: pointer;
   padding: 1em;
   border-radius: 0.4em;
@@ -185,25 +185,26 @@ main > aside article {
   transition: background-color 400ms ease-out;
 }
 
-main > aside article:hover {
+main > aside a > article:hover {
   background-color: #e6e6e6;
 }
 
-main > aside article div {
+main > aside a > article div {
   height: 10em;
 }
 
-main > aside article p {
-  color: gray;
+main > aside a > article p {
+  color: #2a4a69;
   font-family: yekan, cursive;
 }
 
-main > aside article p > span {
-  color: #2a4a69;
+main > aside a > article p > span {
+  color: gray;
   font-size: 0.9em;
+  font-family: yekan;
 }
 
-main > aside article p > span > i {
+main > aside a > article p > span > i {
   font-size: 0.9em;
   color: #6FC691;
   padding-inline: 0.4em;
@@ -264,17 +265,17 @@ main > aside article p > span > i {
     -ms-grid-columns: 100%;
         grid-template: auto / 100%;
   }
-  main > aside .articleContainer article {
+  main > aside .articleContainer a > article {
     display: -ms-grid;
     display: grid;
     -ms-grid-rows: auto;
     -ms-grid-columns: 50% 50%;
         grid-template: auto / 50% 50%;
   }
-  main > aside .articleContainer article div {
+  main > aside .articleContainer a > article div {
     height: 6em;
   }
-  main > aside .articleContainer article p {
+  main > aside .articleContainer a > article p {
     padding: 0.4em;
   }
 }
@@ -315,17 +316,17 @@ main > aside article p > span > i {
     -ms-grid-columns: 100%;
         grid-template: auto / 100%;
   }
-  main > aside .articleContainer article {
+  main > aside .articleContainer a > article {
     display: -ms-grid;
     display: grid;
     -ms-grid-rows: auto;
     -ms-grid-columns: 50% 50%;
         grid-template: auto / 50% 50%;
   }
-  main > aside .articleContainer article div {
+  main > aside .articleContainer a > article div {
     height: 6em;
   }
-  main > aside .articleContainer article p {
+  main > aside .articleContainer a > article p {
     padding: 0.4em;
   }
 }

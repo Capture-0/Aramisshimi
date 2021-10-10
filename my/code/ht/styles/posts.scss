@@ -116,7 +116,7 @@ main {
         .articleContainer {
             display: grid;
         }
-        article {
+        a>article {
             cursor: pointer;
             padding: 1em;
             border-radius: 0.4em;
@@ -128,11 +128,12 @@ main {
                 height: 10em;
             }
             p {
-                color: gray;
+                color: $clr-dark-1;
                 font-family: yekan, cursive;
                 &>span {
-                    color: $clr-dark-1;
+                    color: gray;
                     font-size: 0.9em;
+                    font-family: yekan;
                     &>i {
                         font-size: 0.9em;
                         color: $clr-secondary-d;
@@ -176,7 +177,7 @@ main {
             grid-row: 2 / 3;
             .articleContainer {
                 grid-template: auto / 100%;
-                article {
+                a>article {
                     display: grid;
                     grid-template: auto / 50% 50%;
                     div {
@@ -210,7 +211,7 @@ main {
             grid-row: 2 / 3;
             .articleContainer {
                 grid-template: auto / 100%;
-                article {
+                a>article {
                     display: grid;
                     grid-template: auto / 50% 50%;
                     div {
