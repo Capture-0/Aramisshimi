@@ -134,9 +134,9 @@ function cnf_db_select($qry, $vals = null)
 
 function cnf_page_create($_PAGE)
 {
-    if (count(cnf_db_select("select name from _page where name = '" . $_PAGE["name"] . "'")) == 0)
-        cnf_db_insert("INSERT into _page (name, title, description, keywords, styles) VALUES (?,?,?,?,?)", [$_PAGE["name"], $_PAGE["title"], $_PAGE["description"], $_PAGE["keywords"], $_PAGE["styles"]]);
-    else cnf_db_execute("update _page set title = ?, description = ?, keywords = ?, styles = ? where name = ?", [$_PAGE["title"], $_PAGE["description"], $_PAGE["keywords"], $_PAGE["styles"], $_PAGE["name"]]);
+    if (count(cnf_db_select("select name from _page where name = '" . strtolower($_PAGE["name"]) . "'")) == 0)
+        cnf_db_insert("INSERT into _page (name, title, description, keywords, styles) VALUES (?,?,?,?,?)", [strtolower($_PAGE["name"]), $_PAGE["title"], $_PAGE["description"], $_PAGE["keywords"], $_PAGE["styles"]]);
+    else cnf_db_execute("update _page set title = ?, description = ?, keywords = ?, styles = ? where name = ?", [$_PAGE["title"], $_PAGE["description"], $_PAGE["keywords"], $_PAGE["styles"], strtolower($_PAGE["name"])]);
 }
 
 function cnf_page_data($page)
@@ -150,7 +150,7 @@ function cnf_page_data($page)
         "keywords" => $cnf_page_default_keywords, // default keywords
         "styles" => "form,$page"
     ) : $_PAGE[0];
-    if (count($_PAGE) > 1) cnf_db_execute("delete from _page where name = '" . $_PAGE["name"] . "'");
+    if (count($_PAGE) > 1) cnf_db_execute("delete from _page where name = '" . strtolower($_PAGE["name"]) . "'");
     return $result;
 }
 
@@ -161,10 +161,11 @@ function cnf_page_data($page)
 function url($path)
 {
     global $cnf_path_templates, $cnf_path_styles, $cnf_path_images;
+    $strt = substr($path,0,2);
     $p = "";
-    if (str_starts_with($path, "i/")) $p = $cnf_path_images;
-    else if (str_starts_with($path, "$/")) $p = $cnf_path_styles;
-    else if (str_starts_with($path, "@/")) $p = $cnf_path_templates;
+    if ($strt == "i/") $p = $cnf_path_images;
+    else if ($strt == "$/") $p = $cnf_path_styles;
+    else if ($strt == "@/") $p = $cnf_path_templates;
     else return $path;
 
     return $p . "/" . substr($path, 2);

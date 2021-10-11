@@ -3,7 +3,7 @@ $_PAGE = array(
     "title" => "post ha", // 70 chars limit
     "description" => "modiriyate website", // 160 chars limit
     "keywords" => "posts,aramis,shimi", // less than 10 phrases recommended
-    "name" => explode(".", basename(__FILE__))[0],
+    "name" =>  $currentPage,
     "styles" => "posts"
 );
 $post = array("isPost" => count($_REQUEST) > 0 ? m("\d+", $_REQUEST["p1"]) : false, "isIndex" => !m("\d+", isset($_REQUEST["p1"]) ? $_REQUEST["p1"] : ""));

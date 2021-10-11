@@ -11,6 +11,8 @@
 // _setting / id 
 
 // --- other ---
+// reset the database tables query being shown beyond
+// add intro and outro and remove name columns from _page table
 // put intro and outro in etc
 // add view column to tags table in manage page
 // set default pic in settings
@@ -28,12 +30,7 @@ require("my/cnf.php");
 // CREATE TABLE _page (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(50) NOT NULL,title varchar(70) NOT NULL,description varchar(160) NOT NULL,keywords varchar(100) NOT NULL,styles varchar(100) NOT NULL);
 
 
-$currentPage = $_SERVER["REQUEST_URI"];
-if (m('\/(home)?', $currentPage)) $currentPage = "home";
-else if (m('\/login', $currentPage)) $currentPage = "login";
-else if (m('\/order', $currentPage)) $currentPage = "order";
-else if (m('\/posts', $currentPage)) $currentPage = "posts";
-else if (m('\/support', $currentPage)) $currentPage = "support";
+$currentPage = strtolower($_SERVER["REQUEST_URI"]);
 
 $params = preg_split("/\//", $currentPage, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -71,7 +68,6 @@ $_FORM["message"] = "";
     }
     ?>
     <link rel="stylesheet" href="/my/code/ht/styles/style.css">
-    <link rel="stylesheet" href="/my/code/ht/styles/home.css">
     <link rel="stylesheet" href="/my/code/ht/styles/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="/my/code/ht/js/default.js"></script>
@@ -144,7 +140,7 @@ $_FORM["message"] = "";
         for ($i = 1; $i < count($params); $i++) $_REQUEST["p$i"] = $params[$i];
         include(url("@/" . $params[0] . ".php"));
     } else {
-        header("location:/");
+        header("location:/Home");
     }
     include(url("@/outro.php"));
     ob_end_flush();
