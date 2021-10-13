@@ -74,7 +74,7 @@
                         overflow: hidden;
                         background-color: $clr-light-2;
                         font-family: yekan;
-                        &>img{
+                        &>img {
                             object-fit: contain;
                             max-height: 6em;
                         }
@@ -83,7 +83,7 @@
             }
             // sepecifics
             &:nth-child(2)>div:last-child>.row {
-                grid-template: auto / 10em 10em 20em 40em 14em 3em 3em;
+                grid-template: auto / 10em 10em 20em 40em 14em 4em 3em 3em;
             }
             &:nth-child(3)>div:last-child>.row {
                 grid-template: auto / 15em 20em 30em 20em 8em 8em 14em 3em 3em;
@@ -94,7 +94,10 @@
         }
         &>.extraData {
             &>h3 {
-                margin: 2em 3em 1em 0;
+                margin: 0.4em 1em;
+                background-color: $clr-light-1;
+                padding: 0.4em 1em;
+                border-radius: 0.4em;
             }
             &>.lists {
                 border-radius: 0.4em;
@@ -102,6 +105,8 @@
                 padding: 1em;
                 display: grid;
                 gap: 1em;
+                transition: height 400ms ease-out, opacity 400ms ease-in-out;
+                overflow: hidden;
                 &>div {
                     &>h4 {
                         margin: 0 1em 0.6em 1em;
@@ -134,27 +139,32 @@
                         }
                     }
                     &:nth-child(1)>.list>.row {
-                        grid-template: auto / 10em 20em 16em 10em 3em 3em;
+                        grid-template: auto / 10em 20em 10em 16em 10em 3em 3em;
                     }
                     &:nth-child(2)>.list>.row {
-                        grid-template: auto / 10em 8em 3em 3em;
+                        grid-template: auto / 10em 8em 4em 6em 3em 3em;
                     }
                     &:nth-child(3)>.list>.row {
                         grid-template: auto / 10em 8em;
                     }
                     &>.manage {
+                        padding: 1em;
                         &>h5 {
-                            margin: 1em;
+                            margin: 0.2em 1em;
                         }
                         &>div {
                             display: flex;
-                            &>input {
-                                width: 80%;
+                            align-items: center;
+                            font-size: $fs-text;
+                            &>* {
+                                margin: 0.4em 0.6em;
                             }
-                            &>button {
-                                border: 1px solid silver;
-                                width: 20%;
-                            }
+                        }
+                        &>button {
+                            border: 1px solid silver;
+                            width: 20%;
+                            padding: 0.2em 0.6em;
+                            margin: 0.4em 1em;
                         }
                     }
                 }
@@ -162,7 +172,7 @@
         }
         &>.posts {
             &>h3 {
-                margin: 2em 3em 1em 0;
+                margin: 1em;
             }
             &>.compose {
                 background-color: $clr-light-3;

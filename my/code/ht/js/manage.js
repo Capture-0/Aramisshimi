@@ -36,7 +36,7 @@ window.globalThis.pageLoad.push(async function() {
             }
         });
     });
-    
+
     document.querySelectorAll("[data-action=server] [data-op]").forEach(async el => {
         var t = el;
         if (!t.hasAttribute("data-op")) t = t.parentNode;
@@ -55,7 +55,7 @@ window.globalThis.pageLoad.push(async function() {
                     tbl = "ord";
                     break;
                 case "posts":
-                    msg = "پست";
+                    msg = "پست و تامب نیل این پست";
                     tbl = "pst";
                     break;
                 case "messages":
@@ -67,7 +67,7 @@ window.globalThis.pageLoad.push(async function() {
                     tbl = "com";
                     break;
                 case "archives":
-                    msg = "دسته بندی";
+                    msg = "دسته بندی و تمام پست ها و کامنت های مربوط به این دسته بندی";
                     tbl = "arc";
                     break;
                 case "tags":
@@ -79,10 +79,58 @@ window.globalThis.pageLoad.push(async function() {
             }
             switch (t.dataset.op) {
                 case "delete":
-                    if (confirm("ایا از حذف این " + msg + " اطمینان دارید؟")) await ajax("d" + tbl + t.parentNode.dataset.identity);
+                    if (confirm("ایا از حذف این " + msg + " اطمینان دارید؟")) {
+                        await ajax(tbl + t.parentNode.dataset.identity, "delete");
+                        t.parentNode.remove();
+                    }
+                    break;
+                case "edit":
+                    alert("این بخش در حال ساخت است.");
+                    break;
+                case "inspect":
+                    alert("این بخش در حال ساخت است.");
                     break;
             }
         });
+    });
+
+    var h3 = document.querySelector(".extraData>h3");
+    var listsHeight = h3.nextElementSibling.getBoundingClientRect().height;
+    h3.addEventListener("click", (e) => {
+        var sib = e.target.nextElementSibling;
+        if (sib.style.height == "0px") {
+            sib.style.height = listsHeight + "px";
+            sib.style.opacity = "1";
+        } else {
+            sib.style.height = "0px";
+            sib.style.opacity = "0";
+        }
+    });
+    h3.click();
+
+    var btnAnswerComment = document.querySelector(".manage #answerComment");
+    btnAnswerComment.addEventListener("click", (e) => {
+        alert("این بخش در حال ساخت است.");
+    });
+
+    var btnAddArchive = document.querySelector(".manage #archiveAdd");
+    btnAddArchive.addEventListener("click", async(e) => {
+        mng = e.target;
+        while (!mng.classList.contains("manage")) {
+            mng = mng.parentNode;
+        }
+        var name = mng.querySelector("#f_name"),
+            priority = mng.querySelector("#f_priority").value,
+            show = mng.querySelector("#f_show").checked;
+        if (name.value.length > 1 && name.value.indexOf(",") == -1) {
+            res = await ajax("archive," + name.value + "," + priority + "," + (show ? 1 : 0), "insert");
+            if (res == "success") {
+                name.value = "";
+                if (confirm("دسته بندی با موفقیت اضافه شد.\nصفحه رفرش شود؟")) window.location.reload();
+            } else {
+                alert("دسته بندی اضافه نشد.");
+            }
+        } else alert("لطفا نام را به درستی انتخاب نمایید.");
     });
 
     var form = document.querySelector("#manage .posts form").addEventListener("submit", function(event) {

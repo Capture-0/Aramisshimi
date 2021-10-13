@@ -113,6 +113,7 @@ cnf_page_create($_PAGE);
                         <div>ادرس</div>
                         <div>توضیحات</div>
                         <div>تاریخ</div>
+                        <div>پیوست</div>
                         <div data-op="delete"></div>
                         <div data-op="inspect"></div>
                     </div>
@@ -124,6 +125,7 @@ cnf_page_create($_PAGE);
                         <div>' . $i["address"] . '</div>
                         <div>' . $i["content"] . '</div>
                         <div>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y | H:m") . '</div>
+                        <div>' . (strlen($i["attachment"]) < 10 ? "ندارد" : "دارد") . '</div>
                         <div data-op="delete"></div>
                         <div data-op="inspect"></div>
                     </div>';
@@ -207,7 +209,7 @@ cnf_page_create($_PAGE);
                 </div>
             </div>
             <div class="extraData" data-action="server">
-                <h3>جدول ها</h3>
+                <h3 class="btn">جدول ها <i class="fas fa-caret-down"></i></h3>
                 <div class="lists">
                     <div>
                         <h4>کامنت ها</h4>
@@ -215,6 +217,7 @@ cnf_page_create($_PAGE);
                             <div class="row">
                                 <div>نام</div>
                                 <div>نظر</div>
+                                <div>پست</div>
                                 <div>ایمیل</div>
                                 <div>تاریخ</div>
                                 <div data-op="delete"></div>
@@ -225,6 +228,7 @@ cnf_page_create($_PAGE);
                                 echo '<div class="row" data-identity="' . $i["id"] . '">
                                     <div>' . $i["fullname"] . '</div>
                                     <div>' . $i["content"] . '</div>
+                                    <div>' . cnf_db_select("select title from posts where id = " . $i["post"])[0]["title"] . '</div>
                                     <div>' . $i["email"] . '</div>
                                     <div>' . cnf_misc_create_date($i["datetime"], "d MMMM y | H:m") . '</div>
                                     <div data-op="delete"></div>
@@ -236,9 +240,10 @@ cnf_page_create($_PAGE);
                         <div class="manage">
                             <h5>پاسخ</h5>
                             <div>
+                                جواب
                                 <input type="text">
-                                <button>ok</button>
                             </div>
+                            <button id="answerComment">ok</button>
                         </div>
                     </div>
                     <div>
@@ -247,6 +252,8 @@ cnf_page_create($_PAGE);
                             <div class="row">
                                 <div>نام</div>
                                 <div>زیرمجموعه ها</div>
+                                <div>اولویت</div>
+                                <div>قابل نمایش</div>
                                 <div data-op="delete"></div>
                                 <div data-op="edit"></div>
                             </div>
@@ -255,6 +262,8 @@ cnf_page_create($_PAGE);
                                 echo '<div class="row" data-identity="' . $i["id"] . '">
                                     <div>' . $i["name"] . '</div>
                                     <div>' . cnf_db_select("select count(id) as res from posts where archive = " . $i["id"])[0]["res"] . '</div>
+                                    <div>' . ($i["priority"] == 0 ? "کم" : ($i["priority"] == 1 ? "متوسط" : "زیاد")) . '</div>
+                                    <div>' . ($i["show"] == 0 ? "خیر" : "بله") . '</div>
                                     <div data-op="delete"></div>
                                     <div data-op="edit"></div>
                                     </div>';
@@ -264,9 +273,22 @@ cnf_page_create($_PAGE);
                         <div class="manage">
                             <h5>اضافه کردن</h5>
                             <div>
-                                <input type="text">
-                                <button>ok</button>
+                                نام
+                                <input type="text" id="f_name">
                             </div>
+                            <div>
+                                اولویت
+                                <select id="f_priority">
+                                    <option value="2">زیاد</option>
+                                    <option value="1">متوسط</option>
+                                    <option value="0">کم</option>
+                                </select>
+                            </div>
+                            <div>
+                                قابل نمایش
+                                <input type="checkbox" checked="true" id="f_show">
+                            </div>
+                            <button id="archiveAdd">ok</button>
                         </div>
                     </div>
                     <div>

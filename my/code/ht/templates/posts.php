@@ -159,7 +159,7 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         <h3>پر بازدید ها</h3>
         <div class="articleContainer">
             <?php
-            foreach (cnf_db_select("SET FOREIGN_KEY_CHECKS = OFF;SELECT * FROM posts WHERE id IN (SELECT object1 AS id FROM pivot GROUP BY  object1 ORDER BY COUNT(object2) DESC LIMIT 4) LIMIT 4;") as $i) {
+            foreach (cnf_db_select("SELECT * FROM posts WHERE id IN (SELECT object1 AS id FROM pivot GROUP BY  object1 ORDER BY COUNT(object2) DESC LIMIT 4) LIMIT 4") as $i) {
                 echo '<a href="/Posts/' . $i["id"] . '">
                     <article>
                         <div><img data-src="posts/files/thumbnails/' . $i["image"] . '" src="" alt=""></div>

@@ -147,8 +147,8 @@
 
 #manage > .container > .listBtn:nth-child(2) > div:last-child > .row {
   -ms-grid-rows: auto;
-  -ms-grid-columns: 10em 10em 20em 40em 14em 3em 3em;
-      grid-template: auto / 10em 10em 20em 40em 14em 3em 3em;
+  -ms-grid-columns: 10em 10em 20em 40em 14em 4em 3em 3em;
+      grid-template: auto / 10em 10em 20em 40em 14em 4em 3em 3em;
 }
 
 #manage > .container > .listBtn:nth-child(3) > div:last-child > .row {
@@ -164,7 +164,10 @@
 }
 
 #manage > .container > .extraData > h3 {
-  margin: 2em 3em 1em 0;
+  margin: 0.4em 1em;
+  background-color: #cdcecf;
+  padding: 0.4em 1em;
+  border-radius: 0.4em;
 }
 
 #manage > .container > .extraData > .lists {
@@ -174,6 +177,9 @@
   display: -ms-grid;
   display: grid;
   gap: 1em;
+  -webkit-transition: height 400ms ease-out, opacity 400ms ease-in-out;
+  transition: height 400ms ease-out, opacity 400ms ease-in-out;
+  overflow: hidden;
 }
 
 #manage > .container > .extraData > .lists > div > h4 {
@@ -220,14 +226,14 @@
 
 #manage > .container > .extraData > .lists > div:nth-child(1) > .list > .row {
   -ms-grid-rows: auto;
-  -ms-grid-columns: 10em 20em 16em 10em 3em 3em;
-      grid-template: auto / 10em 20em 16em 10em 3em 3em;
+  -ms-grid-columns: 10em 20em 10em 16em 10em 3em 3em;
+      grid-template: auto / 10em 20em 10em 16em 10em 3em 3em;
 }
 
 #manage > .container > .extraData > .lists > div:nth-child(2) > .list > .row {
   -ms-grid-rows: auto;
-  -ms-grid-columns: 10em 8em 3em 3em;
-      grid-template: auto / 10em 8em 3em 3em;
+  -ms-grid-columns: 10em 8em 4em 6em 3em 3em;
+      grid-template: auto / 10em 8em 4em 6em 3em 3em;
 }
 
 #manage > .container > .extraData > .lists > div:nth-child(3) > .list > .row {
@@ -236,27 +242,37 @@
       grid-template: auto / 10em 8em;
 }
 
+#manage > .container > .extraData > .lists > div > .manage {
+  padding: 1em;
+}
+
 #manage > .container > .extraData > .lists > div > .manage > h5 {
-  margin: 1em;
+  margin: 0.2em 1em;
 }
 
 #manage > .container > .extraData > .lists > div > .manage > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.9rem;
 }
 
-#manage > .container > .extraData > .lists > div > .manage > div > input {
-  width: 80%;
+#manage > .container > .extraData > .lists > div > .manage > div > * {
+  margin: 0.4em 0.6em;
 }
 
-#manage > .container > .extraData > .lists > div > .manage > div > button {
+#manage > .container > .extraData > .lists > div > .manage > button {
   border: 1px solid silver;
   width: 20%;
+  padding: 0.2em 0.6em;
+  margin: 0.4em 1em;
 }
 
 #manage > .container > .posts > h3 {
-  margin: 2em 3em 1em 0;
+  margin: 1em;
 }
 
 #manage > .container > .posts > .compose {

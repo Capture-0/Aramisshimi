@@ -31,23 +31,52 @@ if (isset($_GET["url"])) {
     echo url($_REQUEST["url"]);
 }
 
-if (isset($_GET["req"]) && $_SESSION["role"]) {
-    if ($_GET["req"] == "sql" && isset($_GET["p"])) {
+if (isset($_GET["req"]) && isset($_SESSION["role"]) && isset($_GET["p"])) {
+    $cnf_db_connection = new PDO("sqlite:admin.db");
+    if ($_GET["req"] == "delete" && $_SESSION["role"] == "admin") {
         $qry = $_GET["p"];
-        $sql = array("operation" => substr($qry, 0, 1), "table" => substr($qry, 1, 3), "id" => substr($qry, 4));
-        $res = "";
-        if ("d" == $sql["operation"] && $_SESSION["role"] == "admin") $res .= "delete from ";
-        else if ("s" == $sql["operation"]) $res .= "select * from ";
-        if ("arc" == $sql["table"]) $res .= "archives ";
-        else if ("com" == $sql["table"]) $res .= "comments ";
-        else if ("msg" == $sql["table"]) $res .= "messages ";
-        else if ("ord" == $sql["table"]) $res .= "orders ";
-        else if ("pst" == $sql["table"]) $res .= "posts ";
-        $res .= m("\d+", $sql["id"]) ? "where id = " . $sql["id"] : "";
-        $cnf_db_connection = new PDO("sqlite:admin.db");
-        if (substr(strtolower($res),0,6) == "delete") cnf_db_execute($res);
-        else echo json_encode(cnf_db_select($res)[0]);
+        $sql = array("table" => substr($qry, 0, 3), "id" => substr($qry, 3));
+        if ("arc" == $sql["table"]) $res = "archives";
+        else if ("com" == $sql["table"]) $res = "comments";
+        else if ("msg" == $sql["table"]) $res = "messages";
+        else if ("ord" == $sql["table"]) $res = "orders";
+        else if ("pst" == $sql["table"]) $res = "posts";
+        if ($res == "archives") {
+            foreach (cnf_db_select("select id from posts where archive = " . $sql["id"]) as $i) {
+                util_delete_post($i["id"]);
+            }
+        } else if ($res == "posts") {
+            util_delete_post($sql["id"]);
+        } else if ($res == "messages") {
+            unlink("media/uploaded/messages/" . cnf_db_select("select attachment from messages where id = " . $sql["id"])[0]["attachment"]);
+        } else if ($res == "orders") {
+            unlink("media/uploaded/orders/" . cnf_db_select("select attachment from orders where id = " . $sql["id"])[0]["attachment"]);
+        }
+        echo cnf_db_execute("delete from $res where id = " . $sql["id"]);
     }
+    if ($_GET["req"] == "test") {
+        
+    }
+    if ($_GET["req"] == "insert" && $_SESSION["role"] == "admin") {
+        $s = explode(",", $_GET["p"]);
+        if (count($s) < 2) {
+            echo "more than 1 arguments needed seprated by comma";
+        } else {
+            if (m("archives?", $s[0]) && count($s) == 4) {
+                cnf_db_insert("insert into archives(name,priority,show) values(?,?,?)", [$s[1], $s[2], $s[3]]);
+                echo "success";
+            }
+        }
+    }
+}
+
+function util_delete_post($id, $path = "media/img/posts/files/thumbnails/")
+{
+    $p = cnf_db_select("select * from posts where id = $id")[0];
+    unlink($path . $p["image"]);
+    cnf_db_execute("delete from comments where post = $id");
+    cnf_db_execute("delete from pivot where relation like 'post%' and object1 = '$id'");
+    return cnf_db_execute("delete from posts where id = $id");
 }
 
 //|----------------------------------------
@@ -105,7 +134,7 @@ function cnf_db_execute($qry, $vals = null)
         for ($i = 1; $i <= count($vals); $i++) $sth->bindValue($i, $vals[$i - 1]);
     }
     //execute update or delete and return rows affected if successful
-    if (substr(strtolower($qry),0,6) == "update" || substr(strtolower($qry),0,6) == "delete") {
+    if (substr(strtolower($qry), 0, 6) == "update" || substr(strtolower($qry), 0, 6) == "delete") {
         if ($sth->execute()) return $sth->rowCount();
         else return null;
     } else return $sth->fetchAll();
@@ -161,7 +190,7 @@ function cnf_page_data($page)
 function url($path)
 {
     global $cnf_path_templates, $cnf_path_styles, $cnf_path_images;
-    $strt = substr($path,0,2);
+    $strt = substr($path, 0, 2);
     $p = "";
     if ($strt == "i/") $p = $cnf_path_images;
     else if ($strt == "$/") $p = $cnf_path_styles;

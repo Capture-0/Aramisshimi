@@ -67,15 +67,17 @@ $_FORM["message"] = "";
     <title>آرامیس شیمی - <?php echo $_PAGE["title"]; ?></title>
     <?php
     foreach (explode(",", $_PAGE["styles"]) as $i) {
-        echo '<link rel="stylesheet" href="my/code/ht/styles/' . $i . '.css">';
+        echo '<link rel="stylesheet" href="/my/code/ht/styles/' . $i . '.css">';
     }
     ?>
     <link href="http://aramisshimi.rf.gd/Home" rel="canonical">
-    <link rel="stylesheet" href="my/code/ht/styles/style.css">
-    <link rel="stylesheet" href="my/code/ht/styles/header_footer.css">
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="stylesheet" href="/my/code/ht/styles/style.css">
+    <link rel="stylesheet" href="/my/code/ht/styles/header_footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <script src="/my/code/ht/js/default.js"></script>
 </head>
+
 <body>
     <?php
     ob_start();
@@ -90,4 +92,5 @@ $_FORM["message"] = "";
     ob_end_flush();
     ?>
 </body>
+
 </html>
