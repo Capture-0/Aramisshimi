@@ -92,7 +92,7 @@ $_PAGE = array(
     "title" => "modiriyat", // 70 chars limit
     "description" => "modiriyate website", // 160 chars limit
     "keywords" => "manage,aramis,shimi", // less than 10 phrases recommended
-    "name" =>  $currentPage,
+    "name" => $currentPage,
     "styles" => "form,manage"
 );
 cnf_page_create($_PAGE);

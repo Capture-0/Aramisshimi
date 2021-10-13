@@ -1,6 +1,6 @@
 <?php
 $_PAGE = array(
-    "name" => $currentPage,
+    "name" =>  $currentPage,
     "title" => "khane", // 70 chars limit
     "description" => "aramisshimi pishro dar sanate tolide shooyande", // 160 chars limit
     "keywords" => "shooyande,aramis,shimi", // less than 10 phrases recommended
@@ -10,10 +10,10 @@ cnf_page_create($_PAGE);
 ?>
 <main>
     <section id="flashMessage" class="container">
-        <div class="flash" data-type="<?php if (!empty($_SESSION["form_message"])) echo $_SESSION["form_message"] == "" ? "none" : $_SESSION["form_result"];
+        <div class="flash" data-type="<?php if (isset($_SESSION["form_message"])) echo $_SESSION["form_message"] == "" ? "none" : $_SESSION["form_result"];
                                         else echo "none"; ?>">
             <?php
-            if (!empty($_SESSION["form_message"])) {
+            if (isset($_SESSION["form_message"])) {
                 echo $_SESSION["form_message"];
                 $_SESSION["form_message"] = "";
             }

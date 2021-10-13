@@ -36,6 +36,7 @@ window.globalThis.pageLoad.push(async function() {
             }
         });
     });
+    
     document.querySelectorAll("[data-action=server] [data-op]").forEach(async el => {
         var t = el;
         if (!t.hasAttribute("data-op")) t = t.parentNode;
@@ -81,9 +82,6 @@ window.globalThis.pageLoad.push(async function() {
                     if (confirm("ایا از حذف این " + msg + " اطمینان دارید؟")) await ajax("d" + tbl + t.parentNode.dataset.identity);
                     break;
             }
-            // if (confirm("ایا از حذف این " + msg + " اطمینان دارید؟")) alert("a=db&o=" + t.dataset.op + "&i=" + t.parentNode.dataset.identity + "&s=" + sect);
-            // res = await ajax("");
-            // alert(res);
         });
     });
 

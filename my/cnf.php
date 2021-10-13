@@ -45,7 +45,7 @@ if (isset($_GET["req"]) && $_SESSION["role"]) {
         else if ("pst" == $sql["table"]) $res .= "posts ";
         $res .= m("\d+", $sql["id"]) ? "where id = " . $sql["id"] : "";
         $cnf_db_connection = new PDO("sqlite:admin.db");
-        if (str_starts_with($res, "delete")) cnf_db_execute($res);
+        if (substr(strtolower($res),0,6) == "delete") cnf_db_execute($res);
         else echo json_encode(cnf_db_select($res)[0]);
     }
 }
@@ -59,7 +59,7 @@ function cnf_db_connect($dbname)
     global $cnf_db_connection, $cnf_db_host, $cnf_db_user, $cnf_db_dbadmin, $cnf_db_pass;
     if ($cnf_db_connection == null) {
 
-        // //selecting database by parameter (default is admin database)
+        //selecting database by parameter (default is admin database)
         // $db = $cnf_db_dbadmin;
         // if ($dbname == "admin") $db = $cnf_db_dbadmin;
 
@@ -105,7 +105,7 @@ function cnf_db_execute($qry, $vals = null)
         for ($i = 1; $i <= count($vals); $i++) $sth->bindValue($i, $vals[$i - 1]);
     }
     //execute update or delete and return rows affected if successful
-    if (str_starts_with(strtolower($qry), "update") || str_starts_with(strtolower($qry), "delete")) {
+    if (substr(strtolower($qry),0,6) == "update" || substr(strtolower($qry),0,6) == "delete") {
         if ($sth->execute()) return $sth->rowCount();
         else return null;
     } else return $sth->fetchAll();
@@ -136,7 +136,7 @@ function cnf_page_create($_PAGE)
 {
     if (count(cnf_db_select("select name from _page where name = '" . strtolower($_PAGE["name"]) . "'")) == 0)
         cnf_db_insert("INSERT into _page (name, title, description, keywords, styles) VALUES (?,?,?,?,?)", [strtolower($_PAGE["name"]), $_PAGE["title"], $_PAGE["description"], $_PAGE["keywords"], $_PAGE["styles"]]);
-    else cnf_db_execute("update _page set title = ?, description = ?, keywords = ?, styles = ? where name = ?", [$_PAGE["title"], $_PAGE["description"], $_PAGE["keywords"], $_PAGE["styles"], strtolower($_PAGE["name"])]);
+    else cnf_db_execute("UPDATE `_page` SET `title`=?,`description`=?,`keywords`=?,`styles`=? WHERE `name`=?", [$_PAGE["title"], $_PAGE["description"], $_PAGE["keywords"], $_PAGE["styles"], strtolower($_PAGE["name"])]);
 }
 
 function cnf_page_data($page)
@@ -148,7 +148,7 @@ function cnf_page_data($page)
         "title" => $page, // 70 chars limit
         "description" => $cnf_page_default_description, // default description
         "keywords" => $cnf_page_default_keywords, // default keywords
-        "styles" => "form,$page"
+        "styles" => "form" // default styles
     ) : $_PAGE[0];
     if (count($_PAGE) > 1) cnf_db_execute("delete from _page where name = '" . strtolower($_PAGE["name"]) . "'");
     return $result;

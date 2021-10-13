@@ -64,7 +64,7 @@ $_PAGE = array(
     "title" => "sabte sefaresh", // 70 chars limit
     "description" => "baraye daryafte khadamate ma dar in safhe sefareshate khod ra sabt konid", // 160 chars limit
     "keywords" => "sefaresh,aramis,shimi", // less than 10 phrases recommended
-    "name" =>  $currentPage,
+    "name" => $currentPage,
     "styles" => "form,order"
 );
 cnf_page_create($_PAGE);

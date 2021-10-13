@@ -79,3 +79,5 @@ function pagingIndexes(rows, divideBy, currentPage) {
 if (window.history.replaceState) {
     window.history.replaceState(null, null, window.location.href);
 }
+
+window.globalThis.pageLoad = [];

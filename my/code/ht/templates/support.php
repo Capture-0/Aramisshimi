@@ -58,7 +58,7 @@ $_PAGE = array(
     "title" => "poshtibani", // 70 chars limit
     "description" => "baraye daryafte khadamate ma dar in safhe sefareshate khod ra sabt konid", // 160 chars limit
     "keywords" => "support,aramis,shimi", // less than 10 phrases recommended
-    "name" =>  $currentPage,
+    "name" => $currentPage,
     "styles" => "form,support"
 );
 cnf_page_create($_PAGE);

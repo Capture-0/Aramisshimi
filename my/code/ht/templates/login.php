@@ -13,7 +13,7 @@ $_PAGE = array(
     "title" => "vorood", // 70 chars limit
     "description" => "vorood be website", // 160 chars limit
     "keywords" => "login,aramis,shimi", // less than 10 phrases recommended
-    "name" =>  $currentPage,
+    "name" => $currentPage,
     "styles" => "form,login"
 );
 cnf_page_create($_PAGE);

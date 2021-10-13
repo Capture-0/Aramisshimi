@@ -3,7 +3,7 @@ $_PAGE = array(
     "title" => "post ha", // 70 chars limit
     "description" => "modiriyate website", // 160 chars limit
     "keywords" => "posts,aramis,shimi", // less than 10 phrases recommended
-    "name" =>  $currentPage,
+    "name" => $currentPage,
     "styles" => "posts"
 );
 $post = array("isPost" => count($_REQUEST) > 0 ? m("\d+", $_REQUEST["p1"]) : false, "isIndex" => !m("\d+", isset($_REQUEST["p1"]) ? $_REQUEST["p1"] : ""));
@@ -159,7 +159,7 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         <h3>پر بازدید ها</h3>
         <div class="articleContainer">
             <?php
-            foreach (cnf_db_select("SELECT * FROM posts WHERE id IN (SELECT object1 AS id FROM pivot GROUP BY  object1 ORDER BY COUNT(object2) DESC LIMIT 4) LIMIT 4") as $i) {
+            foreach (cnf_db_select("SET FOREIGN_KEY_CHECKS = OFF;SELECT * FROM posts WHERE id IN (SELECT object1 AS id FROM pivot GROUP BY  object1 ORDER BY COUNT(object2) DESC LIMIT 4) LIMIT 4;") as $i) {
                 echo '<a href="/Posts/' . $i["id"] . '">
                     <article>
                         <div><img data-src="posts/files/thumbnails/' . $i["image"] . '" src="" alt=""></div>
@@ -177,7 +177,7 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         <div>
             <h3>دسته بندی ها</h3>
             <?php
-            foreach (cnf_db_select("SELECT * FROM archives WHERE show = 1 ORDER BY [priority] DESC LIMIT 3") as $i) {
+            foreach (cnf_db_select("SELECT * FROM archives WHERE `show` = 1 ORDER BY `priority` DESC LIMIT 3") as $i) {
                 echo '<a href="/Posts/c/' . $i["id"] . '"><div>' . $i["name"] . "</div></a>";
             }
             ?>
