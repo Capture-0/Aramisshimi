@@ -1,0 +1,64 @@
+.btn {
+  -webkit-transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  border-radius: 0.1em;
+  opacity: 0.9;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.btn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  opacity: 1;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+form {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: (minmax(50%, 1fr))[auto-fit];
+      grid-template: auto/repeat(auto-fit, minmax(50%, 1fr));
+}
+
+form > div > span {
+  padding: 1em;
+}
+
+form > div > textarea {
+  height: 20vh;
+}
+
+form > button[type=submit] {
+  border: 1px solid silver;
+  padding: 1em;
+  margin: 1em;
+  background-color: #8de4af;
+}
+
+@media (max-width: 600px) {
+  /* 600px > screen-width */
+  form {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (100%)[auto-fit];
+        grid-template: auto/repeat(auto-fit, 100%);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+  /* 600px < screen-width < 1200 */
+}
+
+@media (min-width: 1200px) {
+  /* 1200 < screen-width */
+}
+/*# sourceMappingURL=order.css.map */

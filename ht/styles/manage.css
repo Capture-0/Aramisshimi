@@ -1,0 +1,371 @@
+.btn {
+  -webkit-transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  border-radius: 0.1em;
+  opacity: 0.9;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.btn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  opacity: 1;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+#manage .row:active {
+  color: #2a4a69;
+  background-color: #cdcecf;
+  -webkit-transition: background-color 100ms ease;
+  transition: background-color 100ms ease;
+}
+
+#manage > .container {
+  -webkit-box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
+          box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
+  background-color: #e6e6e6;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+#manage > .container > h2 {
+  margin: 0 3em 1em 0;
+}
+
+#manage > .container > .listBtn {
+  width: 100%;
+  margin: auto;
+  margin: 1em 0;
+}
+
+#manage > .container > .listBtn > div:first-child {
+  z-index: 2;
+  cursor: pointer;
+  padding: 1em;
+  border-radius: 0.4em;
+  background-color: #cdcecf;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#manage > .container > .listBtn > div:first-child:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+}
+
+#manage > .container > .listBtn > div:first-child h3 > span {
+  background-color: red;
+  color: #ffffff;
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  font-size: 0.6em;
+  display: inline-block;
+  text-align: center;
+}
+
+#manage > .container > .listBtn > div:first-child > div {
+  border-radius: 50%;
+  background-color: #e6e6e6;
+  width: 3em;
+  height: 3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+  transition: transform 0.6s, -webkit-transform 0.6s;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+#manage > .container > .listBtn > div:last-child {
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-height: 0;
+  max-width: 100%;
+  overflow: auto;
+  background-color: #f3f2f2;
+  -webkit-transition: max-height 0.6s;
+  transition: max-height 0.6s;
+}
+
+#manage > .container > .listBtn > div:last-child > .row {
+  display: -ms-grid;
+  display: grid;
+  gap: 0.2em;
+}
+
+#manage > .container > .listBtn > div:last-child > .row:nth-child(2n) > div {
+  background-color: #d0d0d0;
+}
+
+#manage > .container > .listBtn > div:last-child > .row > div {
+  padding: 0.4em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #e6e6e6;
+  font-family: yekan;
+}
+
+#manage > .container > .listBtn > div:last-child > .row > div > img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  max-height: 6em;
+}
+
+#manage > .container > .listBtn:nth-child(2) > div:last-child > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 10em 20em 40em 14em 4em 3em 3em;
+      grid-template: auto / 10em 10em 20em 40em 14em 4em 3em 3em;
+}
+
+#manage > .container > .listBtn:nth-child(3) > div:last-child > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 15em 20em 30em 20em 8em 8em 14em 3em 3em;
+      grid-template: auto / 15em 20em 30em 20em 8em 8em 14em 3em 3em;
+}
+
+#manage > .container > .listBtn:nth-child(4) > div:last-child > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 15em 20em 30em 14em 4em 3em 3em;
+      grid-template: auto / 10em 15em 20em 30em 14em 4em 3em 3em;
+}
+
+#manage > .container > .extraData > h3 {
+  margin: 0.4em 1em;
+  background-color: #cdcecf;
+  padding: 0.4em 1em;
+  border-radius: 0.4em;
+}
+
+#manage > .container > .extraData > .lists {
+  border-radius: 0.4em;
+  background-color: #cdcecf;
+  padding: 1em;
+  display: -ms-grid;
+  display: grid;
+  gap: 1em;
+  -webkit-transition: height 400ms ease-out, opacity 400ms ease-in-out;
+  transition: height 400ms ease-out, opacity 400ms ease-in-out;
+  overflow: hidden;
+}
+
+#manage > .container > .extraData > .lists > div > h4 {
+  margin: 0 1em 0.6em 1em;
+}
+
+#manage > .container > .extraData > .lists > div > .list {
+  height: 14em;
+  overflow: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #f3f2f2;
+  border-radius: 0.4em;
+  border: 1px solid silver;
+}
+
+#manage > .container > .extraData > .lists > div > .list > .row {
+  display: -ms-grid;
+  display: grid;
+}
+
+#manage > .container > .extraData > .lists > div > .list > .row > div {
+  border-radius: 0.2em;
+  padding: 0.2em 0.4em;
+  margin: 0.2em;
+  font-family: yekan;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+#manage > .container > .extraData > .lists > div > .list > .row:nth-child(2n+1) > div {
+  background-color: #cdcecf;
+}
+
+#manage > .container > .extraData > .lists > div > .list > .row:nth-child(2n) > div {
+  background-color: #e6e6e6;
+}
+
+#manage > .container > .extraData > .lists > div:nth-child(1) > .list > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 20em 10em 16em 10em 3em 3em;
+      grid-template: auto / 10em 20em 10em 16em 10em 3em 3em;
+}
+
+#manage > .container > .extraData > .lists > div:nth-child(2) > .list > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 8em 4em 6em 3em 3em;
+      grid-template: auto / 10em 8em 4em 6em 3em 3em;
+}
+
+#manage > .container > .extraData > .lists > div:nth-child(3) > .list > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 8em;
+      grid-template: auto / 10em 8em;
+}
+
+#manage > .container > .extraData > .lists > div > .manage {
+  padding: 1em;
+}
+
+#manage > .container > .extraData > .lists > div > .manage > h5 {
+  margin: 0.2em 1em;
+}
+
+#manage > .container > .extraData > .lists > div > .manage > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.9rem;
+}
+
+#manage > .container > .extraData > .lists > div > .manage > div > * {
+  margin: 0.4em 0.6em;
+}
+
+#manage > .container > .extraData > .lists > div > .manage > button {
+  border: 1px solid silver;
+  width: 20%;
+  padding: 0.2em 0.6em;
+  margin: 0.4em 1em;
+}
+
+#manage > .container > .posts > h3 {
+  margin: 1em;
+}
+
+#manage > .container > .posts > .compose {
+  background-color: #f3f2f2;
+  border-radius: 0.4em;
+  padding: 0.4em;
+}
+
+#manage > .container > .posts > .compose > div > span {
+  padding: 1em;
+}
+
+#manage > .container > .posts > .compose > div > textarea {
+  height: 20vh;
+}
+
+#manage > .container > .posts > .compose > #tags > div > div {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: inline-block;
+  padding: 0.1em 0.3em;
+  margin: 0.2em;
+  background-color: #a8ffca;
+  font-size: 1.1em;
+  border-radius: 0.2em;
+  border: 1px solid #8de4af;
+}
+
+#manage > .container > .posts > .compose > #tags > div > div > i {
+  color: red;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+#manage > .container > .posts > .compose > button[type=submit] {
+  border: 1px solid silver;
+  padding: 1em;
+  margin: 1em;
+  background-color: #8de4af;
+}
+
+#manage > .container > .posts > .compose > button[type=submit]:hover {
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+}
+
+@media (max-width: 600px) {
+  /* 600px > screen-width */
+  .extraData > .lists {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(14em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(14em, 1fr));
+  }
+  .container > .posts > .compose {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: 100%;
+        grid-template: auto / 100%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+  /* 600px < screen-width < 1200 */
+  .extraData > .lists {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(16em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(16em, 1fr));
+  }
+  .container > .posts > .compose {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(16em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(16em, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  /* 1200 < screen-width */
+  .extraData > .lists {
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(18em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(18em, 1fr));
+  }
+  .container > .posts > .compose {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-rows: auto;
+    -ms-grid-columns: (minmax(20em, 1fr))[auto-fill];
+        grid-template: auto/repeat(auto-fill, minmax(20em, 1fr));
+  }
+}
+/*# sourceMappingURL=manage.css.map */
