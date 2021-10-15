@@ -38,18 +38,6 @@ $currentPage = strtolower($_SERVER["REQUEST_URI"]);
 
 $params = preg_split("/\//", $currentPage, -1, PREG_SPLIT_NO_EMPTY);
 
-if (count($params) > 1) { // multi parameter url
-    if (strtolower($params[0]) == "posts" && m("\d+", $params[1])) { // viewing a single post
-        cnf_page_create(array(
-            "title" => $params[0], // 70 chars limit
-            "description" => $params[0], // 160 chars limit
-            "keywords" => "post,aramis,shimi", // less than 10 phrases recommended
-            "name" => $currentPage,
-            "styles" => "posts,post,form"
-        ));
-    }
-}
-
 $_PAGE = cnf_page_data($currentPage);
 $_FORM["result"] = "none";
 $_FORM["message"] = "";

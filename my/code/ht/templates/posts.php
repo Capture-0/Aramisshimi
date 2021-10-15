@@ -39,10 +39,6 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
     </h2>
     <?php
     if ($post["isPost"]) {
-        // implement seen mechanism
-        if (count(cnf_db_select("SELECT * FROM pivot WHERE relation = 'post_view' AND object1 = '" . $post["c"]["id"] . "' AND object2 = '" . $_SERVER["REMOTE_ADDR"] . "'")) == 0) {
-            cnf_db_insert("INSERT INTO pivot (relation, object1, object2) VALUES (?,?,?)", ["post_view", $post["c"]["id"], $_SERVER["REMOTE_ADDR"]]);
-        }
 
         // get tags
         $tmptg = array();
@@ -57,6 +53,21 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         $tmp = "";
         foreach ($post["tags"] as $item) {
             $tmp .= "<div>$item</div>";
+        }
+
+        // set page info
+
+        cnf_page_create(array(
+            "title" => $post["c"]["title"], // 70 chars limit
+            "description" => $post["c"]["subject"], // 160 chars limit
+            "keywords" => implode(", ", $post["tags"]), // less than 10 phrases recommended
+            "name" => $currentPage,
+            "styles" => "posts,post,form"
+        ));
+
+        // implement seen mechanism
+        if (count(cnf_db_select("SELECT * FROM pivot WHERE relation = 'post_view' AND object1 = '" . $post["c"]["id"] . "' AND object2 = '" . $_SERVER["REMOTE_ADDR"] . "'")) == 0) {
+            cnf_db_insert("INSERT INTO pivot (relation, object1, object2) VALUES (?,?,?)", ["post_view", $post["c"]["id"], $_SERVER["REMOTE_ADDR"]]);
         }
 
         echo '<article>
