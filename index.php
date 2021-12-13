@@ -23,7 +23,7 @@
 // create a form validation class in config
 // create a url class that return url params
 // create a handler for uploaded files
-// 1 melyoono sado panj hezar toman
+// change _page to data which has 2 columns key and value which key is page name and value is json of title, description, keywords, styles and page visits
 
 if (empty($_SESSION["role"])) $_SESSION["role"] = "user";
 require("my/cnf.php");

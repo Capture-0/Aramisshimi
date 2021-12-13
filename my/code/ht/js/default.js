@@ -57,6 +57,7 @@ function scrollReached(elements, callback) {
         }
     });
 }
+
 async function ajax(qry, req) {
     return await (await fetch(DEFAULT_CONFIG_PATH + "?req=" + encodeURIComponent(req) + "&p=" + encodeURIComponent(qry))).text();
 }

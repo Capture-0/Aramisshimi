@@ -36,7 +36,7 @@ window.globalThis.pageLoad.push(async function() {
             }
         });
     });
-
+    
     document.querySelectorAll("[data-action=server] [data-op]").forEach(async el => {
         var t = el;
         if (!t.hasAttribute("data-op")) t = t.parentNode;
@@ -128,7 +128,7 @@ window.globalThis.pageLoad.push(async function() {
                 name.value = "";
                 if (confirm("دسته بندی با موفقیت اضافه شد.\nصفحه رفرش شود؟")) window.location.reload();
             } else {
-                alert("دسته بندی اضافه نشد.");
+                alert("دسته بندی اضافه نشد."); // "دسته بندی اضافه نشد."
             }
         } else alert("لطفا نام را به درستی انتخاب نمایید.");
     });

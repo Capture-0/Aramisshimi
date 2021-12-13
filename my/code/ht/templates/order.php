@@ -40,12 +40,12 @@ if (isset($_POST["submit"])) {
                     } else throw new Exception();
                 } else throw new Exception();
             }
-            cnf_db_insert("INSERT INTO orders (first_name, last_name, email, mobile, [address], content, attachment) VALUES (?,?,?,?,?,?,?)", [$f, $l, $e, $m, $a, $o, basename($ig["rand"])]);
+            cnf_db_insert("INSERT INTO orders (first_name, last_name, email, mobile, `address`, content, attachment) VALUES (?,?,?,?,?,?,?)", [$f, $l, $e, $m, $a, $o, basename($ig["rand"])]);
             $_FORM["result"] = "success";
             $_FORM["message"] = "سفارش شما با موفقیت ثبت شد.";
         } catch (Exception $e) {
             $_FORM["result"] = "error";
-            $_FORM["message"] = "سفارش شما ثبت نشد.";
+            $_FORM["message"] = $e->getMessage(); // "سفارش شما ثبت نشد.";
         }
     } else {
         $_FORM["result"] = "warning";
@@ -61,7 +61,7 @@ if (isset($_POST["submit"])) {
     }
 }
 $_PAGE = array(
-    "title" => "sabte sefaresh", // 70 chars limit
+    "title" => "ارامیس شیمی - ثبت سفارش", // 70 chars limit
     "description" => "baraye daryafte khadamate ma dar in safhe sefareshate khod ra sabt konid", // 160 chars limit
     "keywords" => "sefaresh,aramis,shimi", // less than 10 phrases recommended
     "name" => $currentPage,
