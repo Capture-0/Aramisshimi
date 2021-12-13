@@ -52,7 +52,7 @@ $_FORM["message"] = "";
     <meta name="keywords" content="<?php echo $_PAGE["keywords"]; ?>">
     <meta name="description" content="<?php echo $_PAGE["description"]; ?>">
     <meta name="robots" content="index, follow">
-    <title>آرامیس شیمی - <?php echo $_PAGE["title"]; ?></title>
+    <title><?php echo $_PAGE["title"]; ?></title>
     <?php
     foreach (explode(",", $_PAGE["styles"]) as $i) {
         echo '<link rel="stylesheet" href="/my/code/ht/styles/' . $i . '.css">';
