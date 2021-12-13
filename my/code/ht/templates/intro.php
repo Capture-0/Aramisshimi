@@ -4,7 +4,7 @@
             <div><img data-src="logo.png" src="" alt=""></div>
             <div>
                 <h1>آرامیس شیمی</h1>
-                <p style="font-family: yekan;">خط تولید مایعات شوینده کارگاهی و صنعتی</p>
+                <p style="font-family: yekan;">راه اندازی خط تولید مایعات شوینده کارگاهی و صنعتی</p>
             </div>
         </div>
         <div>

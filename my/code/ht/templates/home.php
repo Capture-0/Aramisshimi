@@ -1,9 +1,9 @@
 <?php
 $_PAGE = array(
     "name" =>  $currentPage,
-    "title" => "khane", // 70 chars limit
-    "description" => "aramisshimi pishro dar sanate tolide shooyande", // 160 chars limit
-    "keywords" => "shooyande,aramis,shimi", // less than 10 phrases recommended
+    "title" => "آرامیس شیمی: راه اندازی خط تولید شوینده های کارگاهی و صنعتی", // 70 chars limit
+    "description" => "احداث و راه اندازی خط تولید انواع شوینده پودری و مایع در هر نقطه از ایران دارای گواهینامه با ارایه تجهیزات متخصصان و فرمولاسیون ها دارای دستگاه های پیشرفته", // 160 chars limit
+    "keywords" => "شوینده,aramis,shimi", // less than 10 phrases recommended
     "styles" => "home"
 );
 cnf_page_create($_PAGE);
@@ -82,10 +82,13 @@ cnf_page_create($_PAGE);
     <section id="carousel" style="padding: 0;">
         <div class="frame">
             <div class="slide">
-                <img data-src="carousel/img 1.jpeg" src="" alt="">
-                <img data-src="carousel/img 2.jpeg" src="" alt="">
-                <img data-src="carousel/img 3.jpeg" src="" alt="">
-                <img data-src="carousel/img 4.jpeg" src="" alt="">
+                <img data-src="documentary/image03.jpg" src="" alt="">
+                <img data-src="documentary/image40.jpg" src="" alt="">
+                <img data-src="documentary/image07.jpg" src="" alt="">
+                <img data-src="documentary/image42.jpg" src="" alt="">
+                <img data-src="documentary/image09.jpg" src="" alt="">
+                <img data-src="documentary/image46.jpg" src="" alt="">
+                <img data-src="documentary/image52.jpg" src="" alt="">
             </div>
         </div>
         <button onclick="carouselPrev()" style="left: 0;"><i class="fas fa-chevron-left"></i></button>

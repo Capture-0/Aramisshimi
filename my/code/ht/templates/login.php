@@ -10,7 +10,7 @@ if (isset($_POST["submit"])) {
     }
 }
 $_PAGE = array(
-    "title" => "vorood", // 70 chars limit
+    "title" => "ارامیس شیمی - ورود", // 70 chars limit
     "description" => "vorood be website", // 160 chars limit
     "keywords" => "login,aramis,shimi", // less than 10 phrases recommended
     "name" => $currentPage,
