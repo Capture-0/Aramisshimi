@@ -36,7 +36,7 @@ if (isset($_POST["submit"])) {
                     } else throw new Exception();
                 } else throw new Exception();
             }
-            cnf_db_insert("INSERT INTO messages (fullname, mobile, [subject], content, attachment) VALUES (?,?,?,?,?)", [$n, $m, $s, $c, basename($f["rand"])]);
+            cnf_db_insert("INSERT INTO messages (fullname, mobile, `subject`, content, attachment) VALUES (?,?,?,?,?)", [$n, $m, $s, $c, basename($f["rand"])]);
             $_FORM["result"] = "success";
             $_FORM["message"] = "پیام شما ارسال شد.";
         } catch (Exception $e) {
@@ -55,7 +55,7 @@ if (isset($_POST["submit"])) {
     }
 }
 $_PAGE = array(
-    "title" => "poshtibani", // 70 chars limit
+    "title" => "ارامیس شیمی - پشتیبانی", // 70 chars limit
     "description" => "baraye daryafte khadamate ma dar in safhe sefareshate khod ra sabt konid", // 160 chars limit
     "keywords" => "support,aramis,shimi", // less than 10 phrases recommended
     "name" => $currentPage,

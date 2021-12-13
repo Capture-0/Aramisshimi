@@ -1,6 +1,6 @@
 <?php
 $_PAGE = array(
-    "title" => "post ha", // 70 chars limit
+    "title" => "ارامیس شیمی - مقالات", // 70 chars limit
     "description" => "modiriyate website", // 160 chars limit
     "keywords" => "posts,aramis,shimi", // less than 10 phrases recommended
     "name" => $currentPage,
@@ -8,7 +8,7 @@ $_PAGE = array(
 );
 $post = array("isPost" => count($_REQUEST) > 0 ? m("\d+", $_REQUEST["p1"]) : false, "isIndex" => !m("\d+", isset($_REQUEST["p1"]) ? $_REQUEST["p1"] : ""));
 if (isset($_REQUEST["p1"]) && isset($_REQUEST["p2"])) {
-    $post["isCategory"] = strtolower($_REQUEST["p1"]) == "c" && m("\d+", $_REQUEST["p2"]) ? true : false;
+    $post["isCategory"] = strtolower($_REQUEST["p1"]) == "c" && m("\d+", $_REQUEST["p2"]);
 } else $post["isCategory"] = false;
 if ($post["isPost"]) {
     $r = cnf_db_select("select * from posts where id = " . $_REQUEST["p1"]);
@@ -34,12 +34,12 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
     <h2>
         <?php
         if ($post["isPost"]) echo $post["c"]["title"];
+        else if($post["isCategory"]) echo "دسته بندی: " . cnf_db_select("select name from archives where id = " . $_REQUEST["p2"])[0]["name"];
         else echo "پست ها";
         ?>
     </h2>
     <?php
     if ($post["isPost"]) {
-
         // get tags
         $tmptg = array();
         foreach (cnf_db_select("select * from pivot where relation = 'post_tag' and object1 = " . $post["c"]["id"]) as $j) {
@@ -56,15 +56,15 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         }
 
         // set page info
-
+        $s = $post["c"]["subject"];
         cnf_page_create(array(
             "title" => $post["c"]["title"], // 70 chars limit
-            "description" => $post["c"]["subject"], // 160 chars limit
-            "keywords" => implode(", ", $post["tags"]), // less than 10 phrases recommended
+            "description" => substr($s,0,159), // 160 chars limit
+            "keywords" => implode(",", $post["tags"]), // less than 10 phrases recommended
             "name" => $currentPage,
             "styles" => "posts,post,form"
         ));
-
+        
         // implement seen mechanism
         if (count(cnf_db_select("SELECT * FROM pivot WHERE relation = 'post_view' AND object1 = '" . $post["c"]["id"] . "' AND object2 = '" . $_SERVER["REMOTE_ADDR"] . "'")) == 0) {
             cnf_db_insert("INSERT INTO pivot (relation, object1, object2) VALUES (?,?,?)", ["post_view", $post["c"]["id"], $_SERVER["REMOTE_ADDR"]]);
@@ -134,7 +134,7 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         $qry = "select * from posts order by id desc";
         if ($post["isCategory"]) {
             cnf_page_create(array(
-                "title" => "daste bandi", // 70 chars limit
+                "title" => "آرامیس شیمی - دسته بندی " . cnf_db_select("select name from archives where id = " . $_REQUEST["p2"])[0]["name"], // 70 chars limit
                 "description" => "daste badni", // 160 chars limit
                 "keywords" => "daste bandi,aramis,shimi", // less than 10 phrases recommended
                 "name" => $currentPage,
@@ -159,7 +159,8 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
             }
         }
         ?>
-        <div id="pageIndex"></div>
+        <!-- remove display none to show pagination buttons -->
+        <div id="pageIndex" style="display:none"></div>
     </section>
     <aside>
         <div class="search">
@@ -170,7 +171,7 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         <h3>پر بازدید ها</h3>
         <div class="articleContainer">
             <?php
-            foreach (cnf_db_select("SELECT * FROM posts WHERE id IN (SELECT object1 AS id FROM pivot GROUP BY  object1 ORDER BY COUNT(object2) DESC LIMIT 4) LIMIT 4") as $i) {
+            foreach (cnf_db_select("SET FOREIGN_KEY_CHECKS = OFF;SELECT * FROM posts WHERE id IN (SELECT object1 AS id FROM pivot GROUP BY  object1 ORDER BY COUNT(object2) DESC LIMIT 4) LIMIT 4;") as $i) {
                 echo '<a href="/Posts/' . $i["id"] . '">
                     <article>
                         <div><img data-src="posts/files/thumbnails/' . $i["image"] . '" src="" alt=""></div>

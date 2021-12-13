@@ -4,11 +4,11 @@
             <li><img style="width: 10em;" data-src="logo-secondary.png" src="" alt="" /></li>
             <li>
                 <p><i class="fas fa-map-marker-alt"></i>
-                <address style="white-space: normal;">مشهد - خیابان قرنی بین قرنی 14 و 16 مجتمع آرش پلاک 46</address>
+                <address style="white-space: normal;">خراسان رضوی - قوچان شهرک صنعتی 1 بلوار تلاش 2 پلاک 5 </address>
                 </p>
             </li>
             <li><a href="tel:05137136472"><span><i class="fas fa-phone"></i> 05137645799</span></a></li>
-            <li><a href="tel:+989019966591"><span><i class="fas fa-mobile-alt"></i> 09019966591</span></a></li>
+            <li style="white-space: normal;"><i class="fas fa-mobile-alt"></i><br /><a href="tel:+989019966591"><span>09019966591</span>, <a href="tel:+989015555101"><span>09015555101</span></a>, <a href="tel:+989128005712"><span>09128005712</span></li>
             <li><a href="mailto:majid13590606@gmail.com"><span><i class="fas fa-envelope"></i> majid13590606@gmail.com</span></a></li>
         </ul>
         <ul>

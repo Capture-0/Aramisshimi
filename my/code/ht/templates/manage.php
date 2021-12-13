@@ -18,7 +18,7 @@ if ($_PF["s"]) {
     $i = $_FILES["image"]; // name type tmp_name error size
     $_FORM = array();
     $erar = array();
-    if (bwn($t["n"], $t["s"], $t["e"]) && bwn($s["n"], $s["s"], $s["e"]) && bwn($c["n"], $c["s"], $c["e"]) && bwn($tg["n"], $tg["s"], $tg["e"]) && !empty($_FILES["image"]["name"])) {
+    if (bwn($t["n"], $t["s"], $t["e"]) && bwn($s["n"], $s["s"], $s["e"]) && bwn($c["n"], $c["s"], $c["e"]) && bwn($tg["n"], $tg["s"], $tg["e"]) && is_uploaded_file($_FILES["image"]["tmp_name"])) {
         $_FORM["result"] = "success";
         if (!bwn($t["n"], 4, 10)) $erar[] = "عنوان بین 4 تا 10 کلمه (" . $t["n"] . ")";
         if (!bwn($s["n"], 30, 50)) $erar[] = "موضوع بین 30 تا 50 کلمه (" . $s["n"] . ")";
@@ -49,12 +49,12 @@ if ($_PF["s"]) {
             ) {
                 // check whether file has been uploaded and inputs inserted to database
                 if (move_uploaded_file($_F["i"]["tmp_name"], $_F["rand"])) {
-                    $insertedPostId = cnf_db_insert("INSERT INTO posts (title, [subject], [image], content, archive) VALUES (?,?,?,?,?)", [$t["c"], $s["c"], basename($_F["rand"]), $c["c"], $a]);
+                    $insertedPostId = cnf_db_insert("INSERT INTO posts (title, `subject`, `image`, content, archive) VALUES (?,?,?,?,?)", [$t["c"], $s["c"], basename($_F["rand"]), $c["c"], $a]);
                     $tagsArray = array();
                     foreach (explode(",", $tg["c"]) as $item) {
                         $inTable = cnf_db_select("select * from tags where name= ?", [$item]);
                         if (count($inTable) == 0) {
-                            $insertedId = cnf_db_insert("INSERT INTO tags ([name]) VALUES (?)", [$item]);
+                            $insertedId = cnf_db_insert("INSERT INTO tags (`name`) VALUES (?)", [$item]);
                             $tagsArray[] = $insertedId;
                         } else {
                             $tagsArray[] = $inTable[0]["id"];
@@ -81,7 +81,7 @@ if ($_PF["s"]) {
         if (!bwn($s["n"], $s["s"], $s["e"])) $erar[] = "موضوع بین " . $s["s"] . " تا " . $s["e"] . " کلمه" . " (" . $s["n"] . ")";
         if (!bwn($c["n"], $c["s"], $c["e"])) $erar[] = "محتوای بیش از " . $c["s"] . " کلمه" . " (" . $c["n"] . ")";
         if (!bwn($tg["n"], $tg["s"], $tg["e"])) $erar[] = "برچسب بین " . $tg["s"] . " تا " . $tg["e"] . " عدد" . " (" . $tg["n"] . ")";
-        if (empty($_FILES["image"]["name"])) $erar[] = "اپلود عکس";
+        if (!is_uploaded_file($_FILES["image"]["tmp_name"])) $erar[] = "اپلود عکس";
     }
     if (count($erar) > 1) {
         array_splice($erar, 0, 0, "<br>");
@@ -89,7 +89,7 @@ if ($_PF["s"]) {
     }
 }
 $_PAGE = array(
-    "title" => "modiriyat", // 70 chars limit
+    "title" => "ارامیس شیمی - مدیریت", // 70 chars limit
     "description" => "modiriyate website", // 160 chars limit
     "keywords" => "manage,aramis,shimi", // less than 10 phrases recommended
     "name" => $currentPage,
