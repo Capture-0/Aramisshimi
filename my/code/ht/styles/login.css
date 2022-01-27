@@ -26,8 +26,8 @@ main > .container {
   margin: 2em auto;
   padding: 1em 1vw;
   border-radius: 0.6em;
-  -webkit-box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
-          box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
+  -webkit-box-shadow: 0 2px 4px 0 silver;
+          box-shadow: 0 2px 4px 0 silver;
   background: -webkit-gradient(linear, left top, left bottom, from(#0f2c35), to(#2a4a69)) !important;
   background: linear-gradient(#0f2c35, #2a4a69) !important;
 }

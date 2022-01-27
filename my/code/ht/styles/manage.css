@@ -30,8 +30,8 @@
 }
 
 #manage > .container {
-  -webkit-box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
-          box-shadow: 0.2em 0.2em 1em 0.2em #cdcecf;
+  -webkit-box-shadow: 0 2px 4px 0 silver;
+          box-shadow: 0 2px 4px 0 silver;
   background-color: #e6e6e6;
   border-radius: 1em;
   padding: 1em;
