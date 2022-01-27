@@ -14,8 +14,8 @@
                     <a href="/Home">
                         <li><i class="fas fa-home"></i> خانه</li>
                     </a>
-                    <a href="/Login">
-                        <li><i class="fas fa-sign-in-alt"></i> ورود</li>
+                    <a href="/Store">
+                        <li><i class="fas fa-shopping-bag"></i> فروشگاه</li>
                     </a>
                     <a href="/Order">
                         <li><i class="fas fa-truck"></i> سفارش</li>

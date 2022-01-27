@@ -31,6 +31,22 @@ if (isset($_GET["url"])) {
     echo url($_REQUEST["url"]);
 }
 
+if (isset($_GET["cart"])) {
+    if ($_GET["cart"] == "get") {
+        echo json_encode($_SESSION["cart"]);
+    } else if (isset($_GET["p"]) && m("\\d+", $_GET["p"])) {
+        if ($_GET["cart"] == "set") {
+            if (empty($_SESSION["cart"])) $_SESSION["cart"] = array();
+            if (empty($_SESSION["cart"]["product_" . $_GET["p"]])) $_SESSION["cart"]["product_" . $_GET["p"]] = 1;
+            else $_SESSION["cart"]["product_" . $_GET["p"]]++;
+        } else if ($_GET["cart"] == "remove") {
+            $_SESSION["cart"]["product_" . $_GET["p"]]--;
+        }
+    } else {
+        echo "error";
+    }
+}
+
 if (isset($_GET["req"]) && isset($_SESSION["role"]) && isset($_GET["p"])) {
     $cnf_db_connection = new PDO("sqlite:admin.db");
     if ($_GET["req"] == "delete" && $_SESSION["role"] == "admin") {
@@ -55,7 +71,6 @@ if (isset($_GET["req"]) && isset($_SESSION["role"]) && isset($_GET["p"])) {
         echo cnf_db_execute("delete from $res where id = " . $sql["id"]);
     }
     if ($_GET["req"] == "test") {
-        
     }
     if ($_GET["req"] == "insert" && $_SESSION["role"] == "admin") {
         $s = explode(",", $_GET["p"]);
@@ -250,9 +265,9 @@ function cnf_misc_random_string($length = 32, $chars = "abcdefghijklmnopqrstuvwx
     return $res;
 }
 
-function m($pattern, $input, $caseSensetive = true)
+function m($pattern, $input, $caseInsensetive = true)
 {
-    return preg_match('/^' . $pattern . '$/' . ($caseSensetive ? 'i' : ''), $input);
+    return preg_match('/^' . $pattern . '$/' . ($caseInsensetive ? 'i' : ''), $input);
 }
 
 function cnf_misc_test()

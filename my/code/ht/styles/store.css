@@ -1,0 +1,121 @@
+.btn {
+  -webkit-transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 100ms ease-out, -webkit-transform 100ms ease-out;
+  border-radius: 0.1em;
+  opacity: 0.9;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.btn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  opacity: 1;
+}
+
+.btn:active {
+  opacity: 0.8;
+}
+
+#storeBar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 0.2em 0.3em;
+  -webkit-box-shadow: 0 4px 2px -2px silver;
+          box-shadow: 0 4px 2px -2px silver;
+  background-color: #f3f2f2;
+  z-index: 10;
+}
+
+#storeBar > .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#storeBar > .container > #search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 0.3em;
+  padding: 0.4em 1em 0.4em 0.8em;
+  margin: 0.2em 0.4em;
+  background-color: #e6e6e6;
+}
+
+#storeBar > .container > #search > i {
+  padding: 0.1em 0 0.1em 0.4em;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+#storeBar > .container > #search > input {
+  padding: 0 0.2em 0 0;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+#storeBar > .container > #cart {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.2em 0.4em;
+  cursor: pointer;
+}
+
+#storeBar > .container > #cart > span {
+  font-size: 0.9em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background-color: red;
+  width: 1.2em;
+  height: 1.2em;
+  color: #ffffff;
+  -webkit-box-shadow: 0 2px 4px 0 silver;
+          box-shadow: 0 2px 4px 0 silver;
+}
+
+@media (max-width: 600px) {
+  /* 600px > screen-width */
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+  /* 600px < screen-width < 1200 */
+}
+
+@media (min-width: 1200px) {
+  /* 1200 < screen-width */
+}
+/*# sourceMappingURL=store.css.map */

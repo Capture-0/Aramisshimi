@@ -117,16 +117,6 @@ if (!$post["isPost"]) cnf_page_create($_PAGE);
         </div>
     </article>';
     }
-
-    // # aks
-    // # onvan 4 - 10 words
-    // # mozooe 30 - 50 words
-    // # mohtava > 400 words
-    // # dastebandi
-    // barchasb < 12
-    // # comments
-    // # bazdid
-    // # tarikh
     ?>
 
     <section>

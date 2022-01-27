@@ -1,0 +1,68 @@
+@import "utility";
+#storeBar {
+    position: sticky;
+    top: 0;
+    padding: 0.2em 0.3em;
+    box-shadow: 0 4px 2px -2px silver;
+    background-color: $clr-light-3;
+    z-index: 10;
+    &>.container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &>#search {
+            display: flex;
+            align-items: center;
+            border-radius: 0.3em;
+            padding: 0.4em 1em 0.4em 0.8em;
+            margin: 0.2em 0.4em;
+            background-color: $clr-light-2;
+            &>i {
+                padding: 0.1em 0 0.1em 0.4em;
+                color: rgba(0, 0, 0, 0.5);
+                font-size: 1.2em;
+                cursor: pointer;
+            }
+            &>input {
+                padding: 0 0.2em 0 0;
+                outline: none;
+                border: none;
+                background-color: transparent;
+            }
+        }
+        &>#cart {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0.2em 0.4em;
+            cursor: pointer;
+            &>span {
+                font-size: 0.9em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                border-radius: 50%;
+                background-color: red;
+                width: 1.2em;
+                height: 1.2em;
+                color: #ffffff;
+                box-shadow: $shadow;
+            }
+        }
+    }
+}
+
+@media (max-width:600px) {
+    /* 600px > screen-width */
+}
+
+@media (min-width:600px) and (max-width:1200px) {
+    /* 600px < screen-width < 1200 */
+}
+
+@media (min-width:1200px) {
+    /* 1200 < screen-width */
+}

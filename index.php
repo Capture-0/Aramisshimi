@@ -7,6 +7,7 @@
 // archives / id name(unique) priority(2) show(1) / CREATE TABLE archives (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE,priority INTEGER DEFAULT 2,show BOOLEAN DEFAULT 1);
 // pivot / relation object1 object2 / CREATE TABLE pivot (relation varchar(100) NOT NULL,object1 varchar(100) NOT NULL,object2 varchar(100) NOT NULL);
 // tags / id name(unique) / CREATE TABLE tags (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE);
+// products / id name description image archive datetime / CREATE TABLE products (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE,description varchar(500) NOT NULL,image varchar(100) NOT NULL,archive INTEGER NOT NULL,datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)
 // _page / id 
 // _setting / id 
 
@@ -58,7 +59,7 @@ $_FORM["message"] = "";
         echo '<link rel="stylesheet" href="/my/code/ht/styles/' . $i . '.css">';
     }
     ?>
-    <link href="http://aramisshimi.rf.gd/Home" rel="canonical">
+    <link href="http://aramisshimi.ir/Home" rel="canonical">
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="stylesheet" href="/my/code/ht/styles/style.css">
     <link rel="stylesheet" href="/my/code/ht/styles/header_footer.css">
