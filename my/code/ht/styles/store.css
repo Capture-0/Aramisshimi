@@ -22,6 +22,10 @@
   opacity: 0.8;
 }
 
+section {
+  padding: 0.8em 0 !important;
+}
+
 #storeBar {
   position: -webkit-sticky;
   position: sticky;
@@ -99,16 +103,23 @@
   right: 0;
   bottom: 0;
   border-radius: 50%;
-  background-color: red;
-  width: 1.2em;
-  height: 1.2em;
+  width: 1.3em;
+  height: 1.3em;
+  background-color: #2a4a69;
   color: #ffffff;
   -webkit-box-shadow: 0 2px 4px 0 silver;
           box-shadow: 0 2px 4px 0 silver;
 }
 
+#storeBar > .container > #cart > i {
+  color: #6FC691;
+}
+
 @media (max-width: 600px) {
   /* 600px > screen-width */
+  #storeBar #search input {
+    width: 30vw;
+  }
 }
 
 @media (min-width: 600px) and (max-width: 1200px) {

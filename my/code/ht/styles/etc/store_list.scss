@@ -1,0 +1,169 @@
+@import "../utility";
+.hr {
+    margin: 1em 0.4em;
+    border-top: 1px solid $clr-light-1;
+    display: block;
+}
+
+#list {
+    display: grid;
+    &>section {
+        &>#bar {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            background-color: $clr-light-2;
+            padding: 0.4em 1em;
+            margin: 0.6em 0;
+            font-size: 0.8em;
+            box-shadow: $shadow;
+            border-radius: 0.4em;
+            &>* {
+                margin: 0.2em 0.6em;
+            }
+            &>ul {
+                display: flex;
+                align-items: center;
+                &>li {
+                    border-radius: 0.2em;
+                    padding: 0.2em 0.8em;
+                    margin: 0.4em;
+                    background-color: $clr-secondary-d;
+                    color: white;
+                    font-family: yekan;
+                    box-shadow: $shadow;
+                    @extend .btn;
+                }
+            }
+        }
+        &>#items.grid {
+            display: grid;
+            grid-template: auto / repeat(auto-fill, minmax(11em, 1fr));
+            gap: 0.6em;
+            &>a {
+                box-shadow: $shadow;
+                border-radius: 0.4em;
+                padding: 0.6em;
+                display: flex;
+                flex-direction: column;
+                &>* {
+                    padding: 0.4em 0.2em;
+                }
+                &>div>img {
+                    object-fit: contain;
+                }
+                &>h4 {
+                    font-size: 0.9rem;
+                    font-weight: normal;
+                }
+                &>span {
+                    font-style: italic;
+                    font-weight: lighter;
+                    font-size: 1.1em;
+                }
+                &>button {
+                    @extend .btn;
+                    background: linear-gradient(to left, $clr-secondary-d, $clr-secondary);
+                    box-shadow: $shadow;
+                    font-size: 0.9rem;
+                    border: 0;
+                    border-radius: 0.2em;
+                    white-space: nowrap;
+                }
+            }
+        }
+        &>#items.row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6em;
+            &>a {
+                box-shadow: $shadow;
+                border-radius: 0.4em;
+                padding: 0.6em;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &>* {
+                    padding: 0.4em 0.2em;
+                }
+                &>div>img {
+                    object-fit: contain;
+                    max-height: 6em;
+                }
+                &>h4 {
+                    font-size: 0.9rem;
+                    font-weight: normal;
+                }
+                &>span {
+                    font-style: italic;
+                    font-weight: lighter;
+                    font-size: 1.1em;
+                }
+                &>button {
+                    @extend .btn;
+                    background: linear-gradient(to left, $clr-secondary-d, $clr-secondary);
+                    box-shadow: $shadow;
+                    font-size: 0.9rem;
+                    border: 0;
+                    border-radius: 0.2em;
+                    padding: 0.2em 1em;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+    &>aside {
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        &>.cont {
+            display: grid;
+            grid-template: auto / repeat(auto-fill, minmax(8.2em, 1fr));
+            gap: 0.4em;
+            &>a {
+                padding: 0.6em;
+                border-radius: 0.4em;
+                box-shadow: $shadow;
+                &>div>img {
+                }
+                &>h5 {
+                    font-size: 0.8rem;
+                    font-style: italic;
+                    font-weight: normal;
+                    color: $clr-dark-1;
+                    margin: 1em;
+                }
+                &>span {
+                    @extend .btn;
+                    font-size: 0.8rem;
+                    padding: 0.3em 1em;
+                    margin: 1em;
+                    background-color: $clr-secondary-l;
+                    border-radius: 0.4em;
+                    box-shadow: $shadow;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:600px) {
+    /* 600px > screen-width */
+    #list {
+        grid-template: auto / auto;
+    }
+}
+
+@media (min-width:600px) and (max-width:1200px) {
+    /* 600px < screen-width < 1200 */
+    #list {
+        grid-template: auto / 2fr 1fr;
+    }
+}
+
+@media (min-width:1200px) {
+    /* 1200 < screen-width */
+    #list {
+        grid-template: auto / 3fr 1fr;
+    }
+}

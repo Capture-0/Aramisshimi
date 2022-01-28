@@ -171,10 +171,6 @@ ol {
   src: url(../../../media/font/yekan.woff);
 }
 
-section {
-  padding: 0.8em 0 !important;
-}
-
 article#banner {
   display: -ms-grid;
   display: grid;

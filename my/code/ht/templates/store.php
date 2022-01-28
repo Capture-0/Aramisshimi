@@ -5,7 +5,7 @@ $_PAGE = array(
     "description" => "baraye daryafte khadamate ma dar in safhe sefareshate khod ra sabt konid", // 160 chars limit
     "keywords" => "store,aramis,shimi", // less than 10 phrases recommended
     "name" => $currentPage,
-    "styles" => "store,etc/store_home"
+    "styles" => "store,etc/store_list"
 );
 cnf_page_create($_PAGE);
 /*
@@ -26,10 +26,10 @@ on clicking on the basket icon it should open item managing page
                 <input type="search" placeholder="جستجو ..." />
             </div>
             <h3 style="padding: 0.2em 0.4em;">فروشگاه</h3>
-            <div id="cart"><span>3</span><i class="fas fa-shopping-cart"></i></div>
+            <div id="cart"><span>5</span><i class="fas fa-shopping-cart"></i></div>
         </div>
     </div>
     <?php
-    include(url("@/etc/store_home.php"));
+    include(url("@/etc/store_list.php"));
     ?>
 </main>
