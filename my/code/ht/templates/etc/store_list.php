@@ -1,5 +1,5 @@
 <?php
-// sort by most viewed, newest and price
+// sort by name, newest and price
 
 ?>
 <div id="list" class="container">
@@ -18,71 +18,16 @@
             </ul>
         </div>
         <div id="items" class="row">
-            <a href="">
-                <div><img data-src="documentary/image04.jpg" alt=""></div>
-                <h4>
-                    لورم ایپسوم متن ساختگی با تولید
-                </h4>
-                <span>680,000</span>
-                <button class="addToCart" data-product="4">+ سبد</button>
-            </a>
-            <a href="">
-                <div><img data-src="documentary/image04.jpg" alt=""></div>
-                <h4>
-                    لورم ایپسوم متن ساختگی با تولید
-                </h4>
-                <span>680,000</span>
-                <button class="addToCart" data-product="4">+ سبد</button>
-            </a>
-            <a href="">
-                <div><img data-src="documentary/image04.jpg" alt=""></div>
-                <h4>
-                    لورم ایپسوم متن ساختگی با تولید
-                </h4>
-                <span>680,000</span>
-                <button class="addToCart" data-product="4">+ سبد</button>
-            </a>
-            <a href="">
-                <div><img data-src="documentary/image04.jpg" alt=""></div>
-                <h4>
-                    لورم ایپسوم متن ساختگی با تولید
-                </h4>
-                <span>680,000</span>
-                <button class="addToCart" data-product="4">+ سبد</button>
-            </a>
-            <a href="">
-                <div><img data-src="documentary/image04.jpg" alt=""></div>
-                <h4>
-                    لورم ایپسوم متن ساختگی با تولید
-                </h4>
-                <span>680,000</span>
-                <button class="addToCart" data-product="4">+ سبد</button>
-            </a>
-            <a href="">
-                <div><img data-src="documentary/image04.jpg" alt=""></div>
-                <h4>
-                    لورم ایپسوم متن ساختگی با تولید
-                </h4>
-                <span>680,000</span>
-                <button class="addToCart" data-product="4">+ سبد</button>
-            </a>
-            <a href="">
-                <div><img data-src="documentary/image04.jpg" alt=""></div>
-                <h4>
-                    لورم ایپسوم متن ساختگی با تولید
-                </h4>
-                <span>680,000</span>
-                <button class="addToCart" data-product="4">+ سبد</button>
-            </a>
-            <a href="">
-                <div><img data-src="documentary/image04.jpg" alt=""></div>
-                <h4>
-                    لورم ایپسوم متن ساختگی با تولید
-                </h4>
-                <span>680,000</span>
-                <button class="addToCart" data-product="4">+ سبد</button>
-            </a>
         </div>
+        <template item-template>
+            <a href="">
+                <div><img src="documentary/image04.jpg" alt=""></div>
+                <h4>
+                </h4>
+                <span></span>
+                <button class="addToCart" data-product="">+ سبد</button>
+            </a>
+        </template>
     </section>
     <aside>
         <div>
@@ -91,26 +36,31 @@
         <div class="hr"></div>
         <h3>جدید ترین محصولات</h3>
         <div class="cont">
-            <a>
-                <div><img data-src="documentary/image22.jpg" alt=""></div>
-                <h5>لورم ایپسوم متن ساختگی با تولید</h5>
-                <span>بیشتر</span>
-            </a>
-            <a>
-                <div><img data-src="documentary/image34.jpg" alt=""></div>
-                <h5>لورم ایپسوم متن ساختگی با تولید</h5>
-                <span>بیشتر</span>
-            </a>
-            <a>
-                <div><img data-src="documentary/image61.jpg" alt=""></div>
-                <h5>لورم ایپسوم متن ساختگی با تولید</h5>
-                <span>بیشتر</span>
-            </a>
-            <a>
-                <div><img data-src="documentary/image11.jpg" alt=""></div>
-                <h5>لورم ایپسوم متن ساختگی با تولید</h5>
-                <span>بیشتر</span>
-            </a>
+            <?php
+            foreach (cnf_db_select("SELECT * FROM products ORDER BY id DESC LIMIT 4") as $i) {
+                echo '<a href="">
+                    <div><img src="/my/media/img/posts/files/products/' . $i["image"] . '" alt=""></div>
+                    <h5>' . $i["name"] . '</h5>
+                    <span>بیشتر</span>
+                </a>';
+            }
+            ?>
         </div>
     </aside>
 </div>
+<script>
+    window.globalThis.pageLoad.push(function() {});
+    loadList();
+
+    async function loadList(search = "", category = "0", orderby = "newest", desc = false) {
+        items = JSON.parse(await ajax("store=" + (search != "" ? search : "null") + "&c=" + category + "&ob=" + orderby + "&desc=" + (desc ? "true" : "false")));
+        items.forEach(i => {
+            a = document.querySelector("[item-template]").content.cloneNode(true).children[0];
+            a.firstElementChild.firstElementChild.setAttribute("src", "/my/media/img/posts/files/products/" + i.image);
+            a.querySelector("h4").textContent = i.name;
+            a.querySelector("span").textContent = String(i.price).replace(/(.)(?=(\d{3})+$)/g, '$1,') + " تومان";
+            a.querySelector("button").dataset.product = i.id;
+            document.querySelector("#list > section > #items").appendChild(a);
+        });
+    }
+</script>

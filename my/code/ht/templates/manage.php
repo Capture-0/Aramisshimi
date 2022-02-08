@@ -1,5 +1,13 @@
 <?php
 if ($_SESSION["role"] != "admin") header("location:/");
+$_PAGE = array(
+    "title" => "ارامیس شیمی - مدیریت", // 70 chars limit
+    "description" => "modiriyate website", // 160 chars limit
+    "keywords" => "manage,aramis,shimi", // less than 10 phrases recommended
+    "name" => $currentPage,
+    "styles" => "form,manage"
+);
+cnf_page_create($_PAGE);
 function wc($input, $seprator = "\s+")
 {
     return count(preg_split("/$seprator/", $input, -1, PREG_SPLIT_NO_EMPTY));
@@ -8,15 +16,73 @@ function bwn($input, $start, $end)
 {
     return $input >= $start && $input <= $end;
 }
+$_FORM = array();
+$_FORM["for"] = "none";
+if (isset($_POST["product_submit"])) {
+    $_FORM["for"] = "products";
+    $n = $_POST["name"];
+    $p = $_POST["price"];
+    $a = isset($_POST["archive"]) ? $_POST["archive"] : null;
+    $c = array("c" => $_POST["productDesc"], "s" => 100, "e" => 99999, "n" => wc(strip_tags($_POST["productDesc"])));
+    $i = $_FILES["image"]; // name type tmp_name error size
+    $erar = array();
+    if (strlen($n) > 3 && m("\\d+", $p) && bwn($c["n"], $c["s"], $c["e"]) && $a != null && is_uploaded_file($i["tmp_name"])) {
+        $_FORM["result"] = "success";
+        try {
+            // file settings
+            $_F = array(
+                "str" => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+                "rand" => "", "len" => 32, "ext" => strtolower(pathinfo(basename($i["name"]), PATHINFO_EXTENSION)), "i" => $i, "lim" => 10
+            );
+            // create random name for the image
+            for ($i = 0; $i < $_F["len"]; $i++) $_F["rand"] .= $_F["str"][rand(0, strlen($_F["str"]) - 1)];
+            $_F["rand"] = url("i/posts/files/products/" . $_F["rand"] . "." . $_F["ext"]);
+            while (file_exists($_F["rand"])) {
+                $_F["rand"] = "";
+                for ($i = 0; $i < $_F["len"]; $i++) $_F["rand"] .= $_F["str"][rand(0, strlen($_F["str"]) - 1)];
+                $_F["rand"] = url("i/posts/files/products/" . $_F["rand"] . "." . $_F["ext"]);
+            }
+            // check whether file has certain conditions
+            if (
+                in_array($_F["ext"], explode(",", "jpg,jpeg,png,gif,apng,avif,jfif,pjpeg,pjp,svg,webp")) == 1 &&
+                getimagesize($_F["i"]["tmp_name"]) && $_F["i"]["size"] < $_F["lim"] * 1024 * 1024
+            ) {
+                // check whether file has been uploaded and inputs inserted to database
+                if (move_uploaded_file($_F["i"]["tmp_name"], $_F["rand"])) {
+                    $insertedPostId = cnf_db_insert("INSERT INTO products (name, `description`, price, `image`, archive) VALUES (?,?,?,?,?)", [$n, $c["c"], $p, basename($_F["rand"]), $a]);
+                    $_FORM["message"] = "محصول با موفقیت ثبت شد.";
+                } else throw new Exception();
+            } else throw new Exception();
+        } catch (Exception $e) {
+            $_FORM["result"] = "error";
+            $_FORM["message"] = "محصول ثبت نشد.";
+            $erar[] = "لطفا موارد زیر را رعایت کنید.";
+            $erar[] = "نوع فایل عکس باشد (jpg,jpeg,png,gif,svg,webp,...)";
+            $erar[] = "حجم فایل زیر 10 مگابایت باشد";
+        }
+    } else {
+        $_FORM["result"] = "warning";
+        $_FORM["message"] = "لطفا موارد زیر را به درستی وارد نمایید.";
+        if (!(strlen($n) > 3)) $erar[] = "نام محصول باید حدعقل 4 کاراکتر باشد.";
+        if (!(m("\\d+", $p))) $erar[] = "قیمت را به درستی وارد کنید.";
+        if (!(bwn($c["n"], $c["s"], $c["e"]))) $erar[] = "توضیحات باید حدعقل " . $c["s"] . " کلمه باشد.";
+        if (!($a != null)) $erar[] = "دسته بندی انتخاب نشده";
+        if (!(is_uploaded_file($i["tmp_name"]))) $erar[] = "فایل اپلود نشده است";
+    }
+    if (count($erar) >= 1) {
+        array_splice($erar, 0, 0, "<br>");
+        $_FORM["message"] .= implode("<br />", $erar);
+    }
+}
 $_PF = array("s" => isset($_POST["post_submit"]), "r" => isset($_POST["post_submit"]));
 if ($_PF["s"]) {
+    $_FORM["for"] = "posts";
     $t = array("c" => $_POST["title"], "s" => 3, "e" => 10, "n" => wc($_POST["title"]));
     $s = array("c" => $_POST["subject"], "s" => 20, "e" => 50, "n" => wc($_POST["subject"]));
     $c = array("c" => $_POST["postDesc"], "s" => 300, "e" => 99999, "n" => wc(strip_tags($_POST["postDesc"])));
     $a = $_POST["archive"];
     $tg = array("c" => $_POST["tags"], "s" => 6, "e" => 10, "n" => wc($_POST["tags"], ","));
     $i = $_FILES["image"]; // name type tmp_name error size
-    $_FORM = array();
     $erar = array();
     if (bwn($t["n"], $t["s"], $t["e"]) && bwn($s["n"], $s["s"], $s["e"]) && bwn($c["n"], $c["s"], $c["e"]) && bwn($tg["n"], $tg["s"], $tg["e"]) && is_uploaded_file($_FILES["image"]["tmp_name"])) {
         $_FORM["result"] = "success";
@@ -83,19 +149,11 @@ if ($_PF["s"]) {
         if (!bwn($tg["n"], $tg["s"], $tg["e"])) $erar[] = "برچسب بین " . $tg["s"] . " تا " . $tg["e"] . " عدد" . " (" . $tg["n"] . ")";
         if (!is_uploaded_file($_FILES["image"]["tmp_name"])) $erar[] = "اپلود عکس";
     }
-    if (count($erar) > 1) {
+    if (count($erar) >= 1) {
         array_splice($erar, 0, 0, "<br>");
         $_FORM["message"] .= implode("<br />", $erar);
     }
 }
-$_PAGE = array(
-    "title" => "ارامیس شیمی - مدیریت", // 70 chars limit
-    "description" => "modiriyate website", // 160 chars limit
-    "keywords" => "manage,aramis,shimi", // less than 10 phrases recommended
-    "name" => $currentPage,
-    "styles" => "form,manage"
-);
-cnf_page_create($_PAGE);
 ?>
 <main>
     <section id="manage">
@@ -128,6 +186,38 @@ cnf_page_create($_PAGE);
                         <div>' . (strlen($i["attachment"]) < 10 ? "ندارد" : "دارد") . '</div>
                         <div data-op="delete"></div>
                         <div data-op="inspect"></div>
+                    </div>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="listBtn">
+                <div class="btn">
+                    <h3><span>0</span> محصولات</h3>
+                    <div><i class="fas fa-chevron-down"></i></div>
+                </div>
+                <div data-sect="products">
+                    <div class="row">
+                        <div>عکس</div>
+                        <div>توضیحات</div>
+                        <div>تعداد سفارش</div>
+                        <div>دسته بندی</div>
+                        <div>تاریخ</div>
+                        <div data-op="delete"></div>
+                        <div data-op="edit"></div>
+                    </div>
+                    <?php
+                    foreach (cnf_db_select("select * from products order by id desc") as $i) {
+                        // 
+                        // ' . cnf_db_select("SELECT * FROM product_archives WHERE id = " . $i["archive"])[0]["name"] . ' // for product archive
+                        echo '<div class="row" data-identity="' . $i["id"] . '">
+                        <div><img data-src="posts/files/products/' . $i["image"] . '" src="">' . $i["name"] . '</div>
+                        <div>' . $i["description"] . '</div>
+                        <div>' . $i["ordered"] . '</div>
+                        <div>دستگاه ها</div>
+                        <div>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y | H:m") . '</div>
+                        <div data-op="delete"></div>
+                        <div data-op="edit"></div>
                     </div>';
                     }
                     ?>
@@ -310,12 +400,49 @@ cnf_page_create($_PAGE);
                     </div>
                 </div>
             </div>
-            <div class="posts">
-                <h3>نوشتن پست جدید</h3>
+            <div class="products">
+                <h3><i class="fas fa-shopping-cart"></i> افزودن محصول جدید</h3>
                 <form method="POST" class="compose" enctype="multipart/form-data">
-                    <div class="flash" data-type="<?php echo $_FORM["message"] == "" ? "none" : $_FORM["result"];  ?>">
+                    <div class="flash" <?php echo $_FORM["for"] == "products" ? "" : "style='display:none'"; ?> data-type="<?php echo ($_FORM["message"] ?? "") == "" ? "none" : $_FORM["result"];  ?>">
                         <?php
-                        echo $_FORM["message"];
+                        echo $_FORM["message"] ?? "";
+                        ?>
+                    </div>
+                    <div>
+                        <span>نام</span>
+                        <input name="name" type="text" value="<?php echo $_POST["name"] ?? ""; ?>" />
+                    </div>
+                    <div>
+                        <span>قیمت</span>
+                        <input name="price" type="text" value="<?php echo $_POST["price"] ?? ""; ?>" />
+                    </div>
+                    <div>
+                        <span>دسته بندی</span>
+                        <select name="archive">
+                            <?php
+                            foreach (cnf_db_select("select * from product_archives order by id desc") as $item) {
+                                echo '<option value="' . $item["id"] . '">' . $item["name"] . '</option>';
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <span>توضیحات</span>
+                        <textarea name="productDesc" contenteditable="true"><?php echo $_POST["productDesc"] ?? ""; ?></textarea>
+                    </div>
+                    <div>
+                        <span>عکس</span>
+                        <input name="image" type="file" />
+                    </div>
+                    <button style="grid-column: 1 / -1;" type="submit" name="product_submit">ثبت</button>
+                </form>
+            </div>
+            <div class="posts">
+                <h3><i class="far fa-newspaper"></i> نوشتن پست جدید</h3>
+                <form method="POST" class="compose" enctype="multipart/form-data">
+                    <div class="flash" <?php echo $_FORM["for"] == "posts" ? "" : "style='display:none'"; ?> data-type="<?php echo ($_FORM["message"] ?? "") == "" ? "none" : $_FORM["result"];  ?>">
+                        <?php
+                        echo $_FORM["message"] ?? "";
                         ?>
                     </div>
                     <div>

@@ -1,0 +1,143 @@
+@import "../utility";
+.container {
+    display: grid;
+    &>article {
+        display: flex;
+        flex-direction: column;
+        border-radius: 0.4em;
+        box-shadow: $shadow;
+        padding: 1em;
+        margin: 1em;
+        &>span {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.4em;
+            color: $clr-dark-1;
+            background-color: $clr-light-2;
+            padding: 0.4em;
+            margin: 1em 0;
+            border-radius: 0.4em;
+            font-size: 0.9rem;
+            &>i {
+                font-size: 0.9em;
+                color: $clr-dark-1;
+            }
+        }
+        &>.intro {
+            display: flex;
+            &>img {
+                object-fit: contain;
+                padding: 1em;
+            }
+            &>div {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                &>span {
+                    font-size: 0.9rem;
+                    font-style: italic;
+                    color: gray;
+                }
+            }
+        }
+        &>.outro {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: $clr-light-2;
+            padding: 0.4em;
+            margin: 0.4em 0;
+            border-radius: 0.4em;
+            box-shadow: $shadow;
+            &>span {
+                font-size: 0.9em;
+                font-style: italic;
+                padding: 0 1em;
+            }
+            &>button {
+                border: 0;
+                outline: 0;
+                background-color: $clr-secondary;
+                padding: 0.4em 1em;
+                border-radius: 0.4em;
+                box-shadow: $shadow;
+                display: flex;
+                align-items: center;
+                gap: 0.6em;
+            }
+        }
+    }
+    &>aside {
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        &>h3 {
+            padding: 0.4em 1em;
+        }
+        &>.cont {
+            display: grid;
+            grid-template: auto / repeat(auto-fill, minmax(6em, 1fr));
+            gap: 0.4em;
+            &>a {
+                padding: 0.6em;
+                border-radius: 0.4em;
+                box-shadow: $shadow;
+                &>h5 {
+                    font-size: 0.9rem;
+                    font-style: italic;
+                    font-weight: normal;
+                    color: $clr-dark-1;
+                    margin: 1em;
+                }
+                &>span {
+                    @extend .btn;
+                    font-size: 0.8rem;
+                    padding: 0.3em 1em;
+                    margin: 1em;
+                    background-color: $clr-secondary-d;
+                    color: #fff;
+                    border-radius: 0.4em;
+                    box-shadow: $shadow;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:600px) {
+    /* 600px > screen-width */
+    .container {
+        grid-template: auto / 1fr;
+        &>article>.intro {
+            flex-direction: column;
+            &>img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media (min-width:600px) and (max-width:1200px) {
+    /* 600px < screen-width < 1200 */
+    .container {
+        grid-template: auto / 2fr 1fr;
+        &>article>.intro {
+            &>img {
+                width: 40%;
+            }
+        }
+    }
+}
+
+@media (min-width:1200px) {
+    /* 1200 < screen-width */
+    .container {
+        grid-template: auto / 3fr 1fr;
+        &>article>.intro {
+            &>img {
+                width: 30%;
+            }
+        }
+    }
+}

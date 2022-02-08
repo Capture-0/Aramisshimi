@@ -86,9 +86,12 @@
                 grid-template: auto / 10em 10em 20em 40em 14em 4em 3em 3em;
             }
             &:nth-child(3)>div:last-child>.row {
-                grid-template: auto / 15em 20em 30em 20em 8em 8em 14em 3em 3em;
+                grid-template: auto / 15em 30em 6em 8em 14em 3em 3em;
             }
             &:nth-child(4)>div:last-child>.row {
+                grid-template: auto / 15em 20em 30em 20em 8em 8em 14em 3em 3em;
+            }
+            &:nth-child(5)>div:last-child>.row {
                 grid-template: auto / 10em 15em 20em 30em 14em 4em 3em 3em;
             }
         }
@@ -170,6 +173,34 @@
                 }
             }
         }
+        &>.products {
+            &>h3 {
+                margin: 1em;
+            }
+            &>.compose {
+                background-color: $clr-light-3;
+                border-radius: 0.4em;
+                padding: 0.4em;
+                display: grid;
+                &>div {
+                    &>span {
+                        padding: 1em;
+                    }
+                    &>textarea {
+                        height: 20vh;
+                    }
+                }
+                &>button[type=submit] {
+                    border: 1px solid silver;
+                    padding: 1em;
+                    margin: 1em;
+                    background-color: $clr-secondary;
+                    &:hover {
+                        transform: scale(1.01);
+                    }
+                }
+            }
+        }
         &>.posts {
             &>h3 {
                 margin: 1em;
@@ -178,6 +209,7 @@
                 background-color: $clr-light-3;
                 border-radius: 0.4em;
                 padding: 0.4em;
+                display: grid;
                 &>div {
                     &>span {
                         padding: 1em;
@@ -221,7 +253,9 @@
         grid-template: auto / repeat(auto-fill, minmax(14em, 1fr));
     }
     .container>.posts>.compose {
-        display: grid;
+        grid-template: auto / 100%;
+    }
+    .container>.products>.compose {
         grid-template: auto / 100%;
     }
 }
@@ -232,8 +266,13 @@
         grid-template: auto / repeat(auto-fill, minmax(16em, 1fr));
     }
     .container>.posts>.compose {
-        display: grid;
         grid-template: auto / repeat(auto-fill, minmax(16em, 1fr));
+    }
+    .container>.products>.compose {
+        grid-template: auto / 50% 50%;
+        &>div:first-child {
+            grid-column: 1 / -1;
+        }
     }
 }
 
@@ -243,7 +282,9 @@
         grid-template: auto / repeat(auto-fill, minmax(18em, 1fr));
     }
     .container>.posts>.compose {
-        display: grid;
         grid-template: auto / repeat(auto-fill, minmax(20em, 1fr));
+    }
+    .container>.products>.compose {
+        grid-template: auto / 33% 33% 33%;
     }
 }

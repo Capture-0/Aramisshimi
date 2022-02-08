@@ -33,34 +33,70 @@ if (isset($_GET["url"])) {
 
 if (isset($_GET["cart"])) {
     if ($_GET["cart"] == "get") {
-        echo json_encode($_SESSION["cart"]);
+        if (!empty($_SESSION["cart"])) {
+            $prds = array();
+            $qntt = array();
+            foreach ($_SESSION["cart"] as $key => $value) {
+                $prds[] = explode("_", $key)[1];
+                $qntt[] = $value;
+            }
+            $res = array();
+            $res["items"] = implode(",", $prds);
+            $res["counts"] = implode(",", $qntt);
+            echo json_encode($res);
+        } else echo "null";
     } else if (isset($_GET["p"]) && m("\\d+", $_GET["p"])) {
         if ($_GET["cart"] == "set") {
             if (empty($_SESSION["cart"])) $_SESSION["cart"] = array();
-            if (empty($_SESSION["cart"]["product_" . $_GET["p"]])) $_SESSION["cart"]["product_" . $_GET["p"]] = 1;
-            else $_SESSION["cart"]["product_" . $_GET["p"]]++;
+            if (empty($_SESSION["cart"]["p_" . $_GET["p"]])) $_SESSION["cart"]["p_" . $_GET["p"]] = 1;
+            else $_SESSION["cart"]["p_" . $_GET["p"]]++;
         } else if ($_GET["cart"] == "remove") {
-            $_SESSION["cart"]["product_" . $_GET["p"]]--;
+            if ($_GET["p"] == "0") unset($_SESSION["cart"]);
+            else {
+                if ($_SESSION["cart"]["p_" . $_GET["p"]] == 1) unset($_SESSION["cart"]["p_" . $_GET["p"]]);
+                else if ($_SESSION["cart"]["p_" . $_GET["p"]] > 1) $_SESSION["cart"]["p_" . $_GET["p"]]--;
+            }
         }
     } else {
         echo "error";
     }
 }
 
-if (isset($_GET["req"]) && isset($_SESSION["role"]) && isset($_GET["p"])) {
+if (isset($_GET["product"])) {
+    $cnf_db_connection = new PDO("sqlite:admin.db");
+    if (m("\\d+(,\\d+)*", $_GET["product"])) {
+        echo json_encode(cnf_db_select("select * from products where id in (" . $_GET["product"] . ")"));
+    }
+}
+if (isset($_GET["store"])) {
+    $cnf_db_connection = new PDO("sqlite:admin.db");
+    $cat = isset($_GET["c"]) ? (m("\\d+", $_GET["c"]) ? $_GET["c"] : "0") : "0";
+    $srch = $_GET["store"] == "null" ? "" : $_GET["store"];
+    $ob = isset($_GET["ob"]) ? strtolower($_GET["ob"]) : "";
+    $ob = $ob == "name" ? $ob : ($ob == "newest" ? "id" : ($ob == "price" ? $ob : "id"));
+    $desc = isset($_GET["desc"]) ? ($_GET["desc"] == "true" ? true : false) : false;
+    $desc = $ob == "id" ? $desc : !$desc;
+    $qry = "select * from products where " . ($cat != "0" ? " archive = " . $cat . " and " : "") . "(name like ? or description like ?) order by " . $ob . " " . (!$desc ? "desc" : "");
+    echo json_encode(cnf_db_select($qry, ["%$srch%", "%$srch%"]));
+}
+
+if (isset($_GET["req"]) && isset($_GET["p"]) && isset($_SESSION["role"])) {
     $cnf_db_connection = new PDO("sqlite:admin.db");
     if ($_GET["req"] == "delete" && $_SESSION["role"] == "admin") {
         $qry = $_GET["p"];
         $sql = array("table" => substr($qry, 0, 3), "id" => substr($qry, 3));
         if ("arc" == $sql["table"]) $res = "archives";
-        else if ("com" == $sql["table"]) $res = "comments";
-        else if ("msg" == $sql["table"]) $res = "messages";
         else if ("ord" == $sql["table"]) $res = "orders";
+        else if ("prd" == $sql["table"]) $res = "products";
         else if ("pst" == $sql["table"]) $res = "posts";
+        else if ("msg" == $sql["table"]) $res = "messages";
+        else if ("com" == $sql["table"]) $res = "comments";
         if ($res == "archives") {
             foreach (cnf_db_select("select id from posts where archive = " . $sql["id"]) as $i) {
                 util_delete_post($i["id"]);
             }
+        } else if ($res == "products") {
+            util_delete_product($sql["id"]);
         } else if ($res == "posts") {
             util_delete_post($sql["id"]);
         } else if ($res == "messages") {
@@ -83,6 +119,13 @@ if (isset($_GET["req"]) && isset($_SESSION["role"]) && isset($_GET["p"])) {
             }
         }
     }
+}
+
+function util_delete_product($id, $path = "media/img/posts/files/products/")
+{
+    $p = cnf_db_select("select * from products where id = $id")[0];
+    unlink($path . $p["image"]);
+    return cnf_db_execute("delete from products where id = $id");
 }
 
 function util_delete_post($id, $path = "media/img/posts/files/thumbnails/")

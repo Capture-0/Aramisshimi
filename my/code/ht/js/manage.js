@@ -1,6 +1,28 @@
 var tagInputFocused = false;
 var tags = [];
 
+// ckeditor for products
+var editor = CKEDITOR.replace("productDesc", {
+    filebrowserBrowseUrl: "my/code/plugin/ckfinder/ckfinder.html",
+    filebrowserUploadUrl: "my/code/plugin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files",
+    filebrowserUploadMethod: "form"
+});
+CKEDITOR.config.toolbarGroups = [{
+        groups: ['basicstyles', 'indent', 'clipboard', 'undo']
+    }, '/',
+    {
+        groups: ['insert', 'links', 'list', 'bidi']
+    }, '/',
+    {
+        groups: ['tools', 'document', 'mode', 'styles']
+    }
+];
+
+CKEDITOR.config.removeButtons = 'Italic,Strike,Subscript,Cut,Paste,Redo,NumberedList,Anchor,Unlink';
+
+CKFinder.setupCKEditor(editor);
+
+// ckeditor for posts
 var editor = CKEDITOR.replace("postDesc", {
     filebrowserBrowseUrl: "my/code/plugin/ckfinder/ckfinder.html",
     filebrowserUploadUrl: "my/code/plugin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files",
@@ -36,7 +58,7 @@ window.globalThis.pageLoad.push(async function() {
             }
         });
     });
-    
+
     document.querySelectorAll("[data-action=server] [data-op]").forEach(async el => {
         var t = el;
         if (!t.hasAttribute("data-op")) t = t.parentNode;
@@ -53,6 +75,10 @@ window.globalThis.pageLoad.push(async function() {
                 case "orders":
                     msg = "سفارش";
                     tbl = "ord";
+                    break;
+                case "products":
+                    msg = "محصول";
+                    tbl = "prd";
                     break;
                 case "posts":
                     msg = "پست و تامب نیل این پست";
@@ -80,7 +106,7 @@ window.globalThis.pageLoad.push(async function() {
             switch (t.dataset.op) {
                 case "delete":
                     if (confirm("ایا از حذف این " + msg + " اطمینان دارید؟")) {
-                        await ajax(tbl + t.parentNode.dataset.identity, "delete");
+                        await ajax("req=delete&p=" + tbl + t.parentNode.dataset.identity);
                         t.parentNode.remove();
                     }
                     break;
@@ -123,7 +149,7 @@ window.globalThis.pageLoad.push(async function() {
             priority = mng.querySelector("#f_priority").value,
             show = mng.querySelector("#f_show").checked;
         if (name.value.length > 1 && name.value.indexOf(",") == -1) {
-            res = await ajax("archive," + name.value + "," + priority + "," + (show ? 1 : 0), "insert");
+            res = await ajax("req=insert&p=" + "archive," + name.value + "," + priority + "," + (show ? 1 : 0));
             if (res == "success") {
                 name.value = "";
                 if (confirm("دسته بندی با موفقیت اضافه شد.\nصفحه رفرش شود؟")) window.location.reload();

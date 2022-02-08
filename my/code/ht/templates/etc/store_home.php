@@ -348,10 +348,4 @@
             });
         }
     });
-    document.querySelectorAll(".addToCart").forEach(btn => {
-        btn.addEventListener("click", function(e) {
-            e.preventDefault();
-            alert(e.target.dataset.product);
-        });
-    });
 </script>

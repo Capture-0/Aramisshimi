@@ -1,7 +1,94 @@
 @import "utility";
-
 section {
     padding: 0.8em 0 !important;
+}
+
+#cartManager {
+    display: none;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: hsla(0, 0%, 52.9%, 0.5);
+    z-index: 100;
+    &>div {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 10vh;
+        max-width: 600px;
+        max-height: 80vh;
+        width: 90%;
+        background-color: $clr-light-2;
+        border-radius: 1vw;
+        padding: 1em;
+        overflow: auto;
+        &>#header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &>span {
+                @extend .btn;
+                font-size: 0.8rem;
+                color: red;
+            }
+        }
+        &>.list {
+            background-color: $clr-light-3;
+            border-radius: 0.4em;
+            box-shadow: $shadow;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2em;
+            padding: 0.2em;
+            max-height: 69vh;
+            overflow: auto;
+            &>.row {
+                display: flex;
+                gap: 0.4em;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.4em;
+                border-bottom: 1px solid silver;
+                &:last-child {
+                    border: none;
+                }
+                &>div>img {
+                    max-width: 10em;
+                }
+                &>.qntt {
+                    display: flex;
+                    gap: 1em;
+                    align-items: center;
+                    &>button {
+                        padding: 0.2em 1em;
+                        border: none;
+                        box-shadow: $shadow;
+                        background-color: $clr-secondary-d;
+                        border-radius: 0.4em;
+                    }
+                }
+            }
+        }
+        &>#terminal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &>button{
+                padding: 0.3em 1em;
+                box-shadow: $shadow;
+                border: none;
+                border-radius: 0.4em;
+                background-color: $clr-secondary-d;
+            }
+            &>span{
+                font-size: 0.9rem;
+            }
+        }
+    }
 }
 
 #storeBar {
@@ -56,7 +143,7 @@ section {
                 color: #ffffff;
                 box-shadow: $shadow;
             }
-            &>i{
+            &>i {
                 color: $clr-secondary-d;
             }
         }
@@ -65,7 +152,7 @@ section {
 
 @media (max-width:600px) {
     /* 600px > screen-width */
-    #storeBar #search input{
+    #storeBar #search input {
         width: 30vw;
     }
 }

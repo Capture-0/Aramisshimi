@@ -92,6 +92,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -115,7 +118,7 @@
 #list > section > #items.grid > a > span {
   font-style: italic;
   font-weight: lighter;
-  font-size: 1.1em;
+  font-size: 0.9em;
 }
 
 #list > section > #items.grid > a > button {
@@ -174,7 +177,7 @@
 #list > section > #items.row > a > span {
   font-style: italic;
   font-weight: lighter;
-  font-size: 1.1em;
+  font-size: 0.9em;
 }
 
 #list > section > #items.row > a > button {
@@ -228,7 +231,8 @@
   font-size: 0.8rem;
   padding: 0.3em 1em;
   margin: 1em;
-  background-color: #9Df4BF;
+  background-color: #6FC691;
+  color: #fff;
   border-radius: 0.4em;
   -webkit-box-shadow: 0 2px 4px 0 silver;
           box-shadow: 0 2px 4px 0 silver;

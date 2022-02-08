@@ -7,7 +7,7 @@
 // archives / id name(unique) priority(2) show(1) / CREATE TABLE archives (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE,priority INTEGER DEFAULT 2,show BOOLEAN DEFAULT 1);
 // pivot / relation object1 object2 / CREATE TABLE pivot (relation varchar(100) NOT NULL,object1 varchar(100) NOT NULL,object2 varchar(100) NOT NULL);
 // tags / id name(unique) / CREATE TABLE tags (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE);
-// products / id name description image archive datetime / CREATE TABLE products (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE,description varchar(500) NOT NULL,image varchar(100) NOT NULL,archive INTEGER NOT NULL,datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)
+// products / id name description price ordered image archive datetime / CREATE TABLE products (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,name varchar(100) NOT NULL UNIQUE,description varchar(1000) NOT NULL, price varchar(100) NOT NULL, ordered INTEGER NOT NULL DEFAULT 0,image varchar(100) NOT NULL,archive INTEGER NOT NULL,datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)
 // _page / id 
 // _setting / id 
 
