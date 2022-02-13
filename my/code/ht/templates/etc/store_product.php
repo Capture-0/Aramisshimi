@@ -8,19 +8,16 @@ $_PAGE = array(
 );
 cnf_page_create($_PAGE);
 $product = cnf_db_select("select * from products where id = " . $_REQUEST["p1"])[0];
-// aks
-// tozih 100 kalame ii
-// tarikh
-// gheymat
-// dokme afzoodan be sabad
 ?>
 <div class="container">
     <article>
         <h2><?php echo $product["name"]; ?></h2>
         <span>
-            فروشگاه
+            <a href="/Store">فروشگاه</a>
             <i class="fas fa-chevron-left"></i>
-            <?php echo cnf_db_select("SELECT name FROM product_archives WHERE id = " . $product["archive"])[0]["name"]; ?>
+            <a href="/Store/s?c=<?php echo $product["archive"]; ?>">
+                <?php echo cnf_db_select("SELECT name FROM product_archives WHERE id = " . $product["archive"])[0]["name"]; ?>
+            </a>
             <i class="fas fa-chevron-left"></i>
             <?php echo $product["name"]; ?>
         </span>

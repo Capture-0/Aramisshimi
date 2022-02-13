@@ -3,11 +3,42 @@ form {
     display: grid;
     grid-template: auto / repeat(auto-fit, minmax(50%, 1fr));
     &>div {
-        &>span{
+        &>span {
             padding: 1em;
         }
         &>textarea {
             height: 20vh;
+        }
+    }
+    &>#cart {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        &>.row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6em;
+            border-radius: 0.3em;
+            box-shadow: $shadow;
+            padding: 1em;
+            background-color: $clr-light-3;
+            font-family: yekan;
+            &>div>img {
+                max-width: 10em;
+            }
+            &>span {
+                font-size: 1rem;
+            }
+            &>div[onclick] {
+                @extend .btn;
+                padding: 0.3em 1em;
+                border: 1px solid silver;
+                background-color: lightcoral;
+                border-radius: 0.3em;
+                box-shadow: $shadow;
+                font-size: 0.9em;
+            }
         }
     }
     &>button[type=submit] {

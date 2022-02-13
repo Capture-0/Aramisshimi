@@ -53,7 +53,8 @@ if (isset($_GET["cart"])) {
         } else if ($_GET["cart"] == "remove") {
             if ($_GET["p"] == "0") unset($_SESSION["cart"]);
             else {
-                if ($_SESSION["cart"]["p_" . $_GET["p"]] == 1) unset($_SESSION["cart"]["p_" . $_GET["p"]]);
+                if ($_GET["c"] == "l") unset($_SESSION["cart"]["p_" . $_GET["p"]]);
+                else if ($_SESSION["cart"]["p_" . $_GET["p"]] == 1) unset($_SESSION["cart"]["p_" . $_GET["p"]]);
                 else if ($_SESSION["cart"]["p_" . $_GET["p"]] > 1) $_SESSION["cart"]["p_" . $_GET["p"]]--;
             }
         }
@@ -91,6 +92,7 @@ if (isset($_GET["req"]) && isset($_GET["p"]) && isset($_SESSION["role"])) {
         else if ("pst" == $sql["table"]) $res = "posts";
         else if ("msg" == $sql["table"]) $res = "messages";
         else if ("com" == $sql["table"]) $res = "comments";
+        else if ("prc" == $sql["table"]) $res = "product_archives";
         if ($res == "archives") {
             foreach (cnf_db_select("select id from posts where archive = " . $sql["id"]) as $i) {
                 util_delete_post($i["id"]);
@@ -103,6 +105,10 @@ if (isset($_GET["req"]) && isset($_GET["p"]) && isset($_SESSION["role"])) {
             unlink("media/uploaded/messages/" . cnf_db_select("select attachment from messages where id = " . $sql["id"])[0]["attachment"]);
         } else if ($res == "orders") {
             unlink("media/uploaded/orders/" . cnf_db_select("select attachment from orders where id = " . $sql["id"])[0]["attachment"]);
+        } else if ($res == "product_archives") {
+            foreach (cnf_db_select("select id from products where archive = " . $sql["id"]) as $i) {
+                util_delete_product($i["id"]);
+            }
         }
         echo cnf_db_execute("delete from $res where id = " . $sql["id"]);
     }
@@ -113,8 +119,11 @@ if (isset($_GET["req"]) && isset($_GET["p"]) && isset($_SESSION["role"])) {
         if (count($s) < 2) {
             echo "more than 1 arguments needed seprated by comma";
         } else {
-            if (m("archives?", $s[0]) && count($s) == 4) {
+            if (m("archives", $s[0]) && count($s) == 4) {
                 cnf_db_insert("insert into archives(name,priority,show) values(?,?,?)", [$s[1], $s[2], $s[3]]);
+                echo "success";
+            } else if (m("product_archives", $s[0]) && count($s) == 3) {
+                cnf_db_insert("insert into product_archives(name,show) values(?,?)", [$s[1], $s[2]]);
                 echo "success";
             }
         }

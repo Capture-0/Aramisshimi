@@ -68,6 +68,10 @@ $_FORM["message"] = "";
 </head>
 
 <body>
+    <input type="hidden" id="isPageLoaded" value="<?php echo $_PAGE["description"] == "" ? "false" : "true"; ?>" />
+    <script>
+        if (document.querySelector("input#isPageLoaded").value != "true") window.location.reload();
+    </script>
     <?php
     ob_start();
     include(url("@/intro.php"));

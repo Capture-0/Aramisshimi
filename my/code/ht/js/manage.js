@@ -93,11 +93,15 @@ window.globalThis.pageLoad.push(async function() {
                     tbl = "com";
                     break;
                 case "archives":
-                    msg = "دسته بندی و تمام پست ها و کامنت های مربوط به این دسته بندی";
+                    msg = "دسته بندی و تمام پست ها و کامنت های مربوط به ان";
                     tbl = "arc";
                     break;
                 case "tags":
                     msg = "برچسب";
+                    break;
+                case "product_archives":
+                    msg = "دسته بندی و تمام محصولات مربوط به ان";
+                    tbl = "prc";
                     break;
                 default:
                     msg = "مورد";
@@ -139,7 +143,7 @@ window.globalThis.pageLoad.push(async function() {
         alert("این بخش در حال ساخت است.");
     });
 
-    var btnAddArchive = document.querySelector(".manage #archiveAdd");
+    var btnAddArchive = document.querySelector(".extraData .list[data-sect=archives]").parentNode.querySelector(".manage .addArchive");
     btnAddArchive.addEventListener("click", async(e) => {
         mng = e.target;
         while (!mng.classList.contains("manage")) {
@@ -149,12 +153,31 @@ window.globalThis.pageLoad.push(async function() {
             priority = mng.querySelector("#f_priority").value,
             show = mng.querySelector("#f_show").checked;
         if (name.value.length > 1 && name.value.indexOf(",") == -1) {
-            res = await ajax("req=insert&p=" + "archive," + name.value + "," + priority + "," + (show ? 1 : 0));
+            res = await ajax("req=insert&p=" + "archives," + name.value + "," + priority + "," + (show ? 1 : 0));
             if (res == "success") {
                 name.value = "";
                 if (confirm("دسته بندی با موفقیت اضافه شد.\nصفحه رفرش شود؟")) window.location.reload();
             } else {
-                alert("دسته بندی اضافه نشد."); // "دسته بندی اضافه نشد."
+                alert("دسته بندی اضافه نشد.");
+            }
+        } else alert("لطفا نام را به درستی انتخاب نمایید.");
+    });
+
+    var btnAddProductArchive = document.querySelector(".extraData .list[data-sect=product_archives]").parentNode.querySelector(".manage .addArchive");
+    btnAddProductArchive.addEventListener("click", async(e) => {
+        mng = e.target;
+        while (!mng.classList.contains("manage")) {
+            mng = mng.parentNode;
+        }
+        var name = mng.querySelector("#f_name"),
+            show = mng.querySelector("#f_show").checked;
+        if (name.value.length > 1 && name.value.indexOf(",") == -1) {
+            res = await ajax("req=insert&p=product_archives," + name.value + "," + (show ? 1 : 0));
+            if (res == "success") {
+                name.value = "";
+                if (confirm("دسته بندی با موفقیت اضافه شد.\nصفحه رفرش شود؟")) window.location.reload();
+            } else {
+                alert("دسته بندی اضافه نشد.");
             }
         } else alert("لطفا نام را به درستی انتخاب نمایید.");
     });
@@ -171,7 +194,7 @@ window.globalThis.pageLoad.push(async function() {
             i.addEventListener("click", function(e) {
                 var input = e.target.parentNode.innerText;
                 if (tags.indexOf(input.substring(0, input.length - 1)) > -1) tags.splice(tags.indexOf(input.substring(0, input.length - 1)), 1);
-                e.target.parentNode.style.display = "none";
+                e.target.parentNode.remove();
                 document.querySelector("#manage .posts .compose #tags #tagsArray").value = tags.length > 0 ? tags.join(",") : "";
             });
             tags.push(tagInput.value);

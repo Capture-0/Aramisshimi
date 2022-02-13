@@ -54,7 +54,7 @@ section {
   max-height: 80vh;
   width: 90%;
   background-color: #e6e6e6;
-  border-radius: 1vw;
+  border-radius: 0.4em;
   padding: 1em;
   overflow: auto;
 }
@@ -254,6 +254,9 @@ section {
   /* 600px > screen-width */
   #storeBar #search input {
     width: 30vw;
+  }
+  #storeBar > .container > h3 {
+    display: none;
   }
 }
 

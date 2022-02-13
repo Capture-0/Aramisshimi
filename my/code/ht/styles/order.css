@@ -1,4 +1,4 @@
-.btn {
+.btn, form > #cart > .row > div[onclick] {
   -webkit-transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
   transition: opacity 100ms ease-out, -webkit-transform 100ms ease-out;
   transition: transform 100ms ease-out, opacity 100ms ease-out;
@@ -12,13 +12,13 @@
           user-select: none;
 }
 
-.btn:hover {
+.btn:hover, form > #cart > .row > div:hover[onclick] {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
   opacity: 1;
 }
 
-.btn:active {
+.btn:active, form > #cart > .row > div:active[onclick] {
   opacity: 0.8;
 }
 
@@ -36,6 +36,54 @@ form > div > span {
 
 form > div > textarea {
   height: 20vh;
+}
+
+form > #cart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1em;
+}
+
+form > #cart > .row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 0.6em;
+  border-radius: 0.3em;
+  -webkit-box-shadow: 0 2px 4px 0 silver;
+          box-shadow: 0 2px 4px 0 silver;
+  padding: 1em;
+  background-color: #f3f2f2;
+  font-family: yekan;
+}
+
+form > #cart > .row > div > img {
+  max-width: 10em;
+}
+
+form > #cart > .row > span {
+  font-size: 1rem;
+}
+
+form > #cart > .row > div[onclick] {
+  padding: 0.3em 1em;
+  border: 1px solid silver;
+  background-color: lightcoral;
+  border-radius: 0.3em;
+  -webkit-box-shadow: 0 2px 4px 0 silver;
+          box-shadow: 0 2px 4px 0 silver;
+  font-size: 0.9em;
 }
 
 form > button[type=submit] {

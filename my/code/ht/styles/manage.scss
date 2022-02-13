@@ -150,6 +150,9 @@
                     &:nth-child(3)>.list>.row {
                         grid-template: auto / 10em 8em;
                     }
+                    &:nth-child(4)>.list>.row {
+                        grid-template: auto / 10em 8em 10em 3em 3em;
+                    }
                     &>.manage {
                         padding: 1em;
                         &>h5 {

@@ -24,9 +24,10 @@ if (isset($_POST["product_submit"])) {
     $p = $_POST["price"];
     $a = isset($_POST["archive"]) ? $_POST["archive"] : null;
     $c = array("c" => $_POST["productDesc"], "s" => 100, "e" => 99999, "n" => wc(strip_tags($_POST["productDesc"])));
+    $t = preg_replace('/\s+/', ' ', $_POST["tags"]);
     $i = $_FILES["image"]; // name type tmp_name error size
     $erar = array();
-    if (strlen($n) > 3 && m("\\d+", $p) && bwn($c["n"], $c["s"], $c["e"]) && $a != null && is_uploaded_file($i["tmp_name"])) {
+    if (strlen($n) > 3 && m("\\d+", $p) && bwn($c["n"], $c["s"], $c["e"]) && $a != null && bwn(count(explode(",", $t)), 6, 10) && is_uploaded_file($i["tmp_name"])) {
         $_FORM["result"] = "success";
         try {
             // file settings
@@ -65,8 +66,9 @@ if (isset($_POST["product_submit"])) {
         $_FORM["message"] = "لطفا موارد زیر را به درستی وارد نمایید.";
         if (!(strlen($n) > 3)) $erar[] = "نام محصول باید حدعقل 4 کاراکتر باشد.";
         if (!(m("\\d+", $p))) $erar[] = "قیمت را به درستی وارد کنید.";
-        if (!(bwn($c["n"], $c["s"], $c["e"]))) $erar[] = "توضیحات باید حدعقل " . $c["s"] . " کلمه باشد.";
         if (!($a != null)) $erar[] = "دسته بندی انتخاب نشده";
+        if (!(bwn($c["n"], $c["s"], $c["e"]))) $erar[] = "توضیحات باید حدعقل " . $c["s"] . " کلمه باشد.";
+        if (!(bwn(count(explode(",", $t)), 6, 10))) $erar[] = "حدعقل 6 برچسب و حواکثر 10 برچسب بنویسید";
         if (!(is_uploaded_file($i["tmp_name"]))) $erar[] = "فایل اپلود نشده است";
     }
     if (count($erar) >= 1) {
@@ -150,7 +152,7 @@ if ($_PF["s"]) {
         if (!is_uploaded_file($_FILES["image"]["tmp_name"])) $erar[] = "اپلود عکس";
     }
     if (count($erar) >= 1) {
-        array_splice($erar, 0, 0, "<br>");
+        array_splice($erar, 0, 0, "<br />");
         $_FORM["message"] .= implode("<br />", $erar);
     }
 }
@@ -214,7 +216,7 @@ if ($_PF["s"]) {
                         <div><img data-src="posts/files/products/' . $i["image"] . '" src="">' . $i["name"] . '</div>
                         <div>' . $i["description"] . '</div>
                         <div>' . $i["ordered"] . '</div>
-                        <div>دستگاه ها</div>
+                        <div>' . cnf_db_select("SELECT * FROM product_archives WHERE id = " . $i["archive"])[0]["name"] . '</div>
                         <div>' . cnf_misc_create_date($i["datetime"], "EEEE d MMMM y | H:m") . '</div>
                         <div data-op="delete"></div>
                         <div data-op="edit"></div>
@@ -337,7 +339,7 @@ if ($_PF["s"]) {
                         </div>
                     </div>
                     <div>
-                        <h4>دسته بندی ها</h4>
+                        <h4>دسته بندی پست ها</h4>
                         <div class="list" data-sect="archives">
                             <div class="row">
                                 <div>نام</div>
@@ -378,7 +380,7 @@ if ($_PF["s"]) {
                                 قابل نمایش
                                 <input type="checkbox" checked="true" id="f_show">
                             </div>
-                            <button id="archiveAdd">ok</button>
+                            <button class="addArchive">ok</button>
                         </div>
                     </div>
                     <div>
@@ -390,12 +392,49 @@ if ($_PF["s"]) {
                             </div>
                             <?php
                             foreach (cnf_db_select("select * from tags order by id desc") as $i) {
+                                $used = cnf_db_select("select count(*) as res from pivot where relation = 'post_tag' and object2 = " . $i["id"])[0]["res"];
                                 echo '<div class="row" data-identity="' . $i["id"] . '">
                                     <div>' . $i["name"] . '</div>
-                                    <div>' . cnf_db_select("select count(*) as res from pivot where relation = 'post_tag' and object2 = " . $i["id"])[0]["res"] . '</div>
+                                    <div>' . $used . '</div>
+                                    </div>';
+                                if ($used == "0") cnf_db_execute("delete from tags where id = " . $i["id"]);
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>دسته بندی محصولات</h4>
+                        <div class="list" data-sect="product_archives">
+                            <div class="row">
+                                <div>نام</div>
+                                <div>زیرمجموعه ها</div>
+                                <div>نمایش در فروشگاه</div>
+                                <div data-op="delete"></div>
+                                <div data-op="edit"></div>
+                            </div>
+                            <?php
+                            foreach (cnf_db_select("select * from product_archives order by id desc") as $i) {
+                                echo '<div class="row" data-identity="' . $i["id"] . '">
+                                    <div>' . $i["name"] . '</div>
+                                    <div>' . cnf_db_select("select count(*) from products where archive = " . $i["id"])[0]["count(*)"] . '</div>
+                                    <div>' . ($i["show"] == "1" ? "بله" : "خیر") . '</div>
+                                    <div data-op="delete"></div>
+                                    <div data-op="edit"></div>
                                     </div>';
                             }
                             ?>
+                        </div>
+                        <div class="manage">
+                            <h5>اضافه کردن</h5>
+                            <div>
+                                نام
+                                <input type="text" id="f_name">
+                            </div>
+                            <div>
+                                نمایش در صفحه فروشگاه
+                                <input type="checkbox" id="f_show">
+                            </div>
+                            <button class="addArchive">ok</button>
                         </div>
                     </div>
                 </div>
@@ -413,7 +452,7 @@ if ($_PF["s"]) {
                         <input name="name" type="text" value="<?php echo $_POST["name"] ?? ""; ?>" />
                     </div>
                     <div>
-                        <span>قیمت</span>
+                        <span>قیمت (تومان)</span>
                         <input name="price" type="text" value="<?php echo $_POST["price"] ?? ""; ?>" />
                     </div>
                     <div>
@@ -429,6 +468,10 @@ if ($_PF["s"]) {
                     <div style="grid-column: 1 / -1;">
                         <span>توضیحات</span>
                         <textarea name="productDesc" contenteditable="true"><?php echo $_POST["productDesc"] ?? ""; ?></textarea>
+                    </div>
+                    <div>
+                        <span>برچسب ها <span style="color: gray;font-size: 0.9em;font-style: italic;padding: 0 0.4em;">مثال: شوینده, کارخانه, دستگاه, ...</span></span>
+                        <input name="tags" type="text" />
                     </div>
                     <div>
                         <span>عکس</span>

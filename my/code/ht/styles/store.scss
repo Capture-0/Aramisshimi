@@ -23,7 +23,7 @@ section {
         max-height: 80vh;
         width: 90%;
         background-color: $clr-light-2;
-        border-radius: 1vw;
+        border-radius: 0.4em;
         padding: 1em;
         overflow: auto;
         &>#header {
@@ -77,14 +77,14 @@ section {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            &>button{
+            &>button {
                 padding: 0.3em 1em;
                 box-shadow: $shadow;
                 border: none;
                 border-radius: 0.4em;
                 background-color: $clr-secondary-d;
             }
-            &>span{
+            &>span {
                 font-size: 0.9rem;
             }
         }
@@ -154,6 +154,9 @@ section {
     /* 600px > screen-width */
     #storeBar #search input {
         width: 30vw;
+    }
+    #storeBar>.container>h3 {
+        display: none;
     }
 }
 

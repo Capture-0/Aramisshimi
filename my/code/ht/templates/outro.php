@@ -46,7 +46,6 @@
             </li>
             <li>
                 <a href=""><i style="color: #db4a39;" class="fab fa-google-plus-square"></i></a>
-                <a href=""><i style="color: #4267B2;" class="fab fa-facebook-square"></i></a>
                 <a href="instagram://user?username=aramisshimi"><i style="color: #bc2a8d;" class="fab fa-instagram-square"></i></a>
                 <a href=""><i style="color: #0077b5;" class="fab fa-linkedin"></i></a>
                 <a href="https://api.whatsapp.com/send?phone=989019966591"><i style="color: #4FCE5D;" class="fab fa-whatsapp-square"></i></a>

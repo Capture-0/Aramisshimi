@@ -248,6 +248,12 @@
       grid-template: auto / 10em 8em;
 }
 
+#manage > .container > .extraData > .lists > div:nth-child(4) > .list > .row {
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 10em 8em 10em 3em 3em;
+      grid-template: auto / 10em 8em 10em 3em 3em;
+}
+
 #manage > .container > .extraData > .lists > div > .manage {
   padding: 1em;
 }

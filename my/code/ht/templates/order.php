@@ -15,7 +15,7 @@ if (isset($_POST["submit"])) {
         "rand" => ""
     );
     $_FORM = array();
-    if (m("..+", $f) && m("..+", $l) && m("(\+)?[\d\s]+", $m) && (m("....+", $a) || empty($a)) && (m("[\w\.\-]+@[\w\.\-]+\.[\w\.\-]+", $e) || empty($e)) && m("....+", $o)) {
+    if (m("..+", $f) && m("..+", $l) && m("(\+)?[\d\s]+", $m) && (m("....+", $a) || empty($a)) && (m("[\w\.\-]+@[\w\.\-]+\.[\w\.\-]+", $e) || empty($e))) {
         if ($_FILES["attachment"]["size"] > 0 || !empty($_FILES["attachment"]["name"])) {
             $ig["c"] = $_FILES["attachment"];
             $ig["ext"] = strtolower(pathinfo(basename($_FILES["attachment"]["name"]), PATHINFO_EXTENSION));
@@ -40,9 +40,16 @@ if (isset($_POST["submit"])) {
                     } else throw new Exception();
                 } else throw new Exception();
             }
+            if (isset($_SESSION["cart"])) {
+                $o .= "<br /><br />محصولات از فروشگاه:<br /><br />";
+                foreach ($_SESSION["cart"] as $key => $value) {
+                    $o .= $value . " عدد از محصول " . cnf_db_select("select name from products where id = " . explode("_", $key)[1])[0]["name"] . "<br />";
+                }
+            }
             cnf_db_insert("INSERT INTO orders (first_name, last_name, email, mobile, `address`, content, attachment) VALUES (?,?,?,?,?,?,?)", [$f, $l, $e, $m, $a, $o, basename($ig["rand"])]);
             $_FORM["result"] = "success";
             $_FORM["message"] = "سفارش شما با موفقیت ثبت شد.";
+            unset($_SESSION["cart"]);
         } catch (Exception $e) {
             $_FORM["result"] = "error";
             $_FORM["message"] = $e->getMessage(); // "سفارش شما ثبت نشد.";
@@ -56,7 +63,6 @@ if (isset($_POST["submit"])) {
         if (!m("(\+)?[\d\s]+", $m)) $erar[] = "شماره موبایل";
         if (!m("....+", $a) && !empty($a)) $erar[] = "ادرس";
         if (!m("[\w\.\-]+@[\w\.\-]+\.[\w\.\-]+", $e) && !empty($e)) $erar[] = "ایمیل";
-        if (!m("....+", $o)) $erar[] = "شرح سفارش";
         $_FORM["message"] .= implode(", ", $erar);
     }
 }
@@ -108,8 +114,23 @@ cnf_page_create($_PAGE);
                 <br />
                 <input name="attachment" type="file" />
             </div>
+            <div id="cart" style="grid-column: 1 / -1;">
+                <?php
+                if (isset($_SESSION["cart"])) {
+                    foreach ($_SESSION["cart"] as $key => $value) {
+                        $item = cnf_db_select("select * from products where id = " . explode("_", $key)[1])[0];
+                        echo '<div class="row">
+                        <div><img src="/my/media/img/posts/files/products/' . $item["image"] . '" src="" alt=""></div>
+                        <span>' . $item["name"] . '</span>
+                        <span>' . $value . ' &times; ' . $item["price"] . '</span>
+                        <div onclick="this.parentNode.remove();fetch(\'/my/cnf.php?cart=remove&c=l&p=' . $item["id"] . '\');">حذف</div>
+                    </div>';
+                    }
+                }
+                ?>
+            </div>
             <div style="grid-column: 1 / -1;">
-                <span><span style="color: red;">*</span> شرح سفارش</span>
+                <span>شرح سفارش</span>
                 <textarea name="orderDesc" contenteditable="true"></textarea>
             </div>
             <button style="grid-column: 1 / -1;" type="submit" name="submit">ثبت</button>

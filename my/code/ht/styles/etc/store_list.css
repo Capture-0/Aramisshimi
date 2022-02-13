@@ -28,6 +28,80 @@
   display: block;
 }
 
+#loading {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 100;
+  -webkit-transition: opacity 300ms ease-in;
+  transition: opacity 300ms ease-in;
+  background-color: rgba(135, 135, 135, 0.5);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+}
+
+#loading > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  padding: 4em;
+  border-radius: 1em;
+  gap: 4em;
+}
+
+#loading > div > div {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #6FC691;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: loadingSpin 2s linear infinite;
+          animation: loadingSpin 2s linear infinite;
+}
+
+@-webkit-keyframes loadingSpin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes loadingSpin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 #list {
   display: -ms-grid;
   display: grid;
@@ -203,12 +277,22 @@
           flex-direction: column;
 }
 
+#list > aside > a {
+  background: -webkit-gradient(linear, right top, left top, from(#e6e6e6), to(#f3f2f2));
+  background: linear-gradient(to left, #e6e6e6, #f3f2f2);
+  -webkit-box-shadow: 0 2px 4px 0 silver;
+          box-shadow: 0 2px 4px 0 silver;
+  border-radius: 0.2em;
+  padding: 0.3em 1em;
+  margin: 0.4em 0;
+}
+
 #list > aside > .cont {
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: auto;
-  -ms-grid-columns: (minmax(8.2em, 1fr))[auto-fill];
-      grid-template: auto/repeat(auto-fill, minmax(8.2em, 1fr));
+  -ms-grid-columns: (minmax(6em, 1fr))[auto-fill];
+      grid-template: auto/repeat(auto-fill, minmax(6em, 1fr));
   gap: 0.4em;
 }
 
